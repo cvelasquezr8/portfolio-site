@@ -1,0 +1,114 @@
+---
+interface Technology {
+	title: string;
+	alt: string;
+	image: string;
+	elements: {
+		title: string;
+		image: string;
+		alt: string;
+	}[];
+}
+
+const technologies: Technology[] = [
+	{
+		title: 'FRONTEND',
+		alt: 'Frontend Technologies',
+		image: 'laptop.png',
+		elements: [
+			{
+				title: 'React & NextJs',
+				image: 'react.svg',
+				alt: 'React & NextJs',
+			},
+			{ title: 'Angular', image: 'angular.svg', alt: 'Angular' },
+			{ title: 'TypeScript', image: 'typescript.svg', alt: 'TypeScript' },
+			{
+				title: 'Tailwind CSS',
+				image: 'tailwindcss.svg',
+				alt: 'Tailwind CSS',
+			},
+		],
+	},
+	{
+		title: 'BACKEND',
+		alt: 'Backend Technologies',
+		image: 'gear.png',
+		elements: [
+			{
+				title: 'NodeJs & Express',
+				image: 'nodedotjs.svg',
+				alt: 'Node.js',
+			},
+			{ title: '.NET', image: 'dotnet.svg', alt: '.NET' },
+			{ title: 'GraphQL', image: 'graphql.svg', alt: 'GraphQL' },
+			{ title: 'NestJs', image: 'nestjs.svg', alt: 'NestJs' },
+		],
+	},
+	{
+		title: 'DATABASE',
+		alt: 'Database Technologies',
+		image: 'card-file-box.png',
+		elements: [
+			{ title: 'PostgreSQL', image: 'postgresql.svg', alt: 'PostgreSQL' },
+			{ title: 'MySql', image: 'mysql.svg', alt: 'MySql' },
+			{ title: 'MongoDB', image: 'mongodb.svg', alt: 'MongoDB' },
+			{ title: 'Redis', image: 'redis.svg', alt: 'Redis' },
+		],
+	},
+	{
+		title: 'DEVOPS',
+		alt: 'DevOps Technologies',
+		image: 'hammer-and-wrench.png',
+		elements: [
+			{ title: 'Docker', image: 'docker.svg', alt: 'Docker' },
+			{ title: 'Kubernetes', image: 'kubernetes.svg', alt: 'Kubernetes' },
+			{ title: 'AWS', image: 'amazonwebservices.svg', alt: 'AWS' },
+			{ title: 'Jenkins', image: 'jenkins.svg', alt: 'Jenkins' },
+		],
+	},
+];
+---
+
+<section id="technologies" class="py-16 section-fade relative">
+	<div class="container mx-auto px-4">
+		<div class="max-w-4xl mx-auto">
+			<h2 class="text-3xl font-bold mb-12 text-center">
+				<span class="text-xl block mb-4 text-blue-500">
+					NAVIGATION SYSTEMS
+				</span>
+				Technical Capabilities
+			</h2>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{
+					technologies.map((technology, index) => (
+						<div class="skill-card p-6 rounded-lg">
+							<div class="flex items-center justify-between mb-6">
+								<h3 class="text-blue-500">
+									{technology.title}
+								</h3>
+								<img
+									src={`/images/${technology.image}`}
+									alt={technology.alt}
+									class="tech-icon"
+								/>
+							</div>
+							<ul class="space-y-4">
+								{technology.elements.map((element) => (
+									<li class="flex items-center space-x-4">
+										<img
+											src={`/images/${element.image}`}
+											alt={element.alt}
+											class="w-8 h-8"
+										/>
+										<span>{element.title}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>

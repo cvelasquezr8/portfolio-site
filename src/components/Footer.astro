@@ -1,0 +1,143 @@
+---
+interface SocialLink {
+	title: string;
+	icon: string;
+	url: string;
+}
+
+const socialLinks: SocialLink[] = [
+	{
+		title: 'GitHub',
+		icon: 'github.svg',
+		url: 'https://github.com/cvelasquezr8',
+	},
+	{
+		title: 'LinkedIn',
+		icon: 'linkedin.svg',
+		url: 'https://linkedin.com/in/cvelasquezr8',
+	},
+	{
+		title: 'RoadMap',
+		icon: 'roadmap.svg',
+		url: 'https://roadmap.sh/u/cvelasquezr8',
+	},
+	{
+		title: 'Hacker Rank',
+		icon: 'hacker-rank.svg',
+		url: 'https://hackerrank.com/profile/cvelasquezr8',
+	},
+	{
+		title: 'LeetCode',
+		icon: 'leetcode.svg',
+		url: 'https://leetcode.com/u/cvelasquezr8/',
+	},
+];
+
+interface NavigationSection {
+	title: string;
+	elements: {
+		name: string;
+		href: string;
+	}[];
+}
+
+const navigationLinks: NavigationSection[] = [
+	{
+		title: 'NAVIGATION',
+		elements: [
+			{ name: 'Home', href: '#' },
+			{ name: 'Technical Capabilities', href: '#technologies' },
+			{ name: 'Featured Projects', href: '#projects' },
+			{ name: 'Keep in Touch', href: '#contact' },
+		],
+	},
+	{
+		title: 'PROJECTS',
+		elements: [{ name: 'Space Dashboard', href: '#' }],
+	},
+	{
+		title: 'LEGAL',
+		elements: [
+			{ name: 'Privacy Policy', href: '#' },
+			{ name: 'Terms of Service', href: '#' },
+		],
+	},
+];
+---
+
+<!-- Footer -->
+<footer class="py-12 bg-gray-900/50 border-t border-blue-500/20 section-fade">
+	<div class="container mx-auto px-4">
+		<div class="max-w-5xl mx-auto">
+			<!-- Logo and Social Links -->
+			<div
+				class="flex flex-col md:flex-row items-center justify-between mb-8"
+			>
+				<div class="flex items-center gap-4 mb-6 md:mb-0">
+					<div
+						class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white text-2xl"
+					>
+						🚀
+					</div>
+					<span class="gradient-text text-xl font-bold"
+						>Carlos Velasquez</span
+					>
+				</div>
+				<div class="flex gap-4">
+					{
+						socialLinks.map((link) => (
+							<a
+								href={link.url}
+								class="p-2 rounded-lg bg-gray-800/50 hover:bg-blue-500/20 transition-colors"
+								title={link.title}
+								target="_blank"
+							>
+								<img
+									src={`/images/${link.icon}`}
+									alt={link.title}
+									class="w-6 h-6"
+								/>
+							</a>
+						))
+					}
+				</div>
+			</div>
+
+			<div
+				class={`grid grid-cols-2 md:grid-cols-${navigationLinks.length} gap-8 mb-12`}
+			>
+				{
+					navigationLinks.map((section) => (
+						<div>
+							<h3 class="text-blue-500">{section.title}</h3>
+							<ul class="space-y-2">
+								{section.elements.map((element) => (
+									<li>
+										<a
+											href={element.href}
+											class="text-gray-400 hover:text-blue-500 transition-colors"
+										>
+											{element.name}
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Copyright -->
+			<div
+				class="text-center text-gray-400 pt-8 border-t border-blue-500/20"
+			>
+				<p>
+					© {new Date().getFullYear()} Carlos Velasquez. All rights reserved.
+				</p>
+				<p class="mt-2 text-sm">
+					Crafted with 💙 in the digital cosmos
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>

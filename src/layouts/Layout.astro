@@ -3,20 +3,69 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="images/astronaut.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Carlos Velasquez - Space Explorer</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+			rel="stylesheet"
+		/>
+		<script>
+			const THEME_KEY = 'portfolio-theme';
+			const THEMES = {
+				DARK: 'dark',
+			};
+
+			function applyTheme(theme) {
+				const root = document.documentElement;
+
+				root.classList.remove(THEMES.DARK);
+				root.classList.add(theme);
+
+				if (theme === THEMES.DARK) {
+					// Dark Mode Colors (unchanged)
+					root.style.setProperty('--primary-color', '#3245FF'); // Bright Blue
+					root.style.setProperty('--secondary-color', '#BC52EE'); // Purple
+					root.style.setProperty('--bg-color', '#0A0B14'); // Very Dark Blue
+					root.style.setProperty('--text-color', '#E5E7EB'); // Light Gray
+					root.style.setProperty('--card-bg', '#1A1B25');
+					root.style.setProperty(
+						'--border-color',
+						'rgba(50, 69, 255, 0.2)',
+					);
+					root.style.setProperty('--gradient-start', '#3245FF'); // Bright Blue
+					root.style.setProperty('--gradient-end', '#BC52EE'); // Purple
+					root.style.setProperty('--accent-color', '#9CA3AF'); // Gray
+					root.style.setProperty('--star-color', '#FFFFFF'); // Dark mode stars
+					root.style.setProperty(
+						'--card-shadow',
+						'0 4px 20px rgba(50, 69, 255, 0.2)',
+					);
+					root.style.setProperty(
+						'--hover-bg',
+						'rgba(50, 69, 255, 0.1)',
+					);
+				}
+			}
+
+			// Initialize theme
+			const savedTheme = localStorage.getItem(THEME_KEY) || THEMES.DARK;
+			applyTheme(savedTheme);
+
+			window.setTheme = function (theme) {
+				localStorage.setItem(THEME_KEY, theme);
+				applyTheme(theme);
+			};
+		</script>
 	</head>
-	<body>
+	<body class="theme-transition">
+		<div class="stars-wrapper">
+			<div id="stars"></div>
+			<div id="stars2"></div>
+			<div id="stars3"></div>
+		</div>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

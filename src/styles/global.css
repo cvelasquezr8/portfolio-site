@@ -1,0 +1,222 @@
+:root {
+	--primary-color: #3245ff;
+	--secondary-color: #bc52ee;
+	--bg-color: #0a0b14;
+	--text-color: #e5e7eb;
+	--card-bg: #1a1b25;
+	--border-color: rgba(50, 69, 255, 0.2);
+	--gradient-start: #3245ff;
+	--gradient-end: #bc52ee;
+	--accent-color: #9ca3af;
+	--star-color: #ffffff;
+	--card-shadow: 0 4px 20px rgba(50, 69, 255, 0.2);
+	--hover-bg: rgba(50, 69, 255, 0.1);
+}
+
+html {
+	font-weight: 400;
+	font-style: normal;
+	font-family: 'Audiowide', serif;
+	scroll-behavior: smooth;
+}
+
+body {
+	color: var(--text-color);
+	background-color: var(--bg-color);
+	overflow-x: hidden;
+}
+
+.theme-transition {
+	transition: all 0.3s ease-in-out;
+}
+
+/* Animated Stars Background */
+.stars-wrapper {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	overflow: hidden;
+	opacity: 0.7;
+}
+
+#stars {
+	width: 1px;
+	height: 1px;
+	background: transparent;
+	box-shadow: 1744px 122px var(--star-color), 134px 1321px var(--star-color),
+		92px 859px var(--star-color);
+	animation: animStar 50s linear infinite;
+}
+
+#stars2 {
+	width: 2px;
+	height: 2px;
+	background: transparent;
+	box-shadow: 1744px 122px var(--star-color), 134px 1321px var(--star-color),
+		92px 859px var(--star-color);
+	animation: animStar 100s linear infinite;
+}
+
+#stars3 {
+	width: 3px;
+	height: 3px;
+	background: transparent;
+	box-shadow: 1744px 122px var(--star-color), 134px 1321px var(--star-color),
+		92px 859px var(--star-color);
+	animation: animStar 150s linear infinite;
+}
+
+@keyframes animStar {
+	from {
+		transform: translateY(0px);
+	}
+	to {
+		transform: translateY(-2000px);
+	}
+}
+
+.skill-card {
+	background: var(--card-bg);
+	border: 1px solid var(--border-color);
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+.skill-card:hover {
+	border-color: var(--primary-color);
+	background: color-mix(in srgb, var(--card-bg) 98%, var(--primary-color));
+}
+
+/* Space themed scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(var(--primary-color), var(--secondary-color));
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(var(--secondary-color), var(--primary-color));
+}
+
+/* Floating animation */
+.float {
+	animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+/* Glow effects */
+.glow {
+	position: relative;
+}
+
+.glow::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	box-shadow: 0 0 30px rgba(var(--primary-color), 0.3);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.glow:hover::after {
+	opacity: 1;
+}
+
+.tech-icon {
+	width: 48px;
+	height: 48px;
+	transition: all 0.3s ease;
+}
+
+.tech-icon:hover {
+	transform: scale(1.1);
+}
+
+.astronaut {
+	position: relative;
+	animation: float-astronaut 8s ease-in-out infinite;
+}
+
+@keyframes float-astronaut {
+	0% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+	25% {
+		transform: translate(5px, -5px) rotate(2deg);
+	}
+	50% {
+		transform: translate(0, -10px) rotate(0deg);
+	}
+	75% {
+		transform: translate(-5px, -5px) rotate(-2deg);
+	}
+	100% {
+		transform: translate(0, 0) rotate(0deg);
+	}
+}
+
+/* Previous styles remain unchanged */
+.shooting-star {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: linear-gradient(to right, var(--primary-color), transparent);
+	border-radius: 50%;
+	animation: shoot 3s linear infinite;
+	opacity: 0;
+}
+
+@keyframes shoot {
+	0% {
+		transform: translate(0, 0) rotate(-45deg);
+		opacity: 1;
+	}
+	100% {
+		transform: translate(300px, 300px) rotate(-45deg);
+		opacity: 0;
+	}
+}
+
+.floating-delayed {
+	animation: floating 4s ease-in-out infinite;
+	animation-delay: 1s;
+}
+
+.floating-fast {
+	animation: floating 3s ease-in-out infinite;
+	animation-delay: 0.5s;
+}
+
+.space-scene {
+	position: relative;
+	overflow: hidden;
+	border-radius: 1rem;
+	background: radial-gradient(
+		circle at center,
+		rgba(50, 69, 255, 0.1),
+		transparent
+	);
+}
