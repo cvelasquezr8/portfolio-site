@@ -82,6 +82,19 @@
 				localStorage.setItem(THEME_KEY, theme);
 				applyTheme(theme);
 			};
+
+			// Add dynamic stars
+			document.addEventListener('DOMContentLoaded', function() {
+				const starsWrapper = document.querySelector('.stars-wrapper');
+				for (let i = 0; i < 20; i++) {
+					const star = document.createElement('div');
+					star.className = 'shooting-star';
+					star.style.left = Math.random() * window.innerWidth + 'px';
+					star.style.top = Math.random() * window.innerHeight + 'px';
+					star.style.animationDelay = Math.random() * 5 + 's';
+					starsWrapper.appendChild(star);
+				}
+			});
 		</script>
 	</head>
 	<body class="theme-transition">
@@ -89,6 +102,9 @@
 			<div id="stars"></div>
 			<div id="stars2"></div>
 			<div id="stars3"></div>
+			<div id="stars4"></div>
+			<div id="stars5"></div>
+			<div class="nebula"></div>
 		</div>
 		<slot />
 	</body>
