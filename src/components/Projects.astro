@@ -4,7 +4,7 @@ const projects = [
 		title: 'Equasystems WebSite',
 		description:
 			'Designed and developed a modern website for Equa Systems, enhancing their online presence and client engagement. Focused on usability, responsiveness, and a sleek design to showcase their tech solutions effectively.',
-		image: `${import.meta.env.BASE_URL}images/equasystems.jpeg`,
+		image: `equasystems.jpeg`,
 		previewLink: 'https://equasystems.netlify.app/',
 		githubLink:
 			'https://github.com/cvelasquezr8/equasystems-website-project',
@@ -31,7 +31,7 @@ const projects = [
 							<div class="relative h-48">
 								<div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-20" />
 								<img
-									src={project.image}
+									src={`/portfolio-site/images/${project.image}`}
 									alt={project.title}
 									class="w-full h-full object-cover"
 								/>
@@ -68,7 +68,7 @@ const projects = [
 									>
 										<span>GitHub</span>
 										<img
-											src="images/github.svg"
+											src="/portfolio-site/images/github.svg"
 											alt="GitHub"
 											class="w-6 h-6"
 										/>
