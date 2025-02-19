@@ -1,0 +1,84 @@
+---
+const projects = [
+	{
+		title: 'Equasystems WebSite',
+		description:
+			'Designed and developed a modern website for Equa Systems, enhancing their online presence and client engagement. Focused on usability, responsiveness, and a sleek design to showcase their tech solutions effectively.',
+		image: '/images/equasystems.jpeg',
+		previewLink: 'https://equasystems.netlify.app/',
+		githubLink:
+			'https://github.com/cvelasquezr8/equasystems-website-project',
+		tags: ['2021', 'Astro', 'Node.js', 'Express'],
+	},
+];
+---
+
+<section id="projects" class="py-20 px-4 section-fade">
+	<div class="container mx-auto">
+		<h2 class="text-4xl font-bold mb-12 text-center gradient-text">
+			<span class="text-xl block mb-4 text-blue-500">
+				SPACE MISSIONS
+			</span>
+			Featured Projects
+			<span class="inline-block ml-2">🚀</span>
+		</h2>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				projects.map((project) => {
+					return (
+						<div class="skill-card rounded-lg overflow-hidden project-card float">
+							<div class="relative h-48">
+								<div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-20" />
+								<img
+									src={project.image}
+									alt={project.title}
+									class="w-full h-full object-cover"
+								/>
+							</div>
+							<div class="p-6">
+								<h3 class="text-xl font-semibold mb-2 text-blue-500">
+									{project.title}
+								</h3>
+								<p class="text-sm text-text-color/80 mb-4">
+									{project.description}
+								</p>
+								<div class="flex flex-wrap gap-2 mb-4">
+									{project.tags.map((tag) => {
+										return (
+											<span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
+												{tag}
+											</span>
+										);
+									})}
+								</div>
+								<div class="flex gap-4">
+									<a
+										href={project.previewLink}
+										target="_blank"
+										class="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
+									>
+										<span>View Project</span>
+										<span class="text-xl">🚀</span>
+									</a>
+									<a
+										href={project.githubLink}
+										target="_blank"
+										class="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
+									>
+										<span>GitHub</span>
+										<img
+											src="images/github.svg"
+											alt="GitHub"
+											class="w-6 h-6"
+										/>
+									</a>
+								</div>
+							</div>
+						</div>
+					);
+				})
+			}
+		</div>
+	</div>
+</section>

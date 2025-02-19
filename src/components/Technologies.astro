@@ -70,45 +70,44 @@ const technologies: Technology[] = [
 ];
 ---
 
-<section id="technologies" class="py-16 section-fade relative">
-	<div class="container mx-auto px-4">
-		<div class="max-w-4xl mx-auto">
-			<h2 class="text-3xl font-bold mb-12 text-center">
-				<span class="text-xl block mb-4 text-blue-500">
-					NAVIGATION SYSTEMS
-				</span>
-				Technical Capabilities
-			</h2>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-				{
-					technologies.map((technology, index) => (
-						<div class="skill-card p-6 rounded-lg">
-							<div class="flex items-center justify-between mb-6">
-								<h3 class="text-blue-500">
-									{technology.title}
-								</h3>
-								<img
-									src={`/images/${technology.image}`}
-									alt={technology.alt}
-									class="tech-icon"
-								/>
-							</div>
-							<ul class="space-y-4">
-								{technology.elements.map((element) => (
-									<li class="flex items-center space-x-4">
-										<img
-											src={`/images/${element.image}`}
-											alt={element.alt}
-											class="w-8 h-8"
-										/>
-										<span>{element.title}</span>
-									</li>
-								))}
-							</ul>
+<section id="technologies" class="py-20 px-4 section-fade">
+	<div class="container mx-auto">
+		<h2 class="text-4xl font-bold mb-12 text-center">
+			<span class="text-xl block mb-4 text-blue-500">
+				NAVIGATION SYSTEMS
+			</span>
+			Technical Capabilities
+			<span class="inline-block ml-2">🧠</span>
+		</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+			{
+				technologies.map((technology) => (
+					<div class="skill-card min-w-[22rem] p-6 rounded-xl float">
+						<div class="flex items-start justify-between mb-4">
+							<h3 class="text-blue-500 text-xl">
+								{technology.title}
+							</h3>
+							<img
+								src={`/images/${technology.image}`}
+								alt={technology.alt}
+								class="tech-icon"
+							/>
 						</div>
-					))
-				}
-			</div>
+						<ul class="space-y-4">
+							{technology.elements.map((element) => (
+								<li class="flex items-center space-x-4">
+									<img
+										src={`/images/${element.image}`}
+										alt={element.alt}
+										class="w-8 h-8"
+									/>
+									<span>{element.title}</span>
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
 		</div>
 	</div>
 </section>
