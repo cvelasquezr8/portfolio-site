@@ -57,7 +57,12 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		const transition = () => {
 			document.querySelector('.content')?.classList.add('fade-out');
 			setTimeout(() => {
-				window.location.href = '/';
+				const currentLang = window.location.pathname.startsWith('/en')
+					? 'en'
+					: 'es';
+
+				const newUrl = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${currentLang}/`;
+				window.location.href = newUrl;
 			}, 500);
 		};
 		transition();
