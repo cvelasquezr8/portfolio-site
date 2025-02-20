@@ -60,6 +60,9 @@ export const labels = {
 		'footer.certificates.hacker_rank_node_basic': 'NodeJs (Basic)',
 		'footer.certificates.udemy_sql_advance': 'SQL Server (Advance)',
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Basic)',
+		'footer.navigation.title': 'NAVIGATION',
+		'footer.project.title': 'PROJECTS',
+		'footer.certificate.title': 'CERTIFICATES',
 	},
 	es: {
 		'nav.home': 'Inicio',
@@ -117,5 +120,8 @@ export const labels = {
 		'footer.certificates.hacker_rank_node_basic': 'NodeJs (Básico)',
 		'footer.certificates.udemy_sql_advance': 'SQL Server (Avanzado)',
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Básico)',
+		'footer.navigation.title': 'NAVEGACIÓN',
+		'footer.project.title': 'PROYECTOS',
+		'footer.certificate.title': 'CERTIFICADOS',
 	},
 };
