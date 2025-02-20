@@ -1,9 +1,10 @@
 ---
+import en from '../i18n/en.json';
+import es from '../i18n/es.json';
+
 const pathPage = (globalThis as any).BASE_URL;
 const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = await import(`../i18n/${lang}.json`).then(
-	(m) => m.default,
-);
+const translations = lang === 'en' ? en : es;
 
 interface SocialLink {
 	title: string;

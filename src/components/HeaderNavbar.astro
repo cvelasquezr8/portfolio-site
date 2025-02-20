@@ -1,8 +1,9 @@
 ---
+import en from '../i18n/en.json';
+import es from '../i18n/es.json';
+
 const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = await import(`../i18n/${lang}.json`).then(
-	(m) => m.default,
-);
+const translations = lang === 'en' ? en : es;
 
 interface NavigationLink {
 	name: string;
@@ -51,7 +52,7 @@ const navigationLinks: NavigationLink[] = [
 <header
 	class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-blue-500/20"
 >
-	<div class="container mx-4 px-4">
+	<div class="container mx-6 px-6">
 		<nav class="flex items-center justify-between py-4">
 			<div
 				class="text-2xl font-bold gradient-text flex items-center gap-2"
