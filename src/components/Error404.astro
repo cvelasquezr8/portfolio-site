@@ -1,0 +1,358 @@
+---
+import '../styles/global.css';
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+const pathPage = (globalThis as any).BASE_URL;
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as keyof typeof languagesList);
+---
+
+<style>
+	html,
+	body {
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+
+	.error-container {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		overflow: hidden;
+		perspective: 1000px;
+	}
+
+	.error-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.astronaut-image {
+		margin-top: 1rem;
+	}
+
+	.astronaut-image img {
+		filter: drop-shadow(0 0 20px rgba(188, 82, 238, 0.3));
+		max-width: 100%;
+		height: auto;
+	}
+
+	.content {
+		text-align: center;
+		color: white;
+		position: relative;
+		animation: fadeIn 1s ease-out;
+		opacity: 1;
+		transform: translateY(0);
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s ease;
+		padding: 2rem;
+		z-index: 1;
+	}
+
+	.content.fade-out {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(-20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	h1 {
+		font-size: 120px;
+		margin: 0;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		position: relative;
+		animation: glitch 5s infinite;
+	}
+
+	@keyframes glitch {
+		0% {
+			text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		}
+		2% {
+			text-shadow:
+				3px 3px 0 #3245ff,
+				-3px -3px 0 #bc52ee;
+		}
+		4% {
+			text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		}
+		50% {
+			text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		}
+		52% {
+			text-shadow:
+				-3px 3px 0 #3245ff,
+				3px -3px 0 #bc52ee;
+		}
+		54% {
+			text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		}
+		100% {
+			text-shadow: 0 0 20px rgba(188, 82, 238, 0.5);
+		}
+	}
+
+	.message {
+		font-size: 32px;
+		margin: 10px 0;
+		color: #f041ff;
+		text-shadow: 0 0 10px rgba(240, 65, 255, 0.5);
+		animation: pulse 2s infinite;
+	}
+
+	@keyframes pulse {
+		0% {
+			text-shadow: 0 0 10px rgba(240, 65, 255, 0.5);
+		}
+		50% {
+			text-shadow: 0 0 20px rgba(240, 65, 255, 0.8);
+		}
+		100% {
+			text-shadow: 0 0 10px rgba(240, 65, 255, 0.5);
+		}
+	}
+
+	.description {
+		font-size: 18px;
+		color: #ffffff;
+		margin-bottom: 30px;
+		max-width: 600px;
+		margin: 20px auto 30px;
+		line-height: 1.6;
+	}
+
+	.floating {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	@keyframes float {
+		0% {
+			transform: translateY(0px) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-10px) rotate(5deg);
+		}
+		100% {
+			transform: translateY(0px) rotate(0deg);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.error-header {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.astronaut-image img {
+			width: 80px;
+			height: 80px;
+		}
+
+		h1 {
+			font-size: 80px;
+		}
+
+		.message {
+			font-size: 24px;
+		}
+
+		.description {
+			font-size: 16px;
+			padding: 0 20px;
+		}
+	}
+
+	/* 3D Space */
+	.view {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	.plane {
+		width: 120px;
+		height: 120px;
+		transform-style: preserve-3d;
+	}
+
+	.plane.main {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotateX(60deg) rotateZ(-30deg);
+		animation:
+			rotate 30s infinite linear,
+			move 15s infinite linear alternate;
+	}
+
+	.circle {
+		width: 120px;
+		height: 120px;
+		position: absolute;
+		transform-style: preserve-3d;
+		border-radius: 100%;
+		box-sizing: border-box;
+		box-shadow:
+			0 0 60px rgba(80, 120, 250, 0.8),
+			inset 0 0 60px rgba(120, 80, 250, 0.8);
+	}
+
+	.circle::before,
+	.circle::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		width: 10%;
+		height: 10%;
+		border-radius: 100%;
+		background: rgba(80, 120, 250, 1);
+		box-sizing: border-box;
+		box-shadow: 0 0 60px 2px rgba(120, 80, 250, 1);
+	}
+
+	.circle::before {
+		transform: translateZ(-90px);
+	}
+
+	.circle::after {
+		transform: translateZ(90px);
+	}
+
+	.circle:nth-child(1) {
+		transform: rotateZ(72deg) rotateX(63.435deg);
+	}
+
+	.circle:nth-child(2) {
+		transform: rotateZ(144deg) rotateX(63.435deg);
+	}
+
+	.circle:nth-child(3) {
+		transform: rotateZ(216deg) rotateX(63.435deg);
+	}
+
+	.circle:nth-child(4) {
+		transform: rotateZ(288deg) rotateX(63.435deg);
+	}
+
+	.circle:nth-child(5) {
+		transform: rotateZ(360deg) rotateX(63.435deg);
+	}
+
+	/* Animaciones */
+	@keyframes rotate {
+		0% {
+			transform: rotateX(0) rotateY(0) rotateZ(0);
+		}
+		100% {
+			transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+		}
+	}
+
+	@keyframes move {
+		0% {
+			top: 10%;
+			left: 10%;
+		}
+		25% {
+			top: 80%;
+			left: 20%;
+		}
+		50% {
+			top: 50%;
+			left: 70%;
+		}
+		75% {
+			top: 30%;
+			left: 40%;
+		}
+		100% {
+			top: 90%;
+			left: 80%;
+		}
+	}
+</style>
+
+<div class="view">
+	<div class="plane main">
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+	</div>
+</div>
+<div class="error-container">
+	<div class="content">
+		<div class="error-header">
+			<h1 class="glitch-text">404</h1>
+			<div class="astronaut-image floating">
+				<img
+					src={`${pathPage}images/astronaut-lost.png`}
+					alt="Astronauta flotando"
+					width="120"
+					height="120"
+				/>
+			</div>
+		</div>
+		<p class="message">{translations('error.title')}</p>
+		<p class="description">
+			{translations('error.description')}
+		</p>
+		<button
+			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-1 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
+			id="backButton"
+		>
+			{translations('error.button')}
+			<img
+				src={`${pathPage}images/astronaut-cohete.png`}
+				alt="Astronaut"
+				width="50px"
+				height="30px"
+			/>
+		</button>
+	</div>
+</div>
+
+<script>
+	document.getElementById('backButton')?.addEventListener('click', () => {
+		const transition = () => {
+			document.querySelector('.content')?.classList.add('fade-out');
+			setTimeout(() => {
+				const currentLang = window.location.pathname.startsWith('/en')
+					? 'en'
+					: 'es';
+
+				const newUrl = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${currentLang}/`;
+				window.location.href = newUrl;
+			}, 500);
+		};
+		transition();
+	});
+</script>
