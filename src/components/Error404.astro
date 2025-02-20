@@ -1,11 +1,23 @@
 ---
 import '../styles/global.css';
-import { languagesList } from '../i18n/ui';
-import { useTranslations } from '../i18n/utils';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
-const translations = useTranslations(currentLang as keyof typeof languagesList);
+const languages: any = {
+	en: {
+		title: 'Houston, We Have a Problem!',
+		description:
+			'The cosmic coordinates you are looking for seem to be lost in space. Let us return to a known star system.',
+		button: 'Back to Mission Control',
+	},
+	es: {
+		title: '¡Houston, Tenemos un Problema!',
+		description:
+			'Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a un sistema estelar conocido.',
+		button: 'Volver al Control de Misión',
+	},
+};
+const translations: any = languages[currentLang];
 ---
 
 <style>
@@ -321,15 +333,15 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 				/>
 			</div>
 		</div>
-		<p class="message">{translations('error.title')}</p>
+		<p class="message">{translations.title}</p>
 		<p class="description">
-			{translations('error.description')}
+			{translations.description}
 		</p>
 		<button
 			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-1 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
 			id="backButton"
 		>
-			{translations('error.button')}
+			{translations.button}
 			<img
 				src={`${pathPage}images/astronaut-cohete.png`}
 				alt="Astronaut"
