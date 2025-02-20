@@ -16,7 +16,7 @@ export const labels = {
 		'hero.space_developer': 'SPACE DEVELOPER',
 		'hero.description':
 			"Exploring the digital universe one line of code at a time. Building stellar applications that push the boundaries of what's possible.",
-		'hero.launch_mission': 'Launch Mission',
+		'hero.launch_mission': 'Download Mission Status',
 		'tech.title': 'Technical Capabilities',
 		'tech.subtitle': 'NAVIGATION SYSTEMS',
 		'project.title': 'Featured Projects',
@@ -76,7 +76,7 @@ export const labels = {
 		'hero.space_developer': 'DESARROLLADOR ESPACIAL',
 		'hero.description':
 			'Explorando el universo digital línea por línea de código. Construyendo aplicaciones estelares que empujan los límites de lo que es posible.',
-		'hero.launch_mission': 'Lanzar Misión',
+		'hero.launch_mission': 'Descargar Estado de la Misión',
 		'tech.title': 'Capacidades Técnicas',
 		'tech.subtitle': 'SISTEMAS DE NAVEGACIÓN',
 		'project.title': 'Proyectos Destacados',

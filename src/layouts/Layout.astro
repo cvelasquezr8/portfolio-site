@@ -99,6 +99,19 @@ const currentLang = Astro.currentLocale || "en";
 					star.style.animationDelay = Math.random() * 5 + 's';
 					starsWrapper.appendChild(star);
 				}
+
+				const sections = document.querySelectorAll(".section-fade");
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("show");
+						} else {
+							entry.target.classList.remove("show");
+						}
+					});
+				}, { threshold: 0.2 });
+			
+				sections.forEach((section) => observer.observe(section));
 			});
 		</script>
 	</head>

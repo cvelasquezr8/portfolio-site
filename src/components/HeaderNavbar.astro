@@ -95,6 +95,7 @@ const navigationLinks: NavigationLink[] = [
 							?.flag}
 						alt={currentLang}
 						class="w-4 h-4 mr-2"
+						loading="lazy"
 					/>
 					{languages.find((lang) => lang.code === currentLang)?.label}
 					<span class="ml-2">▼</span>
@@ -113,6 +114,7 @@ const navigationLinks: NavigationLink[] = [
 									src={lang.flag}
 									alt={lang.label}
 									class="w-4 h-4 mr-2"
+									loading="lazy"
 								/>
 								{lang.label}
 							</li>

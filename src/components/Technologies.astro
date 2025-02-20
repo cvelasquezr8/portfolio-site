@@ -97,6 +97,7 @@ const technologies: Technology[] = [
 								src={`${pathPage}images/${technology.image}`}
 								alt={technology.alt}
 								class="tech-icon"
+								loading="lazy"
 							/>
 						</div>
 						<ul class="space-y-4">
@@ -106,6 +107,7 @@ const technologies: Technology[] = [
 										src={`${pathPage}images/${element.image}`}
 										alt={element.alt}
 										class="w-8 h-8"
+										loading="lazy"
 									/>
 									<span>{element.title}</span>
 								</li>

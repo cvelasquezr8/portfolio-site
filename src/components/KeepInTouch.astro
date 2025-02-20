@@ -76,7 +76,7 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 								>
 								<span
 									class="text-xl group-hover:translate-x-1 transition-transform"
-									>🚀</span
+									>🛰️</span
 								>
 							</span>
 						</button>
@@ -89,16 +89,19 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 							src={`${pathPage}images/satellite.png`}
 							alt="Space Station"
 							class="w-24 absolute top-10 right-10 floating-delayed"
+							loading="lazy"
 						/>
 						<img
 							src={`${pathPage}images/astronaut.png`}
 							alt="Floating Astronaut"
 							class="w-52 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 floating"
+							loading="lazy"
 						/>
 						<img
 							src={`${pathPage}images/planet.png`}
 							alt="Planet"
 							class="w-20 absolute bottom-20 left-20 floating-fast"
+							loading="lazy"
 						/>
 						<div class="shooting-star"></div>
 					</div>
