@@ -1,9 +1,8 @@
 ---
-import en from '../i18n/en.json';
-import es from '../i18n/es.json';
-
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = lang === 'en' ? en : es;
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as keyof typeof languagesList);
 
 interface Course {
 	title: string;
@@ -16,34 +15,29 @@ interface Course {
 
 const courses: Course[] = [
 	{
-		title: translations.certificate_section.courses.hacker_rank_node_basic
-			.title,
+		title: translations('certificate.hacker_rank_node_basic.title'),
 		academy: 'HackerRank',
 		icon: '🚀',
 		href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
-		description:
-			translations.certificate_section.courses.hacker_rank_node_basic
-				.description,
+		description: translations(
+			'certificate.hacker_rank_node_basic.description',
+		),
 		tags: ['2024', 'NodeJs'],
 	},
 	{
-		title: translations.certificate_section.courses.udemy_sql_advance.title,
+		title: translations('certificate.udemy_sql_advance.title'),
 		academy: 'Udemy',
 		icon: '🐱‍💻',
 		href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
-		description:
-			translations.certificate_section.courses.udemy_sql_advance
-				.description,
+		description: translations('certificate.udemy_sql_advance.description'),
 		tags: ['2021', 'SQL Server'],
 	},
 	{
-		title: translations.certificate_section.courses.udemy_sql_basic.title,
+		title: translations('certificate.udemy_sql_basic.title'),
 		academy: 'Udemy',
 		icon: '🐱‍🚀',
 		href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
-		description:
-			translations.certificate_section.courses.udemy_sql_basic
-				.description,
+		description: translations('certificate.udemy_sql_basic.description'),
 		tags: ['2020', 'SQL Server'],
 	},
 ];
@@ -53,9 +47,9 @@ const courses: Course[] = [
 	<div class="container mx-auto">
 		<h2 class="text-4xl font-bold mb-12 text-center gradient-text">
 			<span class="text-xl block mb-4 text-blue-500">
-				{translations.certificate_section.subtitle}
+				{translations('certificate.subtitle')}
 			</span>
-			{translations.certificate_section.title}
+			{translations('certificate.title')}
 			<span class="inline-block ml-2">🎓</span>
 		</h2>
 

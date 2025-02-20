@@ -1,10 +1,10 @@
 ---
-import en from '../i18n/en.json';
-import es from '../i18n/es.json';
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 
+const currentLang = Astro.currentLocale || 'en';
 const pathPage = (globalThis as any).BASE_URL;
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = lang === 'en' ? en : es;
+const translations = useTranslations(currentLang as keyof typeof languagesList);
 ---
 
 <section class="container mx-auto px-4 pt-32 pb-16 section-fade">
@@ -23,7 +23,7 @@ const translations = lang === 'en' ? en : es;
 
 		<h1 class="text-5xl font-bold mb-6">
 			<span class="text-2xl block mb-4 text-blue-500"
-				>{translations.hero_section.mission_control}</span
+				>{translations('hero.mission_control')}</span
 			>
 			<span class="gradient-text flex items-center justify-center gap-3">
 				Carlos Velasquez
@@ -40,20 +40,20 @@ const translations = lang === 'en' ? en : es;
 		>
 			<span
 				class="glow px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20"
-				>{translations.hero_section.role.full_stack_explorer}</span
+				>{translations('hero.full_stack_explorer')}</span
 			>
 			<span
 				class="glow px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20"
-				>{translations.hero_section.role.code_astronaut}</span
+				>{translations('hero.code_astronaut')}</span
 			>
 			<span
 				class="glow px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20"
-				>{translations.hero_section.role.space_developer}</span
+				>{translations('hero.space_developer')}</span
 			>
 		</div>
 
 		<p class="text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-			{translations.hero_section.hero_description}
+			{translations('hero.description')}
 		</p>
 
 		<a
@@ -62,7 +62,7 @@ const translations = lang === 'en' ? en : es;
 			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
 		>
 			<span class="text-xl">🚀</span>
-			{translations.hero_section.launch_mission}
+			{translations('hero.launch_mission')}
 			<svg
 				class="w-5 h-5 group-hover:translate-x-1 transition-transform"
 				fill="none"

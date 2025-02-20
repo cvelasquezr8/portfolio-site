@@ -1,8 +1,9 @@
 ---
 const pathPage = (globalThis as any).BASE_URL;
+const currentLang = Astro.currentLocale || "en";
 ---
 
-<html lang="en">
+<html lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />

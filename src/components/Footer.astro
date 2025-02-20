@@ -1,10 +1,10 @@
 ---
-import en from '../i18n/en.json';
-import es from '../i18n/es.json';
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 
 const pathPage = (globalThis as any).BASE_URL;
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = lang === 'en' ? en : es;
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as keyof typeof languagesList);
 
 interface SocialLink {
 	title: string;
@@ -53,21 +53,21 @@ const navigationLinks: NavigationSection[] = [
 	{
 		title: 'NAVIGATION',
 		elements: [
-			{ name: translations.footer_section.navigation.home, href: '#' },
+			{ name: translations('footer.navigation.home'), href: '#' },
 			{
-				name: translations.footer_section.navigation.skills,
+				name: translations('footer.navigation.skills'),
 				href: '#technologies',
 			},
 			{
-				name: translations.footer_section.navigation.projects,
+				name: translations('footer.navigation.projects'),
 				href: '#projects',
 			},
 			{
-				name: translations.footer_section.navigation.certificates,
+				name: translations('footer.navigation.certificates'),
 				href: '#courses',
 			},
 			{
-				name: translations.footer_section.navigation.contact,
+				name: translations('footer.navigation.contact'),
 				href: '#contact',
 			},
 		],
@@ -76,7 +76,7 @@ const navigationLinks: NavigationSection[] = [
 		title: 'PROJECTS',
 		elements: [
 			{
-				name: translations.footer_section.projects.equasystem,
+				name: translations('footer.projects.equasystem'),
 				href: 'https://equasystems.netlify.app/',
 				isTargetBlank: true,
 			},
@@ -86,19 +86,19 @@ const navigationLinks: NavigationSection[] = [
 		title: 'CERTIFICATES',
 		elements: [
 			{
-				name: translations.footer_section.certificates
-					.hacker_rank_node_basic,
+				name: translations(
+					'footer.certificates.hacker_rank_node_basic',
+				),
 				href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
 				isTargetBlank: true,
 			},
 			{
-				name: translations.footer_section.certificates
-					.udemy_sql_advance,
+				name: translations('footer.certificates.udemy_sql_advance'),
 				href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
 				isTargetBlank: true,
 			},
 			{
-				name: translations.footer_section.certificates.udemy_sql_basic,
+				name: translations('footer.certificates.udemy_sql_basic'),
 				href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
 				isTargetBlank: true,
 			},
@@ -175,10 +175,10 @@ const navigationLinks: NavigationSection[] = [
 		<div class="text-center text-gray-400 pt-2 border-t border-blue-500/20">
 			<p>
 				© {new Date().getFullYear()} Carlos Velasquez. {
-					translations.footer_section.rights
+					translations('footer.rights')
 				}
 			</p>
-			<p class="mt-2 text-sm">{translations.footer_section.crafted}</p>
+			<p class="mt-2 text-sm">{translations('footer.crafted')}</p>
 		</div>
 	</div>
 </footer>

@@ -1,9 +1,8 @@
 ---
-import en from '../i18n/en.json';
-import es from '../i18n/es.json';
-
-const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
-const translations = lang === 'en' ? en : es;
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as keyof typeof languagesList);
 
 interface NavigationLink {
 	name: string;
@@ -12,23 +11,23 @@ interface NavigationLink {
 
 const navigationLinks: NavigationLink[] = [
 	{
-		name: translations.navigation_section.home,
+		name: translations('nav.home'),
 		href: '#',
 	},
 	{
-		name: translations.navigation_section.skills,
+		name: translations('nav.skills'),
 		href: '#technologies',
 	},
 	{
-		name: translations.navigation_section.projects,
+		name: translations('nav.projects'),
 		href: '#projects',
 	},
 	{
-		name: translations.navigation_section.certificates,
+		name: translations('nav.certificates'),
 		href: '#courses',
 	},
 	{
-		name: translations.navigation_section.contact,
+		name: translations('nav.contact'),
 		href: '#contact',
 	},
 ];
@@ -46,7 +45,6 @@ const navigationLinks: NavigationLink[] = [
 	(window as any).changeLanguage = function (lang: string = 'en') {
 		localStorage.setItem('lang', lang);
 		const newUrl = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${lang}/`;
-		console.log('Redirecting to:', newUrl);
 		window.location.href = newUrl;
 	};
 </script>
@@ -85,8 +83,12 @@ const navigationLinks: NavigationLink[] = [
 				onchange="window.changeLanguage(this.value)"
 				class="bg-gray-900 text-white border border-blue-500 rounded p-1 hidden md:block"
 			>
-				<option value="en" selected={lang === 'en'}>🇬🇧 English</option>
-				<option value="es" selected={lang === 'es'}>🇪🇸 Español</option>
+				<option value="en" selected={currentLang === 'en'}
+					>🇬🇧 English</option
+				>
+				<option value="es" selected={currentLang === 'es'}
+					>🇪🇸 Español</option
+				>
 			</select>
 
 			<!-- Mobile Menu Button -->
