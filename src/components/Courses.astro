@@ -1,4 +1,9 @@
 ---
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+
 interface Course {
 	title: string;
 	academy: string;
@@ -10,30 +15,34 @@ interface Course {
 
 const courses: Course[] = [
 	{
-		title: 'Certificate of Accomplishment - NodeJs (Basic)',
+		title: translations.certificate_section.courses.hacker_rank_node_basic
+			.title,
 		academy: 'HackerRank',
 		icon: '🚀',
 		href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
 		description:
-			'This is a Certificate of Accomplishment from HackerRank for Node.js (Basic), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
+			translations.certificate_section.courses.hacker_rank_node_basic
+				.description,
 		tags: ['2024', 'NodeJs'],
 	},
 	{
-		title: 'Certificate of Accomplishment - SQL Server (Advance)',
+		title: translations.certificate_section.courses.udemy_sql_advance.title,
 		academy: 'Udemy',
 		icon: '🐱‍💻',
 		href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
 		description:
-			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 5 total hours of the online course SQL Server: Advanced Programming 2020. The course was instructed by Mariano Puglisi.',
+			translations.certificate_section.courses.udemy_sql_advance
+				.description,
 		tags: ['2021', 'SQL Server'],
 	},
 	{
-		title: 'Certificate of Accomplishment - SQL Server (Basic)',
+		title: translations.certificate_section.courses.udemy_sql_basic.title,
 		academy: 'Udemy',
 		icon: '🐱‍🚀',
 		href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
 		description:
-			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 16 total hours of the online course SQL Server: From Beginner to Professional. The course was instructed by Mariano Puglisi.',
+			translations.certificate_section.courses.udemy_sql_basic
+				.description,
 		tags: ['2020', 'SQL Server'],
 	},
 ];
@@ -43,9 +52,9 @@ const courses: Course[] = [
 	<div class="container mx-auto">
 		<h2 class="text-4xl font-bold mb-12 text-center gradient-text">
 			<span class="text-xl block mb-4 text-blue-500">
-				ASTRO ACHIEVEMENTS
+				{translations.certificate_section.subtitle}
 			</span>
-			Certificates & Courses
+			{translations.certificate_section.title}
 			<span class="inline-block ml-2">🎓</span>
 		</h2>
 

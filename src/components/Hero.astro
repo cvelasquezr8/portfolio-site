@@ -1,3 +1,11 @@
+---
+const pathPage = (globalThis as any).BASE_URL;
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+---
+
 <section class="container mx-auto px-4 pt-32 pb-16 section-fade">
 	<div class="max-w-4xl mx-auto text-center">
 		<div class="relative mb-12">
@@ -6,7 +14,7 @@
 			>
 			</div>
 			<img
-				src="/portfolio-site/images/carlos-velasquez.jpg"
+				src={`${pathPage}images/carlos-velasquez.jpg`}
 				alt="Profile"
 				class="w-48 h-48 rounded-full mx-auto border-4 border-blue-500 shadow-xl relative z-10 float"
 			/>
@@ -14,12 +22,12 @@
 
 		<h1 class="text-5xl font-bold mb-6">
 			<span class="text-2xl block mb-4 text-blue-500"
-				>MISSION CONTROL</span
+				>{translations.hero_section.mission_control}</span
 			>
 			<span class="gradient-text flex items-center justify-center gap-3">
 				Carlos Velasquez
 				<img
-					src="/portfolio-site/images/astronaut.png"
+					src={`${pathPage}images/astronaut.png`}
 					alt="Astronaut"
 					class="w-12 h-12 astronaut inline-block"
 				/>
@@ -31,30 +39,29 @@
 		>
 			<span
 				class="glow px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20"
-				>FULL STACK EXPLORER</span
+				>{translations.hero_section.role.full_stack_explorer}</span
 			>
 			<span
 				class="glow px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20"
-				>CODE ASTRONAUT</span
+				>{translations.hero_section.role.code_astronaut}</span
 			>
 			<span
 				class="glow px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20"
-				>SPACE DEVELOPER</span
+				>{translations.hero_section.role.space_developer}</span
 			>
 		</div>
 
 		<p class="text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
-			Exploring the digital universe one line of code at a time. Building
-			stellar applications that push the boundaries of what's possible.
+			{translations.hero_section.hero_description}
 		</p>
 
 		<a
-			href="/portfolio-site/resume.pdf"
+			href={`${pathPage}resume.pdf`}
 			download
 			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
 		>
 			<span class="text-xl">🚀</span>
-			Launch Mission
+			{translations.hero_section.launch_mission}
 			<svg
 				class="w-5 h-5 group-hover:translate-x-1 transition-transform"
 				fill="none"

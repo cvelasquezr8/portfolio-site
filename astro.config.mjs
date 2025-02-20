@@ -5,6 +5,13 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
 	output: 'static',
-	base: "/portfolio-site/",
-	integrations: [tailwind()]
+	base: import.meta.env.PROD ? "/portfolio-site/" : "/",
+	vite: {
+		define: {
+			'globalThis.BASE_URL': JSON.stringify(
+				import.meta.env.PROD ? '/portfolio-site/' : '/'
+			),
+		},
+	},
+	integrations: [tailwind()],
 });

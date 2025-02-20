@@ -1,9 +1,15 @@
 ---
+const pathPage = (globalThis as any).BASE_URL;
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+
 const projects = [
 	{
-		title: 'Equasystems WebSite',
+		title: translations.project_section.equasystem_project.title,
 		description:
-			'Designed and developed a modern website for Equa Systems, enhancing their online presence and client engagement. Focused on usability, responsiveness, and a sleek design to showcase their tech solutions effectively.',
+			translations.project_section.equasystem_project.description,
 		image: `equasystems.jpeg`,
 		previewLink: 'https://equasystems.netlify.app/',
 		githubLink:
@@ -17,9 +23,9 @@ const projects = [
 	<div class="container mx-auto">
 		<h2 class="text-4xl font-bold mb-12 text-center gradient-text">
 			<span class="text-xl block mb-4 text-blue-500">
-				SPACE MISSIONS
+				{translations.project_section.subtitle}
 			</span>
-			Featured Projects
+			{translations.project_section.title}
 			<span class="inline-block ml-2">🚀</span>
 		</h2>
 
@@ -31,7 +37,7 @@ const projects = [
 							<div class="relative h-48">
 								<div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-20" />
 								<img
-									src={`/portfolio-site/images/${project.image}`}
+									src={`${pathPage}images/${project.image}`}
 									alt={project.title}
 									class="w-full h-full object-cover"
 								/>
@@ -58,7 +64,12 @@ const projects = [
 										target="_blank"
 										class="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
 									>
-										<span>View Project</span>
+										<span>
+											{
+												translations.project_section
+													.view_project
+											}
+										</span>
 										<span class="text-xl">🚀</span>
 									</a>
 									<a
@@ -66,9 +77,14 @@ const projects = [
 										target="_blank"
 										class="text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
 									>
-										<span>GitHub</span>
+										<span>
+											{
+												translations.project_section
+													.view_code
+											}
+										</span>
 										<img
-											src="/portfolio-site/images/github.svg"
+											src={`${pathPage}images/github.svg`}
 											alt="GitHub"
 											class="w-6 h-6"
 										/>

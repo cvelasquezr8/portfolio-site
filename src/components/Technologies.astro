@@ -1,4 +1,10 @@
 ---
+const pathPage = (globalThis as any).BASE_URL;
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+
 interface Technology {
 	title: string;
 	alt: string;
@@ -13,7 +19,7 @@ interface Technology {
 const technologies: Technology[] = [
 	{
 		title: 'FRONTEND',
-		alt: 'Frontend Technologies',
+		alt: 'FRONTEND',
 		image: 'laptop.png',
 		elements: [
 			{
@@ -32,7 +38,7 @@ const technologies: Technology[] = [
 	},
 	{
 		title: 'BACKEND',
-		alt: 'Backend Technologies',
+		alt: 'BACKEND',
 		image: 'gear.png',
 		elements: [
 			{
@@ -47,7 +53,7 @@ const technologies: Technology[] = [
 	},
 	{
 		title: 'DATABASE',
-		alt: 'Database Technologies',
+		alt: 'DATABASE',
 		image: 'card-file-box.png',
 		elements: [
 			{ title: 'PostgreSQL', image: 'postgresql.svg', alt: 'PostgreSQL' },
@@ -58,7 +64,7 @@ const technologies: Technology[] = [
 	},
 	{
 		title: 'DEVOPS',
-		alt: 'DevOps Technologies',
+		alt: 'DEVOPS',
 		image: 'hammer-and-wrench.png',
 		elements: [
 			{ title: 'Docker', image: 'docker.svg', alt: 'Docker' },
@@ -74,9 +80,9 @@ const technologies: Technology[] = [
 	<div class="container mx-auto">
 		<h2 class="text-4xl font-bold mb-12 text-center">
 			<span class="text-xl block mb-4 text-blue-500">
-				NAVIGATION SYSTEMS
+				{translations.technology_section.subtitle}
 			</span>
-			Technical Capabilities
+			{translations.technology_section.title}
 			<span class="inline-block ml-2">🧠</span>
 		</h2>
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -88,7 +94,7 @@ const technologies: Technology[] = [
 								{technology.title}
 							</h3>
 							<img
-								src={`/portfolio-site/images/${technology.image}`}
+								src={`${pathPage}images/${technology.image}`}
 								alt={technology.alt}
 								class="tech-icon"
 							/>
@@ -97,7 +103,7 @@ const technologies: Technology[] = [
 							{technology.elements.map((element) => (
 								<li class="flex items-center space-x-4">
 									<img
-										src={`/portfolio-site/images/${element.image}`}
+										src={`${pathPage}images/${element.image}`}
 										alt={element.alt}
 										class="w-8 h-8"
 									/>

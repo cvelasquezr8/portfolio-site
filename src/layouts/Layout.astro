@@ -1,8 +1,12 @@
+---
+const pathPage = (globalThis as any).BASE_URL;
+---
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="images/astronaut.png" />
+		<link rel="icon" type="image/svg+xml" href={`${pathPage}images/astronaut.png`} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Primary Meta Tags -->
@@ -42,7 +46,7 @@
 				DARK: 'dark',
 			};
 
-			function applyTheme(theme) {
+			function applyTheme(theme: any) {
 				const root = document.documentElement;
 
 				root.classList.remove(THEMES.DARK);
@@ -78,14 +82,14 @@
 			const savedTheme = localStorage.getItem(THEME_KEY) || THEMES.DARK;
 			applyTheme(savedTheme);
 
-			window.setTheme = function (theme) {
+			(window as any).setTheme = function (theme: any) {
 				localStorage.setItem(THEME_KEY, theme);
 				applyTheme(theme);
 			};
 
 			// Add dynamic stars
 			document.addEventListener('DOMContentLoaded', function() {
-				const starsWrapper = document.querySelector('.stars-wrapper');
+				const starsWrapper = document.querySelector('.stars-wrapper') as any;
 				for (let i = 0; i < 20; i++) {
 					const star = document.createElement('div');
 					star.className = 'shooting-star';

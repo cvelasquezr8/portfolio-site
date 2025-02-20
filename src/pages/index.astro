@@ -10,6 +10,18 @@ import Projects from '../components/Projects.astro';
 import HeaderNavbar from '../components/HeaderNavbar.astro';
 ---
 
+<script>
+	if (typeof window !== 'undefined') {
+		const userLang = navigator.language;
+		const lang = userLang.startsWith('es') ? '/es' : '/en';
+		const currentPath = window.location.pathname;
+
+		if (currentPath === '/') {
+			window.location.href = lang;
+		}
+	}
+</script>
+
 <Layout>
 	<main class="min-h-screen relative">
 		<HeaderNavbar />
@@ -21,40 +33,3 @@ import HeaderNavbar from '../components/HeaderNavbar.astro';
 		<Footer />
 	</main>
 </Layout>
-
-<script>
-	// Mobile menu toggle with smooth animation
-	const mobileMenuButton = document.getElementById('mobile-menu-button');
-	const mobileMenu = document.getElementById('mobile-menu');
-	let isMenuOpen = false;
-
-	if (mobileMenuButton && mobileMenu) {
-		mobileMenuButton.addEventListener('click', () => {
-			isMenuOpen = !isMenuOpen;
-
-			// Update max-height for smooth animation
-			if (isMenuOpen) {
-				mobileMenu.style.maxHeight = '100vh';
-				mobileMenu.style.height = '100vh';
-			} else {
-				mobileMenu.style.maxHeight = '0';
-			}
-		});
-
-		// Close menu when clicking on a link
-		const mobileLinks = mobileMenu.querySelectorAll('a');
-		mobileLinks.forEach((link) => {
-			link.addEventListener('click', () => {
-				isMenuOpen = false;
-				mobileMenu.style.maxHeight = '0';
-			});
-		});
-
-		// Update max-height on window resize
-		window.addEventListener('resize', () => {
-			if (isMenuOpen) {
-				mobileMenu.style.maxHeight = '100vh';
-			}
-		});
-	}
-</script>

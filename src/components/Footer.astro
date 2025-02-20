@@ -1,4 +1,10 @@
 ---
+const pathPage = (globalThis as any).BASE_URL;
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+
 interface SocialLink {
 	title: string;
 	icon: string;
@@ -46,18 +52,30 @@ const navigationLinks: NavigationSection[] = [
 	{
 		title: 'NAVIGATION',
 		elements: [
-			{ name: 'Home', href: '#' },
-			{ name: 'Technical Capabilities', href: '#technologies' },
-			{ name: 'Featured Projects', href: '#projects' },
-			{ name: 'Certificates & Courses', href: '#courses' },
-			{ name: 'Keep in Touch', href: '#contact' },
+			{ name: translations.footer_section.navigation.home, href: '#' },
+			{
+				name: translations.footer_section.navigation.skills,
+				href: '#technologies',
+			},
+			{
+				name: translations.footer_section.navigation.projects,
+				href: '#projects',
+			},
+			{
+				name: translations.footer_section.navigation.certificates,
+				href: '#courses',
+			},
+			{
+				name: translations.footer_section.navigation.contact,
+				href: '#contact',
+			},
 		],
 	},
 	{
 		title: 'PROJECTS',
 		elements: [
 			{
-				name: 'EquaSystems Website',
+				name: translations.footer_section.projects.equasystem,
 				href: 'https://equasystems.netlify.app/',
 				isTargetBlank: true,
 			},
@@ -67,17 +85,19 @@ const navigationLinks: NavigationSection[] = [
 		title: 'CERTIFICATES',
 		elements: [
 			{
-				name: 'NodeJs (Basic)',
+				name: translations.footer_section.certificates
+					.hacker_rank_node_basic,
 				href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
 				isTargetBlank: true,
 			},
 			{
-				name: 'SQL Server (Advance)',
+				name: translations.footer_section.certificates
+					.udemy_sql_advance,
 				href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
 				isTargetBlank: true,
 			},
 			{
-				name: 'SQL Server (Basic)',
+				name: translations.footer_section.certificates.udemy_sql_basic,
 				href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
 				isTargetBlank: true,
 			},
@@ -113,7 +133,7 @@ const navigationLinks: NavigationSection[] = [
 							target="_blank"
 						>
 							<img
-								src={`/portfolio-site/images/${link.icon}`}
+								src={`${pathPage}images/${link.icon}`}
 								alt={link.title}
 								class="w-6 h-6"
 							/>
@@ -153,9 +173,11 @@ const navigationLinks: NavigationSection[] = [
 		<!-- Copyright -->
 		<div class="text-center text-gray-400 pt-2 border-t border-blue-500/20">
 			<p>
-				© {new Date().getFullYear()} Carlos Velasquez. All rights reserved.
+				© {new Date().getFullYear()} Carlos Velasquez. {
+					translations.footer_section.rights
+				}
 			</p>
-			<p class="mt-2 text-sm">Crafted with 💙 in the digital cosmos</p>
+			<p class="mt-2 text-sm">{translations.footer_section.crafted}</p>
 		</div>
 	</div>
 </footer>

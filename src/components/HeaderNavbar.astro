@@ -1,4 +1,9 @@
 ---
+const lang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const translations = await import(`../i18n/${lang}.json`).then(
+	(m) => m.default,
+);
+
 interface NavigationLink {
 	name: string;
 	href: string;
@@ -6,32 +11,47 @@ interface NavigationLink {
 
 const navigationLinks: NavigationLink[] = [
 	{
-		name: 'Home',
+		name: translations.navigation_section.home,
 		href: '#',
 	},
 	{
-		name: 'Skills',
+		name: translations.navigation_section.skills,
 		href: '#technologies',
 	},
 	{
-		name: 'Projects',
+		name: translations.navigation_section.projects,
 		href: '#projects',
 	},
 	{
-		name: 'Certificates',
+		name: translations.navigation_section.certificates,
 		href: '#courses',
 	},
 	{
-		name: 'Contact',
+		name: translations.navigation_section.contact,
 		href: '#contact',
 	},
 ];
 ---
 
+<script>
+	const savedLang = localStorage.getItem('lang');
+	if (!savedLang) {
+		const currentLang = window.location.pathname.startsWith('/en')
+			? 'en'
+			: 'es';
+		localStorage.setItem('lang', currentLang ?? 'en');
+	}
+
+	(window as any).changeLanguage = function (lang: string = 'en') {
+		localStorage.setItem('lang', lang);
+		window.location.href = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${lang}/`;
+	};
+</script>
+
 <header
 	class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-blue-500/20"
 >
-	<div class="container mx-auto px-4">
+	<div class="container mx-4 px-4">
 		<nav class="flex items-center justify-between py-4">
 			<div
 				class="text-2xl font-bold gradient-text flex items-center gap-2"
@@ -41,13 +61,11 @@ const navigationLinks: NavigationLink[] = [
 				>
 					🚀
 				</div>
-				<span class="sm:inline items-center gap-3">
-					Carlos Velasquez
-				</span>
+				<span class="sm:inline items-center"> Carlos Velasquez </span>
 			</div>
 
 			<!-- Desktop Navigation -->
-			<div class="hidden md:flex items-center gap-8">
+			<div class="hidden md:flex items-center gap-6">
 				{
 					navigationLinks.map((link) => (
 						<a
@@ -59,6 +77,14 @@ const navigationLinks: NavigationLink[] = [
 					))
 				}
 			</div>
+
+			<select
+				onchange="window.changeLanguage(this.value)"
+				class="bg-gray-900 text-white border border-blue-500 rounded p-1 hidden md:block"
+			>
+				<option value="en" selected={lang === 'en'}>🇬🇧 English</option>
+				<option value="es" selected={lang === 'es'}>🇪🇸 Español</option>
+			</select>
 
 			<!-- Mobile Menu Button -->
 			<button
@@ -102,3 +128,40 @@ const navigationLinks: NavigationLink[] = [
 		</div>
 	</div>
 </header>
+
+<script>
+	// Mobile menu toggle with smooth animation
+	const mobileMenuButton = document.getElementById('mobile-menu-button');
+	const mobileMenu = document.getElementById('mobile-menu');
+	let isMenuOpen = false;
+
+	if (mobileMenuButton && mobileMenu) {
+		mobileMenuButton.addEventListener('click', () => {
+			isMenuOpen = !isMenuOpen;
+
+			// Update max-height for smooth animation
+			if (isMenuOpen) {
+				mobileMenu.style.maxHeight = '100vh';
+				mobileMenu.style.height = '100vh';
+			} else {
+				mobileMenu.style.maxHeight = '0';
+			}
+		});
+
+		// Close menu when clicking on a link
+		const mobileLinks = mobileMenu.querySelectorAll('a');
+		mobileLinks.forEach((link) => {
+			link.addEventListener('click', () => {
+				isMenuOpen = false;
+				mobileMenu.style.maxHeight = '0';
+			});
+		});
+
+		// Update max-height on window resize
+		window.addEventListener('resize', () => {
+			if (isMenuOpen) {
+				mobileMenu.style.maxHeight = '100vh';
+			}
+		});
+	}
+</script>
