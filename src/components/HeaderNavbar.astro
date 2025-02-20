@@ -45,7 +45,9 @@ const navigationLinks: NavigationLink[] = [
 
 	(window as any).changeLanguage = function (lang: string = 'en') {
 		localStorage.setItem('lang', lang);
-		window.location.href = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${lang}/`;
+		const newUrl = `${window.location.origin}${(globalThis as any).BASE_URL || '/'}${lang}/`;
+		console.log('Redirecting to:', newUrl);
+		window.location.href = newUrl;
 	};
 </script>
 
