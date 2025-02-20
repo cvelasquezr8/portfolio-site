@@ -10,18 +10,6 @@ import KeepInTouch from '../../components/KeepInTouch.astro';
 import Footer from '../../components/Footer.astro';
 ---
 
-<script>
-	if (typeof window !== 'undefined') {
-		const userLang = navigator.language;
-		const lang = userLang.startsWith('es') ? '/es' : '/en';
-		const currentPath = window.location.pathname;
-
-		if (currentPath === '/') {
-			window.location.href = lang;
-		}
-	}
-</script>
-
 <Layout>
 	<main class="min-h-screen relative">
 		<HeaderNavbar />
