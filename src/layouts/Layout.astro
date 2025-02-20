@@ -1,21 +1,25 @@
 ---
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || "en";
+const translations = useTranslations(currentLang as keyof typeof languagesList);
 ---
 
 <html lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={`${pathPage}images/astronaut.png`} />
+		<link rel="icon" type="image/svg+xml" href={`${pathPage}images/website.ico`} />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Primary Meta Tags -->
-		<title>Carlos Velasquez - Full Stack Developer & Space Explorer</title>
-		<meta name="title" content="Carlos Velasquez - Full Stack Developer & Space Explorer" />
-		<meta name="description" content="Experienced Full Stack Developer specializing in modern web technologies. Explore my portfolio featuring innovative projects and creative solutions." />
+		<title>{translations('index.title')}</title>
+		<meta name="title" content={translations('index.title')} />
+		<meta name="description" content={translations('index.description')} />
 		<meta name="author" content="Carlos Velasquez" />
-		<meta name="keywords" content="full stack developer, web development, software engineer, portfolio, Carlos Velasquez, space theme, creative developer" />
+		<meta name="keywords" content="" />
 
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />

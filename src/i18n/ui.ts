@@ -5,6 +5,12 @@ export const languagesList = {
 
 export const labels = {
 	en: {
+		'index.title':
+			'Carlos Velasquez - Full Stack Developer & Space Explorer',
+		'index.description':
+			'Experienced Full Stack Developer specializing in modern web technologies. Explore my portfolio featuring innovative projects and creative solutions.',
+		'index.keywords':
+			'full stack developer, web development, software engineer, portfolio, Carlos Velasquez, space theme, creative developer',
 		'nav.home': 'Home',
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',
@@ -63,8 +69,18 @@ export const labels = {
 		'footer.navigation.title': 'NAVIGATION',
 		'footer.project.title': 'PROJECTS',
 		'footer.certificate.title': 'CERTIFICATES',
+		'error.title': 'Houston, We Have a Problem!',
+		'error.description':
+			"The cosmic coordinates you're looking for seem to be lost in space. Let's navigate back to a known star system.",
+		'error.button': 'Return to Mission Control',
 	},
 	es: {
+		'index.title':
+			'Carlos Velasquez - Desarrollador Full Stack y Explorador Espacial',
+		'index.description':
+			'Desarrollador Full Stack con experiencia especializado en tecnologías web modernas. Explora mi portafolio con proyectos innovadores y soluciones creativas.',
+		'index.keywords':
+			'desarrollador full stack, desarrollo web, ingeniero de software, portafolio, Carlos Velasquez, tema espacial, desarrollador creativo',
 		'nav.home': 'Inicio',
 		'nav.skills': 'Habilidades',
 		'nav.projects': 'Proyectos',
@@ -123,5 +139,8 @@ export const labels = {
 		'footer.navigation.title': 'NAVEGACIÓN',
 		'footer.project.title': 'PROYECTOS',
 		'footer.certificate.title': 'CERTIFICADOS',
+		'error.title': '¡Houston, Tenemos un Problema!',
+		'error.description': `Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a navegar a un sistema estelar conocido.`,
+		'error.button': 'Volver al Control de Misión',
 	},
 };
