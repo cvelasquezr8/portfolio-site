@@ -24,12 +24,14 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 						class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-purple-600"
 					>
 					</div>
-					<form class="space-y-6">
+					<form id="contactForm" class="space-y-6">
 						<div class="space-y-2">
 							<label class="text-sm font-medium text-blue-500"
 								>{translations('contact.form.name')}</label
 							>
 							<input
+								id="name"
+								name="name"
 								type="text"
 								placeholder={translations(
 									'contact.form.name_holder',
@@ -43,6 +45,8 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 							>
 							<input
 								type="email"
+								id="email"
+								name="email"
 								placeholder={translations(
 									'contact.form.email_holder',
 								)}
@@ -54,6 +58,8 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 								>{translations('contact.form.message')}</label
 							>
 							<textarea
+								id="message"
+								name="message"
 								placeholder={translations(
 									'contact.form.message_holder',
 								)}
@@ -62,6 +68,7 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 							></textarea>
 						</div>
 						<button
+							type="submit"
 							class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg group glow"
 						>
 							<span
@@ -110,3 +117,209 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		</div>
 	</div>
 </section>
+
+<script>
+	import Swal from 'sweetalert2';
+
+	const customSwal = Swal.mixin({
+		background: '#0B0F1E',
+		color: '#ffffff',
+		confirmButtonColor: '#4361EE',
+		cancelButtonColor: '#FF3D71',
+		buttonsStyling: false,
+		customClass: {
+			popup: 'custom-swal-popup',
+			title: 'custom-swal-title',
+			confirmButton: 'custom-swal-button',
+			cancelButton: 'custom-swal-cancel-button',
+		},
+	});
+
+	const successMessage = () => {
+		customSwal.fire({
+			icon: 'success',
+			title: 'Mission Accomplished! 🚀',
+			text: 'Your message has been successfully sent! We will contact you soon.',
+			confirmButtonText: 'Roger That! ✅',
+		});
+	};
+
+	const errorMessage = (message: string = 'There was an issue sending your message. Please try again later.') => {
+		customSwal.fire({
+			icon: 'error',
+			title: 'Houston, We Have a Problem! ❌',
+			text: message,
+			confirmButtonText: 'Retry 🔁',
+		});
+	};
+
+	const cooldownMessage = (remainingTime: number) => {
+		customSwal.fire({
+			icon: 'warning',
+			title: 'Hold Your Rockets! ⏳',
+			text: `Please wait ${remainingTime} seconds before sending another message.`,
+			confirmButtonText: 'Understood 🛰️',
+		});
+	};
+
+	const connectionErrorMessage = () => {
+		customSwal.fire({
+			icon: 'error',
+			title: 'Lost in Space... 🌌',
+			text: `We couldn't connect to the server. Check your internet connection.`,
+			confirmButtonText: 'Retry Signal 📡',
+		});
+	};
+
+	const validateEmail = (email: string): boolean => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return emailRegex.test(email);
+	};
+
+	const validateForm = (formData: { name: string; email: string; message: string }): { isValid: boolean; error?: string } => {
+		if (!formData.name || formData.name.trim().length < 2) {
+			return {
+				isValid: false,
+				error: 'Name must be at least 2 characters long! 👨‍🚀',
+			};
+		}
+
+		if (!formData.email || !validateEmail(formData.email)) {
+			return {
+				isValid: false,
+				error: 'Please enter a valid email address! 📧',
+			};
+		}
+
+		if (!formData.message || formData.message.trim().length < 10) {
+			return {
+				isValid: false,
+				error: 'Message must be at least 10 characters long! 📝',
+			};
+		}
+
+		return { isValid: true };
+	};
+
+	const contactForm = document.getElementById(
+		'contactForm',
+	) as HTMLFormElement | null;
+	const nameInput = document.getElementById(
+		'name',
+	) as HTMLInputElement | null;
+	const emailInput = document.getElementById(
+		'email',
+	) as HTMLInputElement | null;
+	const messageInput = document.getElementById(
+		'message',
+	) as HTMLTextAreaElement | null;
+
+	if (contactForm) {
+		contactForm.addEventListener('submit', async function (event: Event) {
+			event.preventDefault();
+
+			if (!nameInput || !emailInput || !messageInput) {
+				errorMessage('Form elements not found. Please refresh the page.');
+				return;
+			}
+
+			const formData = {
+				name: nameInput.value.trim(),
+				email: emailInput.value.trim(),
+				message: messageInput.value.trim(),
+			};
+
+			// Validate form data
+			const validation = validateForm(formData);
+			if (!validation.isValid) {
+				errorMessage(validation.error || 'Please check your input!');
+				return;
+			}
+
+			const lastSent = localStorage.getItem('lastEmailSent');
+			const now = Date.now();
+			const cooldown = 3 * 60 * 1000; // 3 minutes
+
+			if (lastSent && now - parseInt(lastSent) < cooldown) {
+				const remainingTime = Math.ceil(
+					(cooldown - (now - parseInt(lastSent))) / 1000,
+				);
+				cooldownMessage(remainingTime);
+				return;
+			}
+
+			try {
+				const response = await fetch(
+					'https://email-service-production-e23d.up.railway.app/email/send/',
+					{
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(formData),
+					},
+				);
+
+				if (response.ok) {
+					localStorage.setItem('lastEmailSent', now.toString());
+					successMessage();
+					contactForm.reset();
+				} else {
+					errorMessage();
+				}
+			} catch (error) {
+				connectionErrorMessage();
+			}
+		});
+	}
+</script>
+
+<style>
+	.custom-swal-popup {
+		border-radius: 15px;
+		border: 2px solid #4361EE;
+		box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
+		background: linear-gradient(145deg, #0B0F1E, #1a1f35) !important;
+	}
+
+	.custom-swal-title {
+		color: #4361EE !important;
+		font-size: 24px;
+		font-weight: bold;
+		text-shadow: 0 0 10px rgba(67, 97, 238, 0.3);
+	}
+
+	.custom-swal-button {
+		background: linear-gradient(145deg, #4361EE, #3451d1) !important;
+		color: white !important;
+		border-radius: 10px;
+		padding: 12px 24px;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		border: none;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.custom-swal-button:hover {
+		background: linear-gradient(145deg, #3451d1, #2941b4) !important;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+	}
+
+	.custom-swal-cancel-button {
+		background: linear-gradient(145deg, #FF3D71, #ff1f5a) !important;
+		color: white !important;
+		border-radius: 10px;
+		padding: 12px 24px;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		border: none;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.custom-swal-cancel-button:hover {
+		background: linear-gradient(145deg, #ff1f5a, #ff0043) !important;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(255, 61, 113, 0.3);
+	}
+</style>
