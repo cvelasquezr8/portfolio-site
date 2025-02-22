@@ -1,24 +1,25 @@
 ---
+import type { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
 import '../styles/global.css';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
-const languages: any = {
-	en: {
-		title: 'Houston, We Have a Problem!',
-		description:
-			'The cosmic coordinates you are looking for seem to be lost in space. Let us return to a known star system.',
-		button: 'Back to Mission Control',
-	},
-	es: {
-		title: '¡Houston, Tenemos un Problema!',
-		description:
-			'Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a un sistema estelar conocido.',
-		button: 'Volver al Control de Misión',
-	},
-};
-const translations: any = languages[currentLang];
+const translations = useTranslations(currentLang as keyof typeof languagesList);
+
+const errorTitle = translations('error.title');
+const errorDescription = translations('error.description');
+const errorButton = translations('error.button');
 ---
+
+<script
+	is:inline
+	set:html={`  
+		window.errorTitle = ${JSON.stringify(errorTitle)};
+		window.errorDescription = ${JSON.stringify(errorDescription)};
+		window.errorButton = ${JSON.stringify(errorButton)};
+	`}
+/>
 
 <style>
 	html,
@@ -333,15 +334,15 @@ const translations: any = languages[currentLang];
 				/>
 			</div>
 		</div>
-		<p class="message">{translations.title}</p>
+		<p class="message">{(window as any).errorTile}</p>
 		<p class="description">
-			{translations.description}
+			{(window as any).errorDescription}
 		</p>
 		<button
 			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-1 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
 			id="backButton"
 		>
-			{translations.button}
+			{(window as any).errorButton}
 			<img
 				src={`${pathPage}images/astronaut-cohete.png`}
 				alt="Astronaut"
