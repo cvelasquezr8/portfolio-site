@@ -19,6 +19,9 @@ export default defineConfig({
 			'globalThis.BASE_URL': JSON.stringify(
 				import.meta.env.PROD ? '/portfolio-site/' : '/'
 			),
+			'globalThis.BACKEND_URL': JSON.stringify(
+				import.meta.env.PROD ? 'https://email-service-production-e23d.up.railway.app/email/send/' : 'http://localhost:3000/email/send/'
+			),
 		},
 	},
 	integrations: [tailwind()],

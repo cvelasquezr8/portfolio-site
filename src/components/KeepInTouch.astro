@@ -5,7 +5,57 @@ import { useTranslations } from '../i18n/utils';
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
+
+const successMessageTitle = translations('contact.email.success.title');
+const successMessageDescription = translations(
+	'contact.email.success.description',
+);
+const errorTitle = translations('contact.email.error.title');
+const errorOptionalMessage = translations(
+	'contact.email.error.optional.message',
+);
+const waitTitle = translations('contact.email.wait.title');
+const waitPart1 = translations('contact.email.wait.part1');
+const waitPart2 = translations('contact.email.wait.part2');
+const connectionTitle = translations('contact.email.connection.title');
+const connectionDescription = translations(
+	'contact.email.connection.description',
+);
+const sendingTitle = translations('contact.email.sending.title');
+const sendingDescription = translations('contact.email.sending.description');
+const validationName = translations('contact.email.validation.name');
+const validationEmail = translations('contact.email.validation.email');
+const validationMessage = translations('contact.email.validation.message');
+const validationForm = translations('contact.email.validation.form');
+const validationError = translations('contact.email.validation.error');
 ---
+
+<style>
+	.custom-swal-popup {
+		border-radius: 15px;
+		border: 2px solid #4361ee;
+		box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
+		background: linear-gradient(145deg, #101c47, #242d52) !important;
+	}
+
+	.custom-swal-button {
+		background: linear-gradient(145deg, #4361ee, #3451d1) !important;
+		color: white !important;
+		border-radius: 10px;
+		padding: 12px 24px;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		border: none;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.custom-swal-button:hover {
+		background: linear-gradient(145deg, #3451d1, #2941b4) !important;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+	}
+</style>
 
 <section id="contact" class="py-20 section-fade">
 	<div class="container mx-auto px-4">
@@ -118,56 +168,146 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 	</div>
 </section>
 
+<script
+	is:inline
+	set:html={`  
+		window.successMessageTitle = ${JSON.stringify(successMessageTitle)};
+		window.successMessageDescription = ${JSON.stringify(successMessageDescription)};
+		window.errorTitle = ${JSON.stringify(errorTitle)};
+		window.errorOptionalMessage = ${JSON.stringify(errorOptionalMessage)};
+		window.waitTitle = ${JSON.stringify(waitTitle)};
+		window.waitPart1 = ${JSON.stringify(waitPart1)};
+		window.waitPart2 = ${JSON.stringify(waitPart2)};
+		window.connectionTitle = ${JSON.stringify(connectionTitle)};
+		window.connectionDescription = ${JSON.stringify(connectionDescription)};
+		window.sendingTitle = ${JSON.stringify(sendingTitle)};
+		window.sendingDescription = ${JSON.stringify(sendingDescription)};
+		window.validationName = ${JSON.stringify(validationName)};
+		window.validationEmail = ${JSON.stringify(validationEmail)};
+		window.validationMessage = ${JSON.stringify(validationMessage)};
+		window.validationForm = ${JSON.stringify(validationForm)};
+		window.validationError = ${JSON.stringify(validationError)};
+	`}
+/>
+
 <script>
 	import Swal from 'sweetalert2';
 
 	const customSwal = Swal.mixin({
-		background: '#0B0F1E',
+		background: '#1a1b25',
 		color: '#ffffff',
 		confirmButtonColor: '#4361EE',
-		cancelButtonColor: '#FF3D71',
-		buttonsStyling: false,
+		buttonsStyling: true,
 		customClass: {
 			popup: 'custom-swal-popup',
-			title: 'custom-swal-title',
 			confirmButton: 'custom-swal-button',
-			cancelButton: 'custom-swal-cancel-button',
+		},
+		timerProgressBar: false,
+		timer: 2000,
+		allowEscapeKey: false,
+		allowOutsideClick: false,
+		showConfirmButton: false,
+		didOpen: () => {
+			const swalContainer = Swal.getPopup();
+			if (swalContainer) {
+				const gradientBar = document.createElement('div');
+				gradientBar.style.position = 'absolute';
+				gradientBar.style.top = '0';
+				gradientBar.style.left = '0';
+				gradientBar.style.width = '100%';
+				gradientBar.style.height = '4px';
+				gradientBar.style.background =
+					'linear-gradient(to rigth, #2563eb, #7c3aed)';
+				gradientBar.style.borderTopLeftRadius = '10px';
+				gradientBar.style.borderTopRightRadius = '10px';
+
+				const progressBarContainer = document.createElement('div');
+				progressBarContainer.style.width = '100%';
+				progressBarContainer.style.height = '6px';
+				progressBarContainer.style.background =
+					'rgba(255, 255, 255, 0.2)';
+				progressBarContainer.style.borderRadius = '4px';
+				progressBarContainer.style.overflow = 'hidden';
+				progressBarContainer.style.marginTop = '10px';
+				progressBarContainer.style.position = 'relative';
+				progressBarContainer.style.marginBottom = '0%';
+
+				const progressBar = document.createElement('div');
+				progressBar.id = 'swal-progress-bar';
+				progressBar.style.width = '0%';
+				progressBar.style.height = '100%';
+				progressBar.style.background =
+					'linear-gradient(to right, #2563eb, #7c3aed)';
+				progressBar.style.transition = 'width 1.5s';
+
+				progressBarContainer.appendChild(progressBar);
+				swalContainer.prepend(gradientBar);
+				swalContainer.appendChild(progressBarContainer);
+				setTimeout(() => {
+					progressBar.style.width = '100%';
+				}, 100);
+			}
 		},
 	});
+
+	const titleStyle = (title: string) => {
+		return `<span style="color: #4361ee !important; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(67, 97, 238, 0.3);">${title}</span>`;
+	};
+
+	const messageStyle = (message: string) => {
+		return `
+				<div
+					style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(to right, #2563eb, #7c3aed); border-top-left-radius: 10px; border-top-right-radius: 10px;">
+				</div>
+				<p>${message}</p>
+			`;
+	};
 
 	const successMessage = () => {
 		customSwal.fire({
 			icon: 'success',
-			title: 'Mission Accomplished! 🚀',
-			text: 'Your message has been successfully sent! We will contact you soon.',
-			confirmButtonText: 'Roger That! ✅',
+			title: titleStyle((window as any).successMessageTitle),
+			html: messageStyle((window as any).successMessageDescription),
 		});
 	};
 
-	const errorMessage = (message: string = 'There was an issue sending your message. Please try again later.') => {
+	const errorMessage = (
+		message: string = (window as any).errorOptionalMessage,
+	) => {
 		customSwal.fire({
 			icon: 'error',
-			title: 'Houston, We Have a Problem! ❌',
-			text: message,
-			confirmButtonText: 'Retry 🔁',
+			title: titleStyle((window as any).errorTitle),
+			html: messageStyle(message),
 		});
 	};
 
 	const cooldownMessage = (remainingTime: number) => {
 		customSwal.fire({
 			icon: 'warning',
-			title: 'Hold Your Rockets! ⏳',
-			text: `Please wait ${remainingTime} seconds before sending another message.`,
-			confirmButtonText: 'Understood 🛰️',
+			title: titleStyle((window as any).waitTitle),
+			html: messageStyle(
+				`${(window as any).waitPart1} ${remainingTime} ${(window as any).waitPart2}`,
+			),
 		});
 	};
 
 	const connectionErrorMessage = () => {
 		customSwal.fire({
 			icon: 'error',
-			title: 'Lost in Space... 🌌',
-			text: `We couldn't connect to the server. Check your internet connection.`,
-			confirmButtonText: 'Retry Signal 📡',
+			title: titleStyle((window as any).connectionTitle),
+			html: messageStyle((window as any).connectionDescription),
+		});
+	};
+
+	const sendingMessage = () => {
+		customSwal.fire({
+			title: titleStyle((window as any).sendingTitle),
+			html: messageStyle((window as any).sendingDescription),
+			allowEscapeKey: false,
+			allowOutsideClick: false,
+			didOpen: () => {
+				customSwal.showLoading();
+			},
 		});
 	};
 
@@ -176,25 +316,29 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		return emailRegex.test(email);
 	};
 
-	const validateForm = (formData: { name: string; email: string; message: string }): { isValid: boolean; error?: string } => {
-		if (!formData.name || formData.name.trim().length < 2) {
+	const validateForm = (formData: {
+		name: string;
+		email: string;
+		message: string;
+	}): { isValid: boolean; error?: string } => {
+		if (!formData.name || formData.name.trim().length === 0) {
 			return {
 				isValid: false,
-				error: 'Name must be at least 2 characters long! 👨‍🚀',
+				error: (window as any).validationName,
 			};
 		}
 
 		if (!formData.email || !validateEmail(formData.email)) {
 			return {
 				isValid: false,
-				error: 'Please enter a valid email address! 📧',
+				error: (window as any).validationEmail,
 			};
 		}
 
-		if (!formData.message || formData.message.trim().length < 10) {
+		if (!formData.message || formData.message.trim().length === 0) {
 			return {
 				isValid: false,
-				error: 'Message must be at least 10 characters long! 📝',
+				error: (window as any).validationMessage,
 			};
 		}
 
@@ -218,10 +362,18 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		contactForm.addEventListener('submit', async function (event: Event) {
 			event.preventDefault();
 
-			if (!nameInput || !emailInput || !messageInput) {
-				errorMessage('Form elements not found. Please refresh the page.');
+			const submitButton = contactForm.querySelector(
+				'button[type="submit"]',
+			) as HTMLButtonElement | null;
+
+			if (!nameInput || !emailInput || !messageInput || !submitButton) {
+				errorMessage((window as any).validationForm);
 				return;
 			}
+
+			submitButton.disabled = true;
+			submitButton.style.opacity = '0.6';
+			submitButton.style.cursor = 'not-allowed';
 
 			const formData = {
 				name: nameInput.value.trim(),
@@ -232,7 +384,12 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 			// Validate form data
 			const validation = validateForm(formData);
 			if (!validation.isValid) {
-				errorMessage(validation.error || 'Please check your input!');
+				errorMessage(
+					validation.error || (window as any).validationError,
+				);
+				submitButton.disabled = false;
+				submitButton.style.opacity = '1';
+				submitButton.style.cursor = 'pointer';
 				return;
 			}
 
@@ -248,15 +405,16 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 				return;
 			}
 
+			sendingMessage();
+
 			try {
-				const response = await fetch(
-					'https://email-service-production-e23d.up.railway.app/email/send/',
-					{
-						method: 'POST',
-						headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify(formData),
-					},
-				);
+				const response = await fetch((globalThis as any).BACKEND_URL, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(formData),
+				});
+
+				Swal.close();
 
 				if (response.ok) {
 					localStorage.setItem('lastEmailSent', now.toString());
@@ -266,60 +424,13 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 					errorMessage();
 				}
 			} catch (error) {
+				Swal.close();
 				connectionErrorMessage();
 			}
+
+			submitButton.disabled = false;
+			submitButton.style.opacity = '1';
+			submitButton.style.cursor = 'pointer';
 		});
 	}
 </script>
-
-<style>
-	.custom-swal-popup {
-		border-radius: 15px;
-		border: 2px solid #4361EE;
-		box-shadow: 0 0 20px rgba(67, 97, 238, 0.3);
-		background: linear-gradient(145deg, #0B0F1E, #1a1f35) !important;
-	}
-
-	.custom-swal-title {
-		color: #4361EE !important;
-		font-size: 24px;
-		font-weight: bold;
-		text-shadow: 0 0 10px rgba(67, 97, 238, 0.3);
-	}
-
-	.custom-swal-button {
-		background: linear-gradient(145deg, #4361EE, #3451d1) !important;
-		color: white !important;
-		border-radius: 10px;
-		padding: 12px 24px;
-		font-weight: 600;
-		transition: all 0.3s ease;
-		border: none;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.custom-swal-button:hover {
-		background: linear-gradient(145deg, #3451d1, #2941b4) !important;
-		transform: translateY(-2px);
-		box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-	}
-
-	.custom-swal-cancel-button {
-		background: linear-gradient(145deg, #FF3D71, #ff1f5a) !important;
-		color: white !important;
-		border-radius: 10px;
-		padding: 12px 24px;
-		font-weight: 600;
-		transition: all 0.3s ease;
-		border: none;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-	}
-
-	.custom-swal-cancel-button:hover {
-		background: linear-gradient(145deg, #ff1f5a, #ff0043) !important;
-		transform: translateY(-2px);
-		box-shadow: 0 5px 15px rgba(255, 61, 113, 0.3);
-	}
-</style>
