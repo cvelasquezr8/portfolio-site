@@ -334,15 +334,13 @@ const errorButton = translations('error.button');
 				/>
 			</div>
 		</div>
-		<p class="message">{(window as any).errorTile}</p>
-		<p class="description">
-			{(window as any).errorDescription}
-		</p>
+		<p class="message" id="errorTitlePlaceholder"></p>
+		<p class="description" id="errorDescriptionPlaceholder"></p>
 		<button
 			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-1 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
 			id="backButton"
 		>
-			{(window as any).errorButton}
+			<span id="errorButtonPlaceholder"></span>
 			<img
 				src={`${pathPage}images/astronaut-cohete.png`}
 				alt="Astronaut"
@@ -352,6 +350,26 @@ const errorButton = translations('error.button');
 		</button>
 	</div>
 </div>
+
+<script is:inline>
+	document.getElementById('errorTitlePlaceholder').textContent =
+		window.errorTitle;
+	document.getElementById('errorDescriptionPlaceholder').textContent =
+		window.errorDescription;
+	document.getElementById('errorButtonPlaceholder').textContent =
+		window.errorButton;
+
+	document.getElementById('backButton')?.addEventListener('click', () => {
+		document.querySelector('.content')?.classList.add('fade-out');
+		setTimeout(() => {
+			const currentLang = window.location.pathname.startsWith('/en')
+				? 'en'
+				: 'es';
+			const newUrl = `${window.location.origin}${globalThis.BASE_URL || '/'}${currentLang}/`;
+			window.location.href = newUrl;
+		}, 500);
+	});
+</script>
 
 <script>
 	document.getElementById('backButton')?.addEventListener('click', () => {
