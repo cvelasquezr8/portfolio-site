@@ -289,6 +289,17 @@ const validationError = translations('contact.email.validation.error');
 				`${(window as any).waitPart1} ${remainingTime} ${(window as any).waitPart2}`,
 			),
 		});
+
+		setTimeout(() => {
+			const submitButton = document.querySelector(
+				'button[type="submit"]',
+			) as HTMLButtonElement | null;
+			if (submitButton) {
+				submitButton.disabled = false;
+				submitButton.style.opacity = '1';
+				submitButton.style.cursor = 'pointer';
+			}
+		}, remainingTime * 1000);
 	};
 
 	const connectionErrorMessage = () => {
