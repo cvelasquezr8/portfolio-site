@@ -290,16 +290,14 @@ const validationError = translations('contact.email.validation.error');
 			),
 		});
 
-		setTimeout(() => {
-			const submitButton = document.querySelector(
-				'button[type="submit"]',
-			) as HTMLButtonElement | null;
-			if (submitButton) {
-				submitButton.disabled = false;
-				submitButton.style.opacity = '1';
-				submitButton.style.cursor = 'pointer';
-			}
-		}, remainingTime * 1000);
+		const submitButton = document.querySelector(
+			'button[type="submit"]',
+		) as HTMLButtonElement | null;
+		if (submitButton) {
+			submitButton.disabled = false;
+			submitButton.style.opacity = '1';
+			submitButton.style.cursor = 'pointer';
+		}
 	};
 
 	const connectionErrorMessage = () => {
