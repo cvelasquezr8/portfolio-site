@@ -55,6 +55,28 @@ export const labels = {
 		'contact.form.message': 'MESSAGE CONTENT',
 		'contact.form.message_holder': 'Enter your message...',
 		'contact.form.send_message': 'Send Message',
+		'contact.email.success.title': 'Mission Accomplished! 🚀',
+		'contact.email.success.description':
+			'Your message has been successfully transmitted to Mission Control. I will respond as soon as possible. Thank you for reaching out!',
+		'contact.email.error.title': 'Houston, We Have a Problem! ❌',
+		'contact.email.error.optional.message':
+			'There was an issue sending your message. Please try again later.',
+		'contact.email.wait.title': 'Hold Your Rockets! ⏳',
+		'contact.email.wait.part1': 'Please wait',
+		'contact.email.wait.part2': 'seconds before sending another message.',
+		'contact.email.connection.title': 'Lost in Space... 🌌',
+		'contact.email.connection.description':
+			"Your message couldn't be transmitted to Mission Control. Please check your internet connection and try again.",
+		'contact.email.sending.title': 'Sending Transmission... 🚀',
+		'contact.email.sending.description':
+			'Your message is being transmitted to Mission Control. Please wait for confirmation.',
+		'contact.email.validation.name': 'Name cannot be empty! 👨‍🚀',
+		'contact.email.validation.email':
+			'Please enter a valid email address! 📧',
+		'contact.email.validation.message': 'Message cannot be empty! 📝',
+		'contact.email.validation.form':
+			'Form elements not found. Please refresh the page.',
+		'contact.email.validation.error': 'Please check your input! 🚨',
 		'footer.rights': 'All rights reserved.',
 		'footer.crafted': 'Crafted with 💙 in the digital cosmos',
 		'footer.navigation.home': 'Home',
@@ -125,6 +147,29 @@ export const labels = {
 		'contact.form.message': 'CONTENIDO DEL MENSAJE',
 		'contact.form.message_holder': 'Introduce tu mensaje...',
 		'contact.form.send_message': 'Enviar Mensaje',
+		'contact.email.success.title': '¡Misión Cumplida! 🚀',
+		'contact.email.success.description':
+			'Tu mensaje ha sido transmitido con éxito a Control de Misión. Responderé lo antes posible. ¡Gracias por contactar!',
+		'contact.email.error.title': '¡Houston, Tenemos un Problema! ❌',
+		'contact.email.error.optional.message':
+			'Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.',
+		'contact.email.wait.title': '¡Detén tus Cohetes! ⏳',
+		'contact.email.wait.part1': 'Por favor, espera',
+		'contact.email.wait.part2': 'segundos antes de enviar otro mensaje.',
+		'contact.email.connection.title': 'Perdido en el Espacio... 🌌',
+		'contact.email.connection.description':
+			'Tu mensaje no pudo ser transmitido a Control de Misión. Por favor, verifica tu conexión a internet e inténtalo de nuevo.',
+		'contact.email.sending.title': 'Enviando Transmisión... 🚀',
+		'contact.email.sending.description':
+			'Tu mensaje está siendo transmitido a Control de Misión. Por favor, espera la confirmación.',
+		'contact.email.validation.name': '¡El nombre no puede estar vacío! 👨‍🚀',
+		'contact.email.validation.email':
+			'¡Por favor, introduce una dirección de correo electrónico válida! 📧',
+		'contact.email.validation.message':
+			'¡El mensaje no puede estar vacío! 📝',
+		'contact.email.validation.form':
+			'No se encontraron elementos del formulario. Por favor, actualiza la página.',
+		'contact.email.validation.error': '¡Por favor, verifica tu entrada! 🚨',
 		'footer.rights': 'Todos los derechos reservados.',
 		'footer.crafted': 'Hecho con 💙 en el cosmos digital',
 		'footer.navigation.home': 'Inicio',
