@@ -223,7 +223,13 @@ const navigationLinks: NavigationLink[] = [
 	if (mobileMenuButton && mobileMenu) {
 		mobileMenuButton.addEventListener('click', () => {
 			isMenuOpen = !isMenuOpen;
-			mobileMenu.style.maxHeight = isMenuOpen ? '400px' : '0';
+			// Update max-height for smooth animation
+			if (isMenuOpen) {
+				mobileMenu.style.maxHeight = '100vh';
+				mobileMenu.style.height = '100vh';
+			} else {
+				mobileMenu.style.maxHeight = '0';
+			}
 		});
 
 		// Close menu when clicking on a link
@@ -237,10 +243,8 @@ const navigationLinks: NavigationLink[] = [
 
 		// Close menu on window resize if screen becomes large
 		window.addEventListener('resize', () => {
-			if (window.innerWidth >= 1024) {
-				// lg breakpoint
-				isMenuOpen = false;
-				mobileMenu.style.maxHeight = '0';
+			if (isMenuOpen) {
+				mobileMenu.style.maxHeight = '100vh';
 			}
 		});
 	}
