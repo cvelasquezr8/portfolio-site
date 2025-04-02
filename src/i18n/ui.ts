@@ -16,6 +16,7 @@ export const labels = {
 		'nav.projects': 'Projects',
 		'nav.certificates': 'Certificates',
 		'nav.contact': 'Contact',
+		'nav.challenges': 'Challenges',
 		'hero.mission_control': 'MISSION CONTROL',
 		'hero.full_stack_explorer': 'FULL STACK EXPLORER',
 		'hero.code_astronaut': 'CODE ASTRONAUT',
@@ -95,6 +96,17 @@ export const labels = {
 		'error.description':
 			"The cosmic coordinates you're looking for seem to be lost in space. Let's navigate back to a known star system.",
 		'error.button': 'Return to Mission Control',
+		'roadmap.title': 'ROADMAP CHALLENGES',
+		'roadmap.subtitle': 'SKILL MISSIONS',
+		'roadmap.task_tracker.title': 'Task Tracker CLI',
+		'roadmap.task_tracker.description':
+			'A command-line task management application built with Node.js. Features include task creation, listing, updating, and deletion with a focus on efficient task organization and status tracking.',
+		'roadmap.url_shortener.title': 'URL Shortening Service',
+		'roadmap.url_shortener.description':
+			'A URL shortening service that transforms long URLs into concise, shareable links. Built with modern backend technologies and includes features like custom aliases and click tracking.',
+		'roadmap.fitness_tracker.title': 'Fitness Workout Tracker',
+		'roadmap.fitness_tracker.description':
+			'A comprehensive fitness tracking application that helps users manage their workout routines, track progress, and achieve their fitness goals. Features include workout planning, progress tracking, and performance analytics.',
 	},
 	es: {
 		'index.title':
@@ -107,6 +119,7 @@ export const labels = {
 		'nav.skills': 'Habilidades',
 		'nav.projects': 'Proyectos',
 		'nav.certificates': 'Certificados',
+		'nav.challenges': 'Desafíos',
 		'nav.contact': 'Contacto',
 		'hero.mission_control': 'CONTROL DE MISIÓN',
 		'hero.full_stack_explorer': 'EXPLORADOR FULL STACK',
@@ -187,5 +200,16 @@ export const labels = {
 		'error.title': '¡Houston, Tenemos un Problema!',
 		'error.description': `Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a navegar a un sistema estelar conocido.`,
 		'error.button': 'Volver al Control de Misión',
+		'roadmap.title': 'DESAFÍOS DE ROADMAP',
+		'roadmap.subtitle': 'MISIONES DE HABILIDAD',
+		'roadmap.task_tracker.title': 'Gestor de Tareas CLI',
+		'roadmap.task_tracker.description':
+			'Una aplicación de línea de comandos para gestión de tareas construida con Node.js. Incluye funciones de creación, listado, actualización y eliminación de tareas con enfoque en la organización eficiente y seguimiento de estado.',
+		'roadmap.url_shortener.title': 'Servicio de Acortamiento de URLs',
+		'roadmap.url_shortener.description':
+			'Un servicio de acortamiento de URLs que transforma enlaces largos en URLs cortas y compartibles. Construido con tecnologías backend modernas e incluye características como alias personalizados y seguimiento de clics.',
+		'roadmap.fitness_tracker.title': 'Gestor de Entrenamientos Fitness',
+		'roadmap.fitness_tracker.description':
+			'Una aplicación integral de seguimiento de fitness que ayuda a los usuarios a gestionar sus rutinas de entrenamiento, seguir su progreso y alcanzar sus objetivos de fitness. Incluye planificación de entrenamientos, seguimiento de progreso y análisis de rendimiento.',
 	},
 };

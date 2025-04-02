@@ -30,6 +30,10 @@ const navigationLinks: NavigationLink[] = [
 		href: '#projects',
 	},
 	{
+		name: translations('nav.challenges'),
+		href: '#challenges',
+	},
+	{
 		name: translations('nav.certificates'),
 		href: '#courses',
 	},
@@ -60,25 +64,26 @@ const navigationLinks: NavigationLink[] = [
 	class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-blue-500/20"
 >
 	<div class="container mx-auto px-4">
-		<nav class="flex items-center justify-between py-2">
+		<nav class="flex items-center justify-between h-16">
+			<!-- Logo -->
 			<div
-				class="text-2xl font-bold gradient-text flex items-center gap-2"
+				class="text-2xl font-bold gradient-text flex items-center gap-2 flex-shrink-0"
 			>
 				<div
 					class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white"
 				>
 					🚀
 				</div>
-				<span class="sm:inline items-center"> Carlos Velasquez </span>
+				<span class="hidden sm:inline"> Carlos Velasquez </span>
 			</div>
 
 			<!-- Desktop Navigation -->
-			<div class="hidden md:flex items-center gap-6">
+			<div class="hidden lg:flex items-center space-x-8">
 				{
 					navigationLinks.map((link) => (
 						<a
 							href={link.href}
-							class="text-text-color hover:text-blue-400 transition-colors"
+							class="text-text-color hover:text-blue-400 transition-colors text-sm"
 						>
 							{link.name}
 						</a>
@@ -86,37 +91,45 @@ const navigationLinks: NavigationLink[] = [
 				}
 			</div>
 
-			<div class="relative inline-block text-left ml-10 hidden md:block">
+			<!-- Language Selector - Desktop -->
+			<div class="hidden lg:block relative">
 				<button
-					class="bg-gray-900 text-white border border-blue-500 rounded p-1 flex items-center"
+					class="bg-gray-900 text-white border border-blue-500/20 rounded p-2 flex items-center space-x-2 hover:border-blue-500/40 transition-colors"
 				>
 					<img
 						src={languages.find((lang) => lang.code === currentLang)
 							?.flag}
 						alt={currentLang}
-						class="w-4 h-4 mr-2"
+						class="w-4 h-4"
 						loading="lazy"
 					/>
-					{languages.find((lang) => lang.code === currentLang)?.label}
-					<span class="ml-2">▼</span>
+					<span class="text-sm"
+						>{
+							languages.find((lang) => lang.code === currentLang)
+								?.label
+						}</span
+					>
+					<span class="text-xs">▼</span>
 				</button>
 
 				<ul
-					class="absolute bg-gray-900 border border-blue-500 rounded mt-1 hidden"
+					class="absolute right-0 mt-2 bg-gray-900 border border-blue-500/20 rounded-lg shadow-lg hidden py-1 min-w-[120px]"
 				>
 					{
 						languages.map((lang) => (
 							<li
-								class="flex items-center p-2 hover:bg-blue-500 cursor-pointer"
+								class="hover:bg-blue-500/20 cursor-pointer transition-colors"
 								onclick={`window.changeLanguage('${lang.code}')`}
 							>
-								<img
-									src={lang.flag}
-									alt={lang.label}
-									class="w-4 h-4 mr-2"
-									loading="lazy"
-								/>
-								{lang.label}
+								<div class="flex items-center space-x-2 px-3 py-2">
+									<img
+										src={lang.flag}
+										alt={lang.label}
+										class="w-4 h-4"
+										loading="lazy"
+									/>
+									<span class="text-sm">{lang.label}</span>
+								</div>
 							</li>
 						))
 					}
@@ -125,7 +138,7 @@ const navigationLinks: NavigationLink[] = [
 
 			<!-- Mobile Menu Button -->
 			<button
-				class="md:hidden p-2 text-text-color hover:text-blue-400 transition-colors"
+				class="lg:hidden p-2 text-text-color hover:text-blue-400 transition-colors"
 				id="mobile-menu-button"
 				aria-label="Toggle menu"
 			>
@@ -147,29 +160,57 @@ const navigationLinks: NavigationLink[] = [
 
 		<!-- Mobile Menu -->
 		<div
-			class="md:hidden transition-all duration-300 ease-in-out max-h-0 overflow-hidden"
+			class="lg:hidden transition-all duration-300 ease-in-out max-h-0 overflow-hidden bg-gray-900/95"
 			id="mobile-menu"
 		>
-			<div class="py-4 space-y-4">
+			<div class="py-2 space-y-1">
 				{
 					navigationLinks.map((link) => (
 						<a
 							href={link.href}
-							class="block text-text-color hover:text-blue-400 transition-colors px-4 py-2"
+							class="block text-text-color hover:text-blue-400 transition-colors px-4 py-2 text-sm"
 						>
 							{link.name}
 						</a>
 					))
 				}
+				<!-- Language Selector - Mobile -->
+				<div class="px-4 py-2 border-t border-blue-500/20 mt-2">
+					<p class="text-sm text-blue-500 mb-2">Language</p>
+					<div class="flex flex-col space-y-2">
+						{
+							languages.map((lang) => (
+								<button
+									onclick={`window.changeLanguage('${lang.code}')`}
+									class="flex items-center space-x-2 text-text-color hover:text-blue-400 transition-colors"
+								>
+									<img
+										src={lang.flag}
+										alt={lang.label}
+										class="w-4 h-4"
+										loading="lazy"
+									/>
+									<span class="text-sm">{lang.label}</span>
+								</button>
+							))
+						}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </header>
 
 <style>
+	/* Desktop language selector dropdown */
 	button:focus + ul,
 	ul:hover {
 		display: block;
+	}
+
+	/* Mobile menu animation */
+	#mobile-menu {
+		transition: max-height 0.3s ease-in-out;
 	}
 </style>
 
@@ -182,14 +223,7 @@ const navigationLinks: NavigationLink[] = [
 	if (mobileMenuButton && mobileMenu) {
 		mobileMenuButton.addEventListener('click', () => {
 			isMenuOpen = !isMenuOpen;
-
-			// Update max-height for smooth animation
-			if (isMenuOpen) {
-				mobileMenu.style.maxHeight = '100vh';
-				mobileMenu.style.height = '100vh';
-			} else {
-				mobileMenu.style.maxHeight = '0';
-			}
+			mobileMenu.style.maxHeight = isMenuOpen ? '400px' : '0';
 		});
 
 		// Close menu when clicking on a link
@@ -201,10 +235,12 @@ const navigationLinks: NavigationLink[] = [
 			});
 		});
 
-		// Update max-height on window resize
+		// Close menu on window resize if screen becomes large
 		window.addEventListener('resize', () => {
-			if (isMenuOpen) {
-				mobileMenu.style.maxHeight = '100vh';
+			if (window.innerWidth >= 1024) {
+				// lg breakpoint
+				isMenuOpen = false;
+				mobileMenu.style.maxHeight = '0';
 			}
 		});
 	}

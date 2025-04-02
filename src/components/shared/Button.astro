@@ -1,0 +1,25 @@
+---
+interface Props {
+	href?: string;
+	className?: string;
+	target?: string;
+	onClick?: string;
+}
+
+const { href, className = '', target, onClick } = Astro.props;
+
+const baseClasses =
+	'inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow';
+---
+
+{
+	href ? (
+		<a href={href} target={target} class={`${baseClasses} ${className}`}>
+			<slot />
+		</a>
+	) : (
+		<button onclick={onClick} class={`${baseClasses} ${className}`}>
+			<slot />
+		</button>
+	)
+}

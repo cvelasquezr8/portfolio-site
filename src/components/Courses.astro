@@ -1,6 +1,8 @@
 ---
 import { languagesList } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import PDFViewer from './PDFViewer.astro';
+
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
 
@@ -8,9 +10,9 @@ interface Course {
 	title: string;
 	academy: string;
 	icon: string;
-	href: string;
 	description: string;
 	tags: string[];
+	pdfUrl?: string;
 }
 
 const courses: Course[] = [
@@ -18,27 +20,27 @@ const courses: Course[] = [
 		title: translations('certificate.hacker_rank_node_basic.title'),
 		academy: 'HackerRank',
 		icon: '🚀',
-		href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
 		description: translations(
 			'certificate.hacker_rank_node_basic.description',
 		),
 		tags: ['2024', 'NodeJs'],
+		pdfUrl: `${(globalThis as any).BASE_URL}certificates/hackerrank-nodejs.pdf`,
 	},
 	{
 		title: translations('certificate.udemy_sql_advance.title'),
 		academy: 'Udemy',
 		icon: '🐱‍💻',
-		href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
 		description: translations('certificate.udemy_sql_advance.description'),
 		tags: ['2021', 'SQL Server'],
+		pdfUrl: `${(globalThis as any).BASE_URL}certificates/sql-advanced.pdf`,
 	},
 	{
 		title: translations('certificate.udemy_sql_basic.title'),
 		academy: 'Udemy',
 		icon: '🐱‍🚀',
-		href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
 		description: translations('certificate.udemy_sql_basic.description'),
 		tags: ['2020', 'SQL Server'],
+		pdfUrl: `${(globalThis as any).BASE_URL}certificates/sql-basic.pdf`,
 	},
 ];
 ---
@@ -53,32 +55,28 @@ const courses: Course[] = [
 			<span class="inline-block ml-2">🎓</span>
 		</h2>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			{
 				courses.map((course) => {
 					return (
 						<div class="skill-card rounded-xl p-6 float">
 							<div class="flex items-start justify-between mb-4">
 								<div class="flex-1">
-									<a
-										href={course.href}
-										target="_blank"
-										class="text-xl text-blue-500 hover:text-blue-400 transition-colors flex items-center gap-1"
-									>
+									<h3 class="text-xl text-blue-500">
 										{course.title}
-									</a>
+									</h3>
 									<p class="text-accent-color text-sm">
 										{course.academy}
 									</p>
 								</div>
-								<div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-color to-secondary-color flex items-center justify-center">
+								<div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-color to-secondary-color flex items-center justify-center text-3xl">
 									{course.icon}
 								</div>
 							</div>
 							<p class="text-sm text-text-color/80 mb-4">
 								{course.description}
 							</p>
-							<div class="flex items-center gap-2 text-xs text-accent-color">
+							<div class="flex flex-wrap gap-2 mb-4">
 								{course.tags.map((tag) => {
 									return (
 										<span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
@@ -87,6 +85,15 @@ const courses: Course[] = [
 									);
 								})}
 							</div>
+							<div class="flex gap-4">
+								<button
+									onclick={`showPDFViewer('${course.pdfUrl}')`}
+									class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
+								>
+									<span>View Certificate</span>
+									<span class="text-xl">🚀</span>
+								</button>
+							</div>
 						</div>
 					);
 				})
@@ -94,3 +101,19 @@ const courses: Course[] = [
 		</div>
 	</div>
 </section>
+
+<PDFViewer pdfUrl="" />
+
+<script>
+	// Function to show PDF viewer
+	(window as any).showPDFViewer = function (pdfUrl: string) {
+		const modal = document.querySelector('.pdf-viewer-modal');
+		const iframe = modal?.querySelector('iframe');
+
+		if (modal && iframe) {
+			iframe.src = pdfUrl;
+			modal.classList.remove('hidden');
+			document.body.style.overflow = 'hidden';
+		}
+	};
+</script>

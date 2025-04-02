@@ -1,6 +1,7 @@
 ---
 import { languagesList } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import { SOCIAL_LINKS } from '../constants';
 
 const currentLang = Astro.currentLocale || 'en';
 const pathPage = (globalThis as any).BASE_URL;
@@ -10,7 +11,7 @@ const curriculum = currentLang === 'en' ? 'resume.pdf' : `resume-spanish.pdf`;
 
 <section class="container mx-auto px-4 pt-32 pb-16 section-fade">
 	<div class="max-w-4xl mx-auto text-center">
-		<div class="relative mb-12">
+		<div class="relative mb-8">
 			<div
 				class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-2xl opacity-20"
 			>
@@ -20,6 +21,28 @@ const curriculum = currentLang === 'en' ? 'resume.pdf' : `resume-spanish.pdf`;
 				alt="Profile"
 				class="w-48 h-48 rounded-full mx-auto border-4 border-blue-500 shadow-xl relative z-10 float"
 			/>
+		</div>
+
+		<!-- Social Media Links -->
+		<div class="flex justify-center gap-4 mb-8">
+			{
+				SOCIAL_LINKS.map((link) => (
+					<a
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class={`p-3 rounded-lg bg-gradient-to-r ${link.color} hover:${link.hoverColor} transition-all duration-300 shadow-lg hover:scale-110`}
+						title={link.name}
+					>
+						<img
+							src={`${pathPage}images/${link.icon}`}
+							alt={link.name}
+							class="w-6 h-6"
+							loading="lazy"
+						/>
+					</a>
+				))
+			}
 		</div>
 
 		<h1 class="text-5xl font-bold mb-6">

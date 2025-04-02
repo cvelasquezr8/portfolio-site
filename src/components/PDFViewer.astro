@@ -1,0 +1,82 @@
+---
+interface Props {
+	pdfUrl: string;
+}
+
+const { pdfUrl } = Astro.props;
+---
+
+<div
+	class="pdf-viewer-modal hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+>
+	<div
+		class="relative w-full max-w-4xl h-[80vh] bg-gray-900 rounded-xl border border-blue-500/20 overflow-hidden"
+	>
+		<!-- Header -->
+		<div
+			class="absolute top-0 left-0 right-0 h-12 bg-gray-900/90 backdrop-blur border-b border-blue-500/20 flex items-center justify-between px-4 z-10"
+		>
+			<h3 class="text-blue-500 font-semibold">Certificate Preview</h3>
+			<button
+				class="close-pdf-viewer p-2 hover:bg-blue-500/20 rounded-lg transition-colors"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M6 18L18 6M6 6l12 12"></path>
+				</svg>
+			</button>
+		</div>
+
+		<!-- PDF Container -->
+		<div class="w-full h-full pt-12">
+			<iframe src={pdfUrl} class="w-full h-full" style="border: none;"
+			></iframe>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Initialize PDF viewer functionality
+	function initPDFViewer() {
+		const modal = document.querySelector('.pdf-viewer-modal');
+		const closeButton = modal?.querySelector('.close-pdf-viewer');
+
+		// Close on button click
+		closeButton?.addEventListener('click', () => {
+			modal?.classList.add('hidden');
+			document.body.style.overflow = 'auto';
+		});
+
+		// Close on outside click
+		modal?.addEventListener('click', (e) => {
+			if (e.target === modal) {
+				modal.classList.add('hidden');
+				document.body.style.overflow = 'auto';
+			}
+		});
+
+		// Close on escape key
+		document.addEventListener('keydown', (e) => {
+			if (
+				e.key === 'Escape' &&
+				modal &&
+				!modal.classList.contains('hidden')
+			) {
+				modal.classList.add('hidden');
+				document.body.style.overflow = 'auto';
+			}
+		});
+	}
+
+	// Initialize when the document is ready
+	document.addEventListener('DOMContentLoaded', initPDFViewer);
+</script>

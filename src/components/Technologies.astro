@@ -18,7 +18,7 @@ interface Technology {
 
 const technologies: Technology[] = [
 	{
-		title: 'FRONTEND',
+		title: 'FRONTEND1',
 		alt: 'FRONTEND',
 		image: 'laptop.png',
 		elements: [
@@ -85,10 +85,10 @@ const technologies: Technology[] = [
 			{translations('tech.title')}
 			<span class="inline-block ml-2">🧠</span>
 		</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 			{
 				technologies.map((technology) => (
-					<div class="skill-card min-w-[22rem] p-6 rounded-xl float">
+					<div class="skill-card p-6 rounded-xl float w-full">
 						<div class="flex items-start justify-between mb-4">
 							<h3 class="text-blue-500 text-xl">
 								{technology.title}
@@ -102,14 +102,14 @@ const technologies: Technology[] = [
 						</div>
 						<ul class="space-y-4">
 							{technology.elements.map((element) => (
-								<li class="flex items-center space-x-4">
+								<li class="flex items-center gap-4">
 									<img
 										src={`${pathPage}images/${element.image}`}
 										alt={element.alt}
 										class="w-8 h-8"
 										loading="lazy"
 									/>
-									<span>{element.title}</span>
+									<span class="text-sm">{element.title}</span>
 								</li>
 							))}
 						</ul>

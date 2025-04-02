@@ -46,6 +46,7 @@ interface NavigationSection {
 		name: string;
 		href: string;
 		isTargetBlank?: boolean;
+		pdfUrl?: string;
 	}[];
 }
 
@@ -83,24 +84,44 @@ const navigationLinks: NavigationSection[] = [
 		],
 	},
 	{
+		title: translations('roadmap.title'),
+		elements: [
+			{
+				name: translations('roadmap.fitness_tracker.title'),
+				href: '',
+				isTargetBlank: false,
+			},
+			{
+				name: translations('roadmap.url_shortener.title'),
+				href: 'https://github.com/cvelasquezr8/url-shortening-service.git',
+				isTargetBlank: true,
+			},
+			{
+				name: translations('roadmap.task_tracker.title'),
+				href: 'https://github.com/cvelasquezr8/task-tracker-cli.git',
+				isTargetBlank: true,
+			},
+		],
+	},
+	{
 		title: translations('footer.certificate.title'),
 		elements: [
 			{
 				name: translations(
 					'footer.certificates.hacker_rank_node_basic',
 				),
-				href: 'https://www.hackerrank.com/certificates/iframe/14edc5459ca3',
-				isTargetBlank: true,
+				href: '#',
+				pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
 			},
 			{
 				name: translations('footer.certificates.udemy_sql_advance'),
-				href: 'https://drive.google.com/file/d/1_PLdB64MTnEabUs_AYEvgR6BxayXyPG_/view?usp=sharing',
-				isTargetBlank: true,
+				href: '#',
+				pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
 			},
 			{
 				name: translations('footer.certificates.udemy_sql_basic'),
-				href: 'https://drive.google.com/file/d/1MZwhLd-UtauTlT0oo4yGy2xbxiB5nH-y/view?usp=sharing',
-				isTargetBlank: true,
+				href: '#',
+				pdfUrl: `${pathPage}certificates/sql-basic.pdf`,
 			},
 		],
 	},
@@ -145,7 +166,7 @@ const navigationLinks: NavigationSection[] = [
 			</div>
 		</div>
 
-		<div class=`grid grid-cols-2 md:grid-cols-3 gap-8 mb-12`>
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
 			{
 				navigationLinks.map((section) => (
 					<div>
@@ -153,17 +174,26 @@ const navigationLinks: NavigationSection[] = [
 						<ul class="space-y-2">
 							{section.elements.map((element) => (
 								<li>
-									<a
-										href={element.href}
-										class="text-gray-400 hover:text-blue-500 transition-colors"
-										target={
-											element.isTargetBlank
-												? '_blank'
-												: '_self'
-										}
-									>
-										{element.name}
-									</a>
+									{element.pdfUrl ? (
+										<button
+											onclick={`showPDFViewer('${element.pdfUrl}')`}
+											class="text-gray-400 hover:text-blue-500 transition-colors text-left"
+										>
+											{element.name}
+										</button>
+									) : (
+										<a
+											href={element.href}
+											class="text-gray-400 hover:text-blue-500 transition-colors"
+											target={
+												element.isTargetBlank
+													? '_blank'
+													: '_self'
+											}
+										>
+											{element.name}
+										</a>
+									)}
 								</li>
 							))}
 						</ul>

@@ -19,7 +19,21 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		<meta name="title" content={translations('index.title')} />
 		<meta name="description" content={translations('index.description')} />
 		<meta name="author" content="Carlos Velasquez" />
-		<meta name="keywords" content="" />
+		<meta name="keywords" content={translations('index.keywords')} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={translations('index.title')} />
+		<meta property="og:description" content={translations('index.description')} />
+		<meta property="og:image" content={`${pathPage}images/carlos-velasquez.jpg`} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={translations('index.title')} />
+		<meta property="twitter:description" content={translations('index.description')} />
+		<meta property="twitter:image" content={`${pathPage}images/carlos-velasquez.jpg`} />
 
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,7 +54,10 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 				"image": "images/astronaut.png",
 				"sameAs": [
 					"https://github.com/cvelasquezr8",
-					"https://linkedin.com/in/cvelasquezr8"
+					"https://linkedin.com/in/cvelasquezr8",
+					"https://roadmap.sh/u/cvelasquezr8",
+					"https://hackerrank.com/profile/cvelasquezr8",
+					"https://leetcode.com/u/cvelasquezr8/"
 				],
 				"description": "Experienced Full Stack Developer specializing in modern web technologies."
 			}
