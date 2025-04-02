@@ -57,46 +57,47 @@ const courses: Course[] = [
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			{
-				courses.map((course) => {
-					return (
-						<div class="skill-card rounded-xl p-6 float">
-							<div class="flex items-start justify-between mb-4">
-								<div class="flex-1">
-									<h3 class="text-xl text-blue-500">
-										{course.title}
-									</h3>
-									<p class="text-accent-color text-sm">
-										{course.academy}
-									</p>
-								</div>
-								<div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-color to-secondary-color flex items-center justify-center text-3xl">
-									{course.icon}
-								</div>
+				courses.map((course) => (
+					<div class="skill-card rounded-xl p-6 float">
+						<div class="flex items-start justify-between mb-4">
+							<div class="flex-1">
+								<h3 class="text-xl text-blue-500">
+									{course.title}
+								</h3>
+								<p class="text-accent-color text-sm">
+									{course.academy}
+								</p>
 							</div>
-							<p class="text-sm text-text-color/80 mb-4">
-								{course.description}
-							</p>
-							<div class="flex flex-wrap gap-2 mb-4">
-								{course.tags.map((tag) => {
-									return (
-										<span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
-											{tag}
-										</span>
-									);
-								})}
-							</div>
-							<div class="flex gap-4">
-								<button
-									onclick={`showPDFViewer('${course.pdfUrl}')`}
-									class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
-								>
-									<span>View Certificate</span>
-									<span class="text-xl">🚀</span>
-								</button>
+							<div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-color to-secondary-color flex items-center justify-center text-3xl">
+								{course.icon}
 							</div>
 						</div>
-					);
-				})
+						<p class="text-sm text-text-color/80 mb-4">
+							{course.description}
+						</p>
+						<div class="flex flex-wrap gap-2 mb-4">
+							{course.tags.map((tag) => (
+								<span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
+									{tag}
+								</span>
+							))}
+						</div>
+						<div class="flex gap-4">
+							<button
+								type="button"
+								data-pdf-url={course.pdfUrl}
+								class="view-certificate-button inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
+							>
+								<span>
+									{translations(
+										'certificate.view_certificate',
+									)}
+								</span>
+								<span class="text-xl">🚀</span>
+							</button>
+						</div>
+					</div>
+				))
 			}
 		</div>
 	</div>
@@ -105,15 +106,21 @@ const courses: Course[] = [
 <PDFViewer pdfUrl="" />
 
 <script>
-	// Function to show PDF viewer
-	(window as any).showPDFViewer = function (pdfUrl: string) {
-		const modal = document.querySelector('.pdf-viewer-modal');
-		const iframe = modal?.querySelector('iframe');
+	document.addEventListener('DOMContentLoaded', () => {
+		const buttons = document.querySelectorAll('.view-certificate-button');
 
-		if (modal && iframe) {
-			iframe.src = pdfUrl;
-			modal.classList.remove('hidden');
-			document.body.style.overflow = 'hidden';
-		}
-	};
+		buttons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const pdfUrl = btn.getAttribute('data-pdf-url');
+				const modal = document.querySelector('.pdf-viewer-modal');
+				const iframe = modal?.querySelector('iframe');
+
+				if (modal && iframe && pdfUrl) {
+					iframe.src = pdfUrl;
+					modal.classList.remove('hidden');
+					document.body.style.overflow = 'hidden';
+				}
+			});
+		});
+	});
 </script>

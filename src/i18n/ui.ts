@@ -47,6 +47,7 @@ export const labels = {
 			'Certificate of Accomplishment - SQL Server (Basic)',
 		'certificate.udemy_sql_basic.description':
 			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 16 total hours of the online course SQL Server: From Beginner to Professional. The course was instructed by Mariano Puglisi.',
+		'certificate.view_certificate': 'View Certificate',
 		'contact.title': 'Keep in Touch',
 		'contact.subtitle': 'COMMUNICATION PORTAL',
 		'contact.form.name': 'CALL SIGN (NAME)',
@@ -151,6 +152,7 @@ export const labels = {
 			'Certificado de Logro - SQL Server (Básico)',
 		'certificate.udemy_sql_basic.description':
 			'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 16 horas totales del curso en línea SQL Server: De Principiante a Profesional. El curso fue impartido por Mariano Puglisi.',
+		'certificate.view_certificate': 'Ver Certificado',
 		'contact.title': 'Mantente en Contacto',
 		'contact.subtitle': 'PORTAL DE COMUNICACIÓN',
 		'contact.form.name': 'NOMBRE (CALL SIGN)',
