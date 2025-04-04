@@ -17,6 +17,14 @@ interface Course {
 
 const courses: Course[] = [
 	{
+		title: translations('certificate.devtalles.title'),
+		academy: 'DevTalles',
+		icon: '💻',
+		description: translations('certificate.devtalles.description'),
+		tags: ['2024', 'NodeJs', 'Rest API', 'Clean Architecture'],
+		pdfUrl: `${(globalThis as any).BASE_URL}certificates/node-clean-architecture.pdf`,
+	},
+	{
 		title: translations('certificate.hacker_rank_node_basic.title'),
 		academy: 'HackerRank',
 		icon: '🚀',
@@ -93,7 +101,7 @@ const courses: Course[] = [
 										'certificate.view_certificate',
 									)}
 								</span>
-								<span class="text-xl">🚀</span>
+								<span class="text-xl">📄</span>
 							</button>
 						</div>
 					</div>
@@ -112,14 +120,7 @@ const courses: Course[] = [
 		buttons.forEach((btn) => {
 			btn.addEventListener('click', () => {
 				const pdfUrl = btn.getAttribute('data-pdf-url');
-				const modal = document.querySelector('.pdf-viewer-modal');
-				const iframe = modal?.querySelector('iframe');
-
-				if (modal && iframe && pdfUrl) {
-					iframe.src = pdfUrl;
-					modal.classList.remove('hidden');
-					document.body.style.overflow = 'hidden';
-				}
+				if (pdfUrl) (window as any).showPDFViewer(pdfUrl);
 			});
 		});
 	});

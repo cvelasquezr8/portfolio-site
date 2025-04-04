@@ -108,6 +108,13 @@ const navigationLinks: NavigationSection[] = [
 		elements: [
 			{
 				name: translations(
+					'footer.certificates.devtalles.node_clean_architecture',
+				),
+				href: '#',
+				pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
+			},
+			{
+				name: translations(
 					'footer.certificates.hacker_rank_node_basic',
 				),
 				href: '#',
@@ -213,3 +220,16 @@ const navigationLinks: NavigationSection[] = [
 		</div>
 	</div>
 </footer>
+
+<script>
+	(window as any).showPDFViewer = function (pdfUrl: string) {
+		const modal = document.querySelector('.pdf-viewer-modal');
+		const iframe = modal?.querySelector('iframe');
+
+		if (modal && iframe && pdfUrl) {
+			iframe.src = pdfUrl;
+			modal.classList.remove('hidden');
+			document.body.style.overflow = 'hidden';
+		}
+	};
+</script>

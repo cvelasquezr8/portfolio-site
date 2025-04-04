@@ -5,18 +5,23 @@ export const languagesList = {
 
 export const labels = {
 	en: {
+		//** Meta Tags */
 		'index.title':
 			'Carlos Velasquez - Full Stack Developer & Space Explorer',
 		'index.description':
 			'Experienced Full Stack Developer specializing in modern web technologies. Explore my portfolio featuring innovative projects and creative solutions.',
 		'index.keywords':
 			'full stack developer, web development, software engineer, portfolio, Carlos Velasquez, space theme, creative developer',
+
+		//** Navigation Bar */
 		'nav.home': 'Home',
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',
 		'nav.certificates': 'Certificates',
 		'nav.contact': 'Contact',
 		'nav.challenges': 'Challenges',
+
+		//** Hero Section */
 		'hero.mission_control': 'MISSION CONTROL',
 		'hero.full_stack_explorer': 'FULL STACK EXPLORER',
 		'hero.code_astronaut': 'CODE ASTRONAUT',
@@ -24,8 +29,12 @@ export const labels = {
 		'hero.description':
 			"Exploring the digital universe one line of code at a time. Building stellar applications that push the boundaries of what's possible.",
 		'hero.launch_mission': 'Download Mission Status',
+
+		//** Tecnical Section */
 		'tech.title': 'Technical Capabilities',
 		'tech.subtitle': 'NAVIGATION SYSTEMS',
+
+		//** Skills Section */
 		'project.title': 'Featured Projects',
 		'project.subtitle': 'SPACE MISSIONS',
 		'project.view_project': 'View Project',
@@ -33,6 +42,8 @@ export const labels = {
 		'project.equasystems.title': 'Equasystem WebSite',
 		'project.equasystems.description':
 			'Designed and developed a modern website for Equa Systems, enhancing their online presence and client engagement. Focused on usability, responsiveness, and a sleek design to showcase their tech solutions effectively.',
+
+		//** Certificates Section */
 		'certificate.title': 'Certificates & Courses',
 		'certificate.subtitle': 'ASTRO ACHIEVEMENTS',
 		'certificate.hacker_rank_node_basic.title':
@@ -47,7 +58,13 @@ export const labels = {
 			'Certificate of Accomplishment - SQL Server (Basic)',
 		'certificate.udemy_sql_basic.description':
 			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 16 total hours of the online course SQL Server: From Beginner to Professional. The course was instructed by Mariano Puglisi.',
+		'certificate.devtalles.title':
+			'Certificate of Accomplishment - DevTalles',
+		'certificate.devtalles.description':
+			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NodeJs - Authentication Rest with Clean Architecture". The course was instructed by Fernando Herrera.',
 		'certificate.view_certificate': 'View Certificate',
+
+		//** Contact Section */
 		'contact.title': 'Keep in Touch',
 		'contact.subtitle': 'COMMUNICATION PORTAL',
 		'contact.form.name': 'CALL SIGN (NAME)',
@@ -79,6 +96,8 @@ export const labels = {
 		'contact.email.validation.form':
 			'Form elements not found. Please refresh the page.',
 		'contact.email.validation.error': 'Please check your input! 🚨',
+
+		//** Footer Section */
 		'footer.rights': 'All rights reserved.',
 		'footer.crafted': 'Crafted with 💙 in the digital cosmos',
 		'footer.navigation.home': 'Home',
@@ -90,13 +109,19 @@ export const labels = {
 		'footer.certificates.hacker_rank_node_basic': 'NodeJs (Basic)',
 		'footer.certificates.udemy_sql_advance': 'SQL Server (Advance)',
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Basic)',
+		'footer.certificates.devtalles.node_clean_architecture':
+			'NodeJs - DevTalles',
 		'footer.navigation.title': 'NAVIGATION',
 		'footer.project.title': 'PROJECTS',
 		'footer.certificate.title': 'CERTIFICATES',
+
+		//** Error Section */
 		'error.title': 'Houston, We Have a Problem!',
 		'error.description':
 			"The cosmic coordinates you're looking for seem to be lost in space. Let's navigate back to a known star system.",
 		'error.button': 'Return to Mission Control',
+
+		//** Roadmap Section */
 		'roadmap.title': 'ROADMAP CHALLENGES',
 		'roadmap.subtitle': 'SKILL MISSIONS',
 		'roadmap.task_tracker.title': 'Task Tracker CLI',
@@ -110,18 +135,23 @@ export const labels = {
 			'A comprehensive fitness tracking application that helps users manage their workout routines, track progress, and achieve their fitness goals. Features include workout planning, progress tracking, and performance analytics.',
 	},
 	es: {
+		//** Meta Tags */
 		'index.title':
 			'Carlos Velasquez - Desarrollador Full Stack y Explorador Espacial',
 		'index.description':
 			'Desarrollador Full Stack con experiencia especializado en tecnologías web modernas. Explora mi portafolio con proyectos innovadores y soluciones creativas.',
 		'index.keywords':
 			'desarrollador full stack, desarrollo web, ingeniero de software, portafolio, Carlos Velasquez, tema espacial, desarrollador creativo',
+
+		//** Navigation Bar */
 		'nav.home': 'Inicio',
 		'nav.skills': 'Habilidades',
 		'nav.projects': 'Proyectos',
 		'nav.certificates': 'Certificados',
 		'nav.challenges': 'Desafíos',
 		'nav.contact': 'Contacto',
+
+		//** Hero Section */
 		'hero.mission_control': 'CONTROL DE MISIÓN',
 		'hero.full_stack_explorer': 'EXPLORADOR FULL STACK',
 		'hero.code_astronaut': 'ASTRONAUTA DEL CÓDIGO',
@@ -129,8 +159,12 @@ export const labels = {
 		'hero.description':
 			'Explorando el universo digital línea por línea de código. Construyendo aplicaciones estelares que empujan los límites de lo que es posible.',
 		'hero.launch_mission': 'Descargar Estado de la Misión',
+
+		//** Tecnical Section */
 		'tech.title': 'Capacidades Técnicas',
 		'tech.subtitle': 'SISTEMAS DE NAVEGACIÓN',
+
+		//** Skills Section */
 		'project.title': 'Proyectos Destacados',
 		'project.subtitle': 'MISIÓN ESPACIAL',
 		'project.view_project': 'Ver Proyecto',
@@ -138,6 +172,8 @@ export const labels = {
 		'project.equasystems.title': 'Sitio Web de Equasystem',
 		'project.equasystems.description':
 			'Diseñado y desarrollado un sitio web moderno para Equa Systems, mejorando su presencia en línea y el compromiso con los clientes. Enfocado en la usabilidad, la capacidad de respuesta y un diseño elegante para mostrar sus soluciones tecnológicas de manera efectiva.',
+
+		//** Certificates Section */
 		'certificate.title': 'Certificados y Cursos',
 		'certificate.subtitle': 'LOGROS EN EL ESPACIO',
 		'certificate.hacker_rank_node_basic.title':
@@ -152,7 +188,12 @@ export const labels = {
 			'Certificado de Logro - SQL Server (Básico)',
 		'certificate.udemy_sql_basic.description':
 			'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 16 horas totales del curso en línea SQL Server: De Principiante a Profesional. El curso fue impartido por Mariano Puglisi.',
+		'certificate.devtalles.title': 'Certificado de Logro - DevTalles',
+		'certificate.devtalles.description':
+			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NodeJs - Autenticación Rest con Clean Architecture". El curso fue impartido por Fernando Herrera.',
 		'certificate.view_certificate': 'Ver Certificado',
+
+		//** Contact Section */
 		'contact.title': 'Mantente en Contacto',
 		'contact.subtitle': 'PORTAL DE COMUNICACIÓN',
 		'contact.form.name': 'NOMBRE (CALL SIGN)',
@@ -185,6 +226,8 @@ export const labels = {
 		'contact.email.validation.form':
 			'No se encontraron elementos del formulario. Por favor, actualiza la página.',
 		'contact.email.validation.error': '¡Por favor, verifica tu entrada! 🚨',
+
+		//** Footer Section */
 		'footer.rights': 'Todos los derechos reservados.',
 		'footer.crafted': 'Hecho con 💙 en el cosmos digital',
 		'footer.navigation.home': 'Inicio',
@@ -196,12 +239,18 @@ export const labels = {
 		'footer.certificates.hacker_rank_node_basic': 'NodeJs (Básico)',
 		'footer.certificates.udemy_sql_advance': 'SQL Server (Avanzado)',
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Básico)',
+		'footer.certificates.devtalles.node_clean_architecture':
+			'NodeJs - DevTalles',
 		'footer.navigation.title': 'NAVEGACIÓN',
 		'footer.project.title': 'PROYECTOS',
 		'footer.certificate.title': 'CERTIFICADOS',
+
+		//** Error Section */
 		'error.title': '¡Houston, Tenemos un Problema!',
 		'error.description': `Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a navegar a un sistema estelar conocido.`,
 		'error.button': 'Volver al Control de Misión',
+
+		//** Roadmap Section */
 		'roadmap.title': 'DESAFÍOS DE ROADMAP',
 		'roadmap.subtitle': 'MISIONES DE HABILIDAD',
 		'roadmap.task_tracker.title': 'Gestor de Tareas CLI',
