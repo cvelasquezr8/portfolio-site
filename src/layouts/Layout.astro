@@ -35,6 +35,18 @@ const translations = useTranslations(currentLang as keyof typeof languagesList);
 		<meta property="twitter:description" content={translations('index.description')} />
 		<meta property="twitter:image" content={`${pathPage}images/carlos-velasquez.jpg`} />
 
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ8RXQ8BMG"></script>
+		<script>
+		  (window as any).dataLayer = (window as any).dataLayer || [];
+		  function gtag(){
+					dataLayer.push(arguments);
+			}
+
+		  gtag('js', new Date());
+		  gtag('config', 'G-SJ8RXQ8BMG');
+		</script>
+
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
