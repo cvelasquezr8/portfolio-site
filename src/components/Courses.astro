@@ -3,13 +3,17 @@ import { languagesList } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
 import PDFViewer from './PDFViewer.astro';
 
+const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
 
 interface Course {
 	title: string;
 	academy: string;
-	icon: string;
+	icon: {
+		image?: string;
+		alt?: string;
+	};
 	description: string;
 	tags: string[];
 	pdfUrl?: string;
@@ -17,38 +21,54 @@ interface Course {
 
 const courses: Course[] = [
 	{
+		title: translations('certificate.devtalles.nestjs.title'),
+		academy: 'DevTalles',
+		icon: { image: 'nestjs.svg', alt: 'NestJs' },
+		description: translations('certificate.devtalles.nestjs.description'),
+		tags: [
+			'2025',
+			'NestJs',
+			'Rest API',
+			'JWT',
+			'TypeOrm',
+			'PostgreSQL',
+			'WebSockets',
+		],
+		pdfUrl: `${pathPage}certificates/nestjs.pdf`,
+	},
+	{
 		title: translations('certificate.devtalles.title'),
 		academy: 'DevTalles',
-		icon: '💻',
+		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
 		description: translations('certificate.devtalles.description'),
 		tags: ['2024', 'NodeJs', 'Rest API', 'Clean Architecture'],
-		pdfUrl: `${(globalThis as any).BASE_URL}certificates/node-clean-architecture.pdf`,
+		pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
 	},
 	{
 		title: translations('certificate.hacker_rank_node_basic.title'),
 		academy: 'HackerRank',
-		icon: '🚀',
+		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
 		description: translations(
 			'certificate.hacker_rank_node_basic.description',
 		),
 		tags: ['2024', 'NodeJs'],
-		pdfUrl: `${(globalThis as any).BASE_URL}certificates/hackerrank-nodejs.pdf`,
+		pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
 	},
 	{
 		title: translations('certificate.udemy_sql_advance.title'),
 		academy: 'Udemy',
-		icon: '🐱‍💻',
+		icon: { image: 'sql-server.svg', alt: 'SQL Server' },
 		description: translations('certificate.udemy_sql_advance.description'),
 		tags: ['2021', 'SQL Server'],
-		pdfUrl: `${(globalThis as any).BASE_URL}certificates/sql-advanced.pdf`,
+		pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
 	},
 	{
 		title: translations('certificate.udemy_sql_basic.title'),
 		academy: 'Udemy',
-		icon: '🐱‍🚀',
+		icon: { image: 'sql-server.svg', alt: 'SQL Server' },
 		description: translations('certificate.udemy_sql_basic.description'),
 		tags: ['2020', 'SQL Server'],
-		pdfUrl: `${(globalThis as any).BASE_URL}certificates/sql-basic.pdf`,
+		pdfUrl: `${pathPage}certificates/sql-basic.pdf`,
 	},
 ];
 ---
@@ -76,9 +96,13 @@ const courses: Course[] = [
 									{course.academy}
 								</p>
 							</div>
-							<div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-color to-secondary-color flex items-center justify-center text-3xl">
-								{course.icon}
-							</div>
+							<img
+								style="width: 40px;"
+								src={`${pathPage}images/${course.icon.image}`}
+								alt={course.icon.alt}
+								class="tech-icon"
+								loading="lazy"
+							/>
 						</div>
 						<p class="text-sm text-text-color/80 mb-4">
 							{course.description}
@@ -101,7 +125,13 @@ const courses: Course[] = [
 										'certificate.view_certificate',
 									)}
 								</span>
-								<span class="text-xl">📄</span>
+								<img
+									style="width: 30px;"
+									src={`${pathPage}images/devbox.svg`}
+									alt="code"
+									class="tech-icon"
+									loading="lazy"
+								/>
 							</button>
 						</div>
 					</div>

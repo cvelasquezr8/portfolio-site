@@ -63,6 +63,10 @@ export const labels = {
 		'certificate.devtalles.description':
 			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NodeJs - Authentication Rest with Clean Architecture". The course was instructed by Fernando Herrera.',
 		'certificate.view_certificate': 'View Certificate',
+		'certificate.devtalles.nestjs.title':
+			'Certificate of Accomplishment - NestJs',
+		'certificate.devtalles.nestjs.description':
+			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NestJs - The Complete Guide". The course was instructed by Fernando Herrera.',
 
 		//** Contact Section */
 		'contact.title': 'Keep in Touch',
@@ -111,6 +115,7 @@ export const labels = {
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Basic)',
 		'footer.certificates.devtalles.node_clean_architecture':
 			'NodeJs - DevTalles',
+		'footer.certificates.devtalles.nestjs': 'NestJs - DevTalles',
 		'footer.navigation.title': 'NAVIGATION',
 		'footer.project.title': 'PROJECTS',
 		'footer.certificate.title': 'CERTIFICATES',
@@ -192,6 +197,9 @@ export const labels = {
 		'certificate.devtalles.description':
 			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NodeJs - Autenticación Rest con Clean Architecture". El curso fue impartido por Fernando Herrera.',
 		'certificate.view_certificate': 'Ver Certificado',
+		'certificate.devtalles.nestjs.title': 'Certificado de Logro - NestJs',
+		'certificate.devtalles.nestjs.description':
+			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NestJs - La Guía Completa". El curso fue impartido por Fernando Herrera.',
 
 		//** Contact Section */
 		'contact.title': 'Mantente en Contacto',
@@ -241,6 +249,7 @@ export const labels = {
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Básico)',
 		'footer.certificates.devtalles.node_clean_architecture':
 			'NodeJs - DevTalles',
+		'footer.certificates.devtalles.nestjs': 'NestJs - DevTalles',
 		'footer.navigation.title': 'NAVEGACIÓN',
 		'footer.project.title': 'PROYECTOS',
 		'footer.certificate.title': 'CERTIFICADOS',
