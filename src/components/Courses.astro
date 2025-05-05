@@ -21,6 +21,16 @@ interface Course {
 
 const courses: Course[] = [
 	{
+		title: translations('certificate.hacker_rank_node_intermediate.title'),
+		academy: 'HackerRank',
+		description: translations(
+			'certificate.hacker_rank_node_intermediate.description',
+		),
+		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
+		tags: ['2025', 'NodeJs', 'Middleware', 'Rest API'],
+		pdfUrl: `${pathPage}certificates/nodejs-intermediate-certificate.pdf`,
+	},
+	{
 		title: translations('certificate.devtalles.nestjs.title'),
 		academy: 'DevTalles',
 		icon: { image: 'nestjs.svg', alt: 'NestJs' },

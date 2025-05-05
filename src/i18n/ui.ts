@@ -67,6 +67,10 @@ export const labels = {
 			'Certificate of Accomplishment - NestJs',
 		'certificate.devtalles.nestjs.description':
 			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NestJs - The Complete Guide". The course was instructed by Fernando Herrera.',
+		'certificate.hacker_rank_node_intermediate.title':
+			'Node.js (Intermediate) Certificate',
+		'certificate.hacker_rank_node_intermediate.description':
+			'This is a Certificate of Accomplishment from HackerRank for Node.js (Intermediate), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
 
 		//** Contact Section */
 		'contact.title': 'Keep in Touch',
@@ -200,6 +204,10 @@ export const labels = {
 		'certificate.devtalles.nestjs.title': 'Certificado de Logro - NestJs',
 		'certificate.devtalles.nestjs.description':
 			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NestJs - La Guía Completa". El curso fue impartido por Fernando Herrera.',
+		'certificate.hacker_rank_node_intermediate.title':
+			'Certificado de Node.js (Intermedio)',
+		'certificate.hacker_rank_node_intermediate.description':
+			'Este es un Certificado de Logro de HackerRank para Node.js (Intermedio), otorgado a Carlos Velasquez. Confirma que ha aprobado con éxito la prueba de certificación de habilidades de HackerRank.',
 
 		//** Contact Section */
 		'contact.title': 'Mantente en Contacto',
