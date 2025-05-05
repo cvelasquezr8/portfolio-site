@@ -59,7 +59,7 @@ export const labels = {
 		'certificate.udemy_sql_basic.description':
 			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 16 total hours of the online course SQL Server: From Beginner to Professional. The course was instructed by Mariano Puglisi.',
 		'certificate.devtalles.title':
-			'Certificate of Accomplishment - DevTalles',
+			'Certificate of Accomplishment - Clean Architecture',
 		'certificate.devtalles.description':
 			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NodeJs - Authentication Rest with Clean Architecture". The course was instructed by Fernando Herrera.',
 		'certificate.view_certificate': 'View Certificate',
@@ -68,7 +68,7 @@ export const labels = {
 		'certificate.devtalles.nestjs.description':
 			'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NestJs - The Complete Guide". The course was instructed by Fernando Herrera.',
 		'certificate.hacker_rank_node_intermediate.title':
-			'Node.js (Intermediate) Certificate',
+			'Certificate of Accomplishment - Node.js (Intermediate)',
 		'certificate.hacker_rank_node_intermediate.description':
 			'This is a Certificate of Accomplishment from HackerRank for Node.js (Intermediate), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
 
@@ -120,6 +120,8 @@ export const labels = {
 		'footer.certificates.devtalles.node_clean_architecture':
 			'NodeJs - DevTalles',
 		'footer.certificates.devtalles.nestjs': 'NestJs - DevTalles',
+		'footer.certificates.hacker_rank_node_intermediate':
+			'Node.js (Intermediate)',
 		'footer.navigation.title': 'NAVIGATION',
 		'footer.project.title': 'PROJECTS',
 		'footer.certificate.title': 'CERTIFICATES',
@@ -197,7 +199,8 @@ export const labels = {
 			'Certificado de Logro - SQL Server (Básico)',
 		'certificate.udemy_sql_basic.description':
 			'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 16 horas totales del curso en línea SQL Server: De Principiante a Profesional. El curso fue impartido por Mariano Puglisi.',
-		'certificate.devtalles.title': 'Certificado de Logro - DevTalles',
+		'certificate.devtalles.title':
+			'Certificado de Logro - Arquitectura Limpia',
 		'certificate.devtalles.description':
 			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NodeJs - Autenticación Rest con Clean Architecture". El curso fue impartido por Fernando Herrera.',
 		'certificate.view_certificate': 'Ver Certificado',
@@ -205,7 +208,7 @@ export const labels = {
 		'certificate.devtalles.nestjs.description':
 			'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NestJs - La Guía Completa". El curso fue impartido por Fernando Herrera.',
 		'certificate.hacker_rank_node_intermediate.title':
-			'Certificado de Node.js (Intermedio)',
+			'Certificado de Logro - Node.js (Intermedio)',
 		'certificate.hacker_rank_node_intermediate.description':
 			'Este es un Certificado de Logro de HackerRank para Node.js (Intermedio), otorgado a Carlos Velasquez. Confirma que ha aprobado con éxito la prueba de certificación de habilidades de HackerRank.',
 
@@ -257,6 +260,8 @@ export const labels = {
 		'footer.certificates.udemy_sql_basic': 'SQL Server (Básico)',
 		'footer.certificates.devtalles.node_clean_architecture':
 			'NodeJs - DevTalles',
+		'footer.certificates.hacker_rank_node_intermediate':
+			'Node.js (Intermedio)',
 		'footer.certificates.devtalles.nestjs': 'NestJs - DevTalles',
 		'footer.navigation.title': 'NAVEGACIÓN',
 		'footer.project.title': 'PROYECTOS',
