@@ -6,7 +6,10 @@ import { SOCIAL_LINKS } from '../constants';
 const currentLang = Astro.currentLocale || 'en';
 const pathPage = (globalThis as any).BASE_URL;
 const translations = useTranslations(currentLang as keyof typeof languagesList);
-const curriculum = currentLang === 'en' ? 'resume.pdf' : `resume-spanish.pdf`;
+const curriculum =
+	currentLang === 'en'
+		? 'carlos-velasquez-resume-en.pdf'
+		: 'carlos-velasquez-resume-es.pdf';
 ---
 
 <section class="container mx-auto px-4 pt-32 pb-16 section-fade">
