@@ -2,6 +2,13 @@
   "name": "portfolio-site",
   "type": "module",
   "version": "0.0.1",
+  "description": "Personal portfolio website built with Astro and Tailwind CSS.",
+  "author": {
+    "name": "Carlos",
+    "email": "contact@carlos-velasquez.dev"
+  },
+  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

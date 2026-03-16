@@ -2,6 +2,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
+const isProduction = process.env.NODE_ENV === 'production';
+const BACKEND_URL_PROD = isProduction ? process.env.BACKEND_URL_PROD : 'localhost:3000/email/send/';
+
 // https://astro.build/config
 export default defineConfig({
 	i18n: {
@@ -13,15 +16,13 @@ export default defineConfig({
 		}
 	},
 	output: 'static',
-	base: import.meta.env.PROD ? "/portfolio-site/" : "/",
+	base: isProduction ? "/portfolio-site/" : "/",
 	vite: {
 		define: {
 			'globalThis.BASE_URL': JSON.stringify(
-				import.meta.env.PROD ? '/portfolio-site/' : '/'
+				isProduction ? '/portfolio-site/' : '/'
 			),
-			'globalThis.BACKEND_URL': JSON.stringify(
-				import.meta.env.PROD ? 'https://email-service-production-e23d.up.railway.app/email/send/' : 'http://localhost:3000/email/send/'
-			),
+			'globalThis.BACKEND_URL': JSON.stringify(BACKEND_URL_PROD),
 		},
 	},
 	integrations: [tailwind()],
