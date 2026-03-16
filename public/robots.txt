@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow error pages
+Disallow: /404
+
+# Sitemap
+Sitemap: https://cvelasquezr8.github.io/portfolio-site/sitemap-index.xml

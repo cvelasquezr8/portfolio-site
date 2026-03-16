@@ -1,0 +1,45 @@
+---
+import Card from './shared/Card.astro';
+import { languagesList } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+import { getWorkExperience } from '../constants';
+
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as keyof typeof languagesList);
+const pathPage = (globalThis as any).BASE_URL;
+
+const workExperience = getWorkExperience(translations);
+---
+<section id="experience" class="py-20 px-4 section-fade">
+  <div class="container mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center gradient-text">
+      <span class="text-xl block mb-4 text-blue-500">{translations('experience.subtitle')}</span>
+      {translations('experience.title')}
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        workExperience.map((experience) => (
+          <Card description={experience.description} summary={experience.summary ?? ''} tags={experience.techs} className="h-full">
+            {experience.icon && (
+              <img slot="icon" src={`${pathPage}images/${experience.icon.image}`} alt={experience.icon.alt} loading="lazy" />
+            )}
+
+            <div slot="title">
+              <div class="text-sm text-text-color/80">{experience.period}</div>
+              <h3 class="text-xl font-semibold mb-1 text-blue-500">{experience.role}</h3>
+              <div class="text-sm text-gray-300">{experience.company}</div>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  #experience .card-icon-wrapper {
+    width: 120px;
+    height: 40px;
+  }
+</style>

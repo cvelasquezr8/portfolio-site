@@ -1,136 +1,35 @@
 ---
-import { languagesList } from '../i18n/ui';
-import { useTranslations } from '../i18n/utils';
+import { languagesList, useTranslations } from '../i18n';
+import type { IFooterNavigationLink, INavigationLink, ISocialLink } from '../types';
+import { getCertificationsLinks, getNavigationLinks, getRoadmapLinks, getSocialLinks, getWorkExperience } from '../constants';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
-
-interface SocialLink {
-	title: string;
-	icon: string;
-	url: string;
-}
-
-const socialLinks: SocialLink[] = [
-	{
-		title: 'GitHub',
-		icon: 'github.svg',
-		url: 'https://github.com/cvelasquezr8',
-	},
-	{
-		title: 'LinkedIn',
-		icon: 'linkedin.svg',
-		url: 'https://linkedin.com/in/cvelasquezr8',
-	},
-	{
-		title: 'RoadMap',
-		icon: 'roadmap.svg',
-		url: 'https://roadmap.sh/u/cvelasquezr8',
-	},
-	{
-		title: 'Hacker Rank',
-		icon: 'hacker-rank.svg',
-		url: 'https://hackerrank.com/profile/cvelasquezr8',
-	},
-	{
-		title: 'LeetCode',
-		icon: 'leetcode.svg',
-		url: 'https://leetcode.com/u/cvelasquezr8/',
-	},
-];
-
-interface NavigationSection {
-	title: string;
-	elements: {
-		name: string;
-		href: string;
-		isTargetBlank?: boolean;
-		pdfUrl?: string;
-	}[];
-}
-
-const navigationLinks: NavigationSection[] = [
+const navigationLinks: INavigationLink[] = getNavigationLinks(translations);
+const roadmapLinks: INavigationLink[] = getRoadmapLinks(translations);
+const certificationsLinks: INavigationLink[] = getCertificationsLinks(translations, pathPage);
+const socialLinks: ISocialLink[] = getSocialLinks();
+const workExperience = getWorkExperience(translations);
+const navigation: IFooterNavigationLink[] = [
 	{
 		title: translations('footer.navigation.title'),
-		elements: [
-			{ name: translations('footer.navigation.home'), href: '#' },
-			{
-				name: translations('footer.navigation.skills'),
-				href: '#technologies',
-			},
-			{
-				name: translations('footer.navigation.certificates'),
-				href: '#courses',
-			},
-			{
-				name: translations('footer.navigation.contact'),
-				href: '#contact',
-			},
-		],
+		elements: navigationLinks,
+	},
+	{
+		title: translations('footer.experience.title'),
+		elements: workExperience,
 	},
 	{
 		title: translations('roadmap.title'),
-		elements: [
-			{
-				name: translations('roadmap.fitness_tracker.title'),
-				href: '',
-				isTargetBlank: false,
-			},
-			{
-				name: translations('roadmap.url_shortener.title'),
-				href: 'https://github.com/cvelasquezr8/url-shortening-service.git',
-				isTargetBlank: true,
-			},
-			{
-				name: translations('roadmap.task_tracker.title'),
-				href: 'https://github.com/cvelasquezr8/task-tracker-cli.git',
-				isTargetBlank: true,
-			},
-		],
+		elements: roadmapLinks,
 	},
 	{
 		title: translations('footer.certificate.title'),
-		elements: [
-			{
-				name: translations(
-					'footer.certificates.hacker_rank_node_intermediate',
-				),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/nodejs-intermediate-certificate.pdf`,
-			},
-			{
-				name: translations('footer.certificates.devtalles.nestjs'),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/nestjs.pdf`,
-			},
-			{
-				name: translations(
-					'footer.certificates.devtalles.node_clean_architecture',
-				),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
-			},
-			{
-				name: translations(
-					'footer.certificates.hacker_rank_node_basic',
-				),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
-			},
-			{
-				name: translations('footer.certificates.udemy_sql_advance'),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
-			},
-			{
-				name: translations('footer.certificates.udemy_sql_basic'),
-				href: '#',
-				pdfUrl: `${pathPage}certificates/sql-basic.pdf`,
-			},
-		],
+		elements: certificationsLinks,
 	},
 ];
+
 ---
 
 <!-- Footer -->
@@ -173,7 +72,7 @@ const navigationLinks: NavigationSection[] = [
 
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
 			{
-				navigationLinks.map((section) => (
+				navigation.map((section) => (
 					<div>
 						<h3 class="text-blue-500">{section.title}</h3>
 						<ul class="space-y-2">

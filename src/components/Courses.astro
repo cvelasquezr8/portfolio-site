@@ -1,86 +1,14 @@
 ---
+import { getCertificationsLinks } from '../constants';
 import {languagesList} from '../i18n/ui';
 import {useTranslations} from '../i18n/utils';
+import type { INavigationLink } from '../types';
 import PDFViewer from './PDFViewer.astro';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
-
-interface Course {
-  title: string;
-  academy: string;
-  icon: {
-    image?: string;
-    alt?: string;
-  };
-  description: string;
-  tags: string[];
-  pdfUrl?: string;
-}
-
-const courses: Course[] = [
-  {
-    title: translations('certificate.cloud_native_academy.devsecops.title'),
-    academy: 'Cloud Native Academy',
-    description: translations(
-      'certificate.cloud_native_academy.devsecops.description',
-    ),
-    icon: {image: 'github-actions.svg', alt: 'Github Actions CI/CD'},
-    tags: ['2026', 'CI/CD', 'Github Actions'],
-    pdfUrl: `${pathPage}certificates/devsecops-github-actions.pdf`,
-  },
-  {
-    title: translations('certificate.hacker_rank_node_intermediate.title'),
-    academy: 'HackerRank',
-    description: translations(
-      'certificate.hacker_rank_node_intermediate.description',
-    ),
-    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
-    tags: ['2025', 'NodeJs', 'Middleware', 'Rest API'],
-    pdfUrl: `${pathPage}certificates/nodejs-intermediate-certificate.pdf`,
-  },
-  {
-    title: translations('certificate.devtalles.nestjs.title'),
-    academy: 'DevTalles',
-    icon: {image: 'nestjs.svg', alt: 'NestJs'},
-    description: translations('certificate.devtalles.nestjs.description'),
-    tags: [
-      '2025',
-      'NestJs',
-      'Rest API',
-      'JWT',
-      'TypeOrm',
-      'PostgreSQL',
-      'WebSockets',
-    ],
-    pdfUrl: `${pathPage}certificates/nestjs.pdf`,
-  },
-  {
-    title: translations('certificate.devtalles.title'),
-    academy: 'DevTalles',
-    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
-    description: translations('certificate.devtalles.description'),
-    tags: ['2024', 'NodeJs', 'Rest API', 'Clean Architecture'],
-    pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
-  },
-  {
-    title: translations('certificate.hacker_rank_node_basic.title'),
-    academy: 'HackerRank',
-    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
-    description: translations('certificate.hacker_rank_node_basic.description'),
-    tags: ['2024', 'NodeJs'],
-    pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
-  },
-  {
-    title: translations('certificate.udemy_sql_advance.title'),
-    academy: 'Udemy',
-    icon: {image: 'sql-server.svg', alt: 'SQL Server'},
-    description: translations('certificate.udemy_sql_advance.description'),
-    tags: ['2021', 'SQL Server'],
-    pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
-  },
-];
+const courses: INavigationLink[] = getCertificationsLinks(translations, pathPage);
 ---
 
 <section id="courses" class="py-20 px-4 section-fade">
@@ -90,7 +18,6 @@ const courses: Course[] = [
         {translations('certificate.subtitle')}
       </span>
       {translations('certificate.title')}
-      <span class="inline-block ml-2">🎓</span>
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -103,16 +30,16 @@ const courses: Course[] = [
                 <p class="text-accent-color text-sm">{course.academy}</p>
               </div>
               <img
-                style="width: 40px;"
-                src={`${pathPage}images/${course.icon.image}`}
-                alt={course.icon.alt}
+                style="width: 40px; height: 40px; object-fit: contain;"
+                src={`${pathPage}images/${course.icon?.image}`}
+                alt={course.icon?.alt}
                 class="tech-icon"
                 loading="lazy"
               />
             </div>
             <p class="text-sm text-text-color/80 mb-4">{course.description}</p>
             <div class="flex flex-wrap gap-2 mb-4">
-              {course.tags.map((tag) => (
+              {course?.tags && course?.tags.map((tag) => (
                 <span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
                   {tag}
                 </span>

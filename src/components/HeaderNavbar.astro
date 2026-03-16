@@ -1,43 +1,15 @@
 ---
 import { languagesList } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import { getNavigationLinks, getLanguages } from '../constants';
+import type { ILanguage, INavigationLink } from '../types';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
 
-const languages = [
-	{ code: 'en', label: 'English', flag: `${pathPage}images/flag-usa.png` },
-	{ code: 'es', label: 'Español', flag: `${pathPage}images/flag-spain.png` },
-];
-
-interface NavigationLink {
-	name: string;
-	href: string;
-}
-
-const navigationLinks: NavigationLink[] = [
-	{
-		name: translations('nav.home'),
-		href: '#',
-	},
-	{
-		name: translations('nav.skills'),
-		href: '#technologies',
-	},
-	{
-		name: translations('nav.challenges'),
-		href: '#challenges',
-	},
-	{
-		name: translations('nav.certificates'),
-		href: '#courses',
-	},
-	{
-		name: translations('nav.contact'),
-		href: '#contact',
-	},
-];
+const navigationLinks: INavigationLink[] = getNavigationLinks(translations);
+const languages: ILanguage[] = getLanguages(pathPage);
 ---
 
 <script>
