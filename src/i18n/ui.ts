@@ -30,7 +30,7 @@ export const labels = {
 			"Exploring the digital universe one line of code at a time. Building stellar applications that push the boundaries of what's possible.",
 		'hero.launch_mission': 'Download Mission Status',
 
-		//** Tecnical Section */
+		//** Technical Section */
 		'tech.title': 'Technical Capabilities',
 		'tech.subtitle': 'NAVIGATION SYSTEMS',
 
@@ -51,13 +51,9 @@ export const labels = {
 		'certificate.hacker_rank_node_basic.description':
 			'This is a Certificate of Accomplishment from HackerRank for Node.js (Basic), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
 		'certificate.udemy_sql_advance.title':
-			'Certificate of Accomplishment - SQL Server (Advance)',
+			'Certificate of Accomplishment - SQL Server (Advanced)',
 		'certificate.udemy_sql_advance.description':
 			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 5 total hours of the online course SQL Server: Advanced Programming 2021. The course was instructed by Mariano Puglisi.',
-		'certificate.udemy_sql_basic.title':
-			'Certificate of Accomplishment - SQL Server (Basic)',
-		'certificate.udemy_sql_basic.description':
-			'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 16 total hours of the online course SQL Server: From Beginner to Professional. The course was instructed by Mariano Puglisi.',
 		'certificate.devtalles.title':
 			'Certificate of Accomplishment - Clean Architecture',
 		'certificate.devtalles.description':
@@ -71,6 +67,8 @@ export const labels = {
 			'Certificate of Accomplishment - Node.js (Intermediate)',
 		'certificate.hacker_rank_node_intermediate.description':
 			'This is a Certificate of Accomplishment from HackerRank for Node.js (Intermediate), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
+		'certificate.cloud_native_academy.devsecops.title': 'Certificate of Accomplishment - DevSecOps Github Actions',
+		'certificate.cloud_native_academy.devsecops.description': 'This is a Certificate of Accomplishment from Cloud Native Academy, awarded to Carlos Velasquez for successfully completing the course "DevSecOps Github Actions". The course was instructed by Aldo Trucios Cornejo.',
 
 		//** Contact Section */
 		'contact.title': 'Keep in Touch',
@@ -152,7 +150,7 @@ export const labels = {
 		'index.description':
 			'Desarrollador Full Stack con experiencia especializado en tecnologías web modernas. Explora mi portafolio con proyectos innovadores y soluciones creativas.',
 		'index.keywords':
-			'desarrollador full stack, desarrollo web, ingeniero de software, portafolio, Carlos Velasquez, tema espacial, desarrollador creativo',
+			'desarrollador full stack, desarrollo web, ingeniero de software, portafolio, Carlos Velásquez, tema espacial, desarrollador creativo',
 
 		//** Navigation Bar */
 		'nav.home': 'Inicio',
@@ -182,7 +180,7 @@ export const labels = {
 		'project.view_code': 'Repositorio de GitHub',
 		'project.equasystems.title': 'Sitio Web de Equasystem',
 		'project.equasystems.description':
-			'Diseñado y desarrollado un sitio web moderno para Equa Systems, mejorando su presencia en línea y el compromiso con los clientes. Enfocado en la usabilidad, la capacidad de respuesta y un diseño elegante para mostrar sus soluciones tecnológicas de manera efectiva.',
+			'Diseño y desarrollo de un sitio web moderno para Equa Systems, mejorando su presencia en línea y el compromiso con los clientes...',
 
 		//** Certificates Section */
 		'certificate.title': 'Certificados y Cursos',
@@ -195,10 +193,6 @@ export const labels = {
 			'Certificado de Logro - SQL Server (Avanzado)',
 		'certificate.udemy_sql_advance.description':
 			'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 5 horas totales del curso en línea SQL Server: Programación Avanzada 2021. El curso fue impartido por Mariano Puglisi.',
-		'certificate.udemy_sql_basic.title':
-			'Certificado de Logro - SQL Server (Básico)',
-		'certificate.udemy_sql_basic.description':
-			'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 16 horas totales del curso en línea SQL Server: De Principiante a Profesional. El curso fue impartido por Mariano Puglisi.',
 		'certificate.devtalles.title':
 			'Certificado de Logro - Arquitectura Limpia',
 		'certificate.devtalles.description':
@@ -211,6 +205,8 @@ export const labels = {
 			'Certificado de Logro - Node.js (Intermedio)',
 		'certificate.hacker_rank_node_intermediate.description':
 			'Este es un Certificado de Logro de HackerRank para Node.js (Intermedio), otorgado a Carlos Velasquez. Confirma que ha aprobado con éxito la prueba de certificación de habilidades de HackerRank.',
+		'certificate.cloud_native_academy.devsecops.title': 'Certificado de Logro - DevSecOps Github Actions',
+		'certificate.cloud_native_academy.devsecops.description': 'Este es un Certificado de Logro de Cloud Native Academy, otorgado a Carlos Velasquez por completar con éxito el curso "DevSecOps Github Actions". El curso fue impartido por Aldo Trucios Cornejo.',
 
 		//** Contact Section */
 		'contact.title': 'Mantente en Contacto',
@@ -218,7 +214,7 @@ export const labels = {
 		'contact.form.name': 'NOMBRE (CALL SIGN)',
 		'contact.form.name_holder': 'Introduce tu nombre...',
 		'contact.form.email': 'EMAIL (FRECUENCIA DE TRANSMISIÓN)',
-		'contact.form.email_holder': 'Introduce tu email...',
+		'contact.form.email_holder': 'Ingresa tu correo electrónico...',
 		'contact.form.message': 'CONTENIDO DEL MENSAJE',
 		'contact.form.message_holder': 'Introduce tu mensaje...',
 		'contact.form.send_message': 'Enviar Mensaje',
@@ -244,7 +240,7 @@ export const labels = {
 			'¡El mensaje no puede estar vacío! 📝',
 		'contact.email.validation.form':
 			'No se encontraron elementos del formulario. Por favor, actualiza la página.',
-		'contact.email.validation.error': '¡Por favor, verifica tu entrada! 🚨',
+		'contact.email.validation.error': '¡Por favor, verifica los datos ingresados! 🚨',
 
 		//** Footer Section */
 		'footer.rights': 'Todos los derechos reservados.',

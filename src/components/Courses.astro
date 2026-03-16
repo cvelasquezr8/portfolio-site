@@ -1,6 +1,6 @@
 ---
-import { languagesList } from '../i18n/ui';
-import { useTranslations } from '../i18n/utils';
+import {languagesList} from '../i18n/ui';
+import {useTranslations} from '../i18n/utils';
 import PDFViewer from './PDFViewer.astro';
 
 const pathPage = (globalThis as any).BASE_URL;
@@ -8,160 +8,149 @@ const currentLang = Astro.currentLocale || 'en';
 const translations = useTranslations(currentLang as keyof typeof languagesList);
 
 interface Course {
-	title: string;
-	academy: string;
-	icon: {
-		image?: string;
-		alt?: string;
-	};
-	description: string;
-	tags: string[];
-	pdfUrl?: string;
+  title: string;
+  academy: string;
+  icon: {
+    image?: string;
+    alt?: string;
+  };
+  description: string;
+  tags: string[];
+  pdfUrl?: string;
 }
 
 const courses: Course[] = [
-	{
-		title: translations('certificate.hacker_rank_node_intermediate.title'),
-		academy: 'HackerRank',
-		description: translations(
-			'certificate.hacker_rank_node_intermediate.description',
-		),
-		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
-		tags: ['2025', 'NodeJs', 'Middleware', 'Rest API'],
-		pdfUrl: `${pathPage}certificates/nodejs-intermediate-certificate.pdf`,
-	},
-	{
-		title: translations('certificate.devtalles.nestjs.title'),
-		academy: 'DevTalles',
-		icon: { image: 'nestjs.svg', alt: 'NestJs' },
-		description: translations('certificate.devtalles.nestjs.description'),
-		tags: [
-			'2025',
-			'NestJs',
-			'Rest API',
-			'JWT',
-			'TypeOrm',
-			'PostgreSQL',
-			'WebSockets',
-		],
-		pdfUrl: `${pathPage}certificates/nestjs.pdf`,
-	},
-	{
-		title: translations('certificate.devtalles.title'),
-		academy: 'DevTalles',
-		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
-		description: translations('certificate.devtalles.description'),
-		tags: ['2024', 'NodeJs', 'Rest API', 'Clean Architecture'],
-		pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
-	},
-	{
-		title: translations('certificate.hacker_rank_node_basic.title'),
-		academy: 'HackerRank',
-		icon: { image: 'nodedotjs.svg', alt: 'NodeJs' },
-		description: translations(
-			'certificate.hacker_rank_node_basic.description',
-		),
-		tags: ['2024', 'NodeJs'],
-		pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
-	},
-	{
-		title: translations('certificate.udemy_sql_advance.title'),
-		academy: 'Udemy',
-		icon: { image: 'sql-server.svg', alt: 'SQL Server' },
-		description: translations('certificate.udemy_sql_advance.description'),
-		tags: ['2021', 'SQL Server'],
-		pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
-	},
-	{
-		title: translations('certificate.udemy_sql_basic.title'),
-		academy: 'Udemy',
-		icon: { image: 'sql-server.svg', alt: 'SQL Server' },
-		description: translations('certificate.udemy_sql_basic.description'),
-		tags: ['2020', 'SQL Server'],
-		pdfUrl: `${pathPage}certificates/sql-basic.pdf`,
-	},
+  {
+    title: translations('certificate.cloud_native_academy.devsecops.title'),
+    academy: 'Cloud Native Academy',
+    description: translations(
+      'certificate.cloud_native_academy.devsecops.description',
+    ),
+    icon: {image: 'github-actions.svg', alt: 'Github Actions CI/CD'},
+    tags: ['2026', 'CI/CD', 'Github Actions'],
+    pdfUrl: `${pathPage}certificates/devsecops-github-actions.pdf`,
+  },
+  {
+    title: translations('certificate.hacker_rank_node_intermediate.title'),
+    academy: 'HackerRank',
+    description: translations(
+      'certificate.hacker_rank_node_intermediate.description',
+    ),
+    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
+    tags: ['2025', 'NodeJs', 'Middleware', 'Rest API'],
+    pdfUrl: `${pathPage}certificates/nodejs-intermediate-certificate.pdf`,
+  },
+  {
+    title: translations('certificate.devtalles.nestjs.title'),
+    academy: 'DevTalles',
+    icon: {image: 'nestjs.svg', alt: 'NestJs'},
+    description: translations('certificate.devtalles.nestjs.description'),
+    tags: [
+      '2025',
+      'NestJs',
+      'Rest API',
+      'JWT',
+      'TypeOrm',
+      'PostgreSQL',
+      'WebSockets',
+    ],
+    pdfUrl: `${pathPage}certificates/nestjs.pdf`,
+  },
+  {
+    title: translations('certificate.devtalles.title'),
+    academy: 'DevTalles',
+    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
+    description: translations('certificate.devtalles.description'),
+    tags: ['2024', 'NodeJs', 'Rest API', 'Clean Architecture'],
+    pdfUrl: `${pathPage}certificates/node-clean-architecture.pdf`,
+  },
+  {
+    title: translations('certificate.hacker_rank_node_basic.title'),
+    academy: 'HackerRank',
+    icon: {image: 'nodedotjs.svg', alt: 'NodeJs'},
+    description: translations('certificate.hacker_rank_node_basic.description'),
+    tags: ['2024', 'NodeJs'],
+    pdfUrl: `${pathPage}certificates/hackerrank-nodejs.pdf`,
+  },
+  {
+    title: translations('certificate.udemy_sql_advance.title'),
+    academy: 'Udemy',
+    icon: {image: 'sql-server.svg', alt: 'SQL Server'},
+    description: translations('certificate.udemy_sql_advance.description'),
+    tags: ['2021', 'SQL Server'],
+    pdfUrl: `${pathPage}certificates/sql-advanced.pdf`,
+  },
 ];
 ---
 
 <section id="courses" class="py-20 px-4 section-fade">
-	<div class="container mx-auto">
-		<h2 class="text-4xl font-bold mb-12 text-center gradient-text">
-			<span class="text-xl block mb-4 text-blue-500">
-				{translations('certificate.subtitle')}
-			</span>
-			{translations('certificate.title')}
-			<span class="inline-block ml-2">🎓</span>
-		</h2>
+  <div class="container mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center gradient-text">
+      <span class="text-xl block mb-4 text-blue-500">
+        {translations('certificate.subtitle')}
+      </span>
+      {translations('certificate.title')}
+      <span class="inline-block ml-2">🎓</span>
+    </h2>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-			{
-				courses.map((course) => (
-					<div class="skill-card rounded-xl p-6 float">
-						<div class="flex items-start justify-between mb-4">
-							<div class="flex-1">
-								<h3 class="text-xl text-blue-500">
-									{course.title}
-								</h3>
-								<p class="text-accent-color text-sm">
-									{course.academy}
-								</p>
-							</div>
-							<img
-								style="width: 40px;"
-								src={`${pathPage}images/${course.icon.image}`}
-								alt={course.icon.alt}
-								class="tech-icon"
-								loading="lazy"
-							/>
-						</div>
-						<p class="text-sm text-text-color/80 mb-4">
-							{course.description}
-						</p>
-						<div class="flex flex-wrap gap-2 mb-4">
-							{course.tags.map((tag) => (
-								<span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
-									{tag}
-								</span>
-							))}
-						</div>
-						<div class="flex gap-4">
-							<button
-								type="button"
-								data-pdf-url={course.pdfUrl}
-								class="view-certificate-button inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
-							>
-								<span>
-									{translations(
-										'certificate.view_certificate',
-									)}
-								</span>
-								<img
-									style="width: 30px;"
-									src={`${pathPage}images/devbox.svg`}
-									alt="code"
-									class="tech-icon"
-									loading="lazy"
-								/>
-							</button>
-						</div>
-					</div>
-				))
-			}
-		</div>
-	</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        courses.map((course) => (
+          <div class="skill-card rounded-xl p-6 float">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex-1">
+                <h3 class="text-xl text-blue-500">{course.title}</h3>
+                <p class="text-accent-color text-sm">{course.academy}</p>
+              </div>
+              <img
+                style="width: 40px;"
+                src={`${pathPage}images/${course.icon.image}`}
+                alt={course.icon.alt}
+                class="tech-icon"
+                loading="lazy"
+              />
+            </div>
+            <p class="text-sm text-text-color/80 mb-4">{course.description}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {course.tags.map((tag) => (
+                <span class="px-2 py-1 text-sm rounded bg-blue-500/10 border border-blue-500/20">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="flex gap-4">
+              <button
+                type="button"
+                data-pdf-url={course.pdfUrl}
+                class="view-certificate-button inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow">
+                <span>{translations('certificate.view_certificate')}</span>
+                <img
+                  style="width: 30px;"
+                  src={`${pathPage}images/devbox.svg`}
+                  alt="code"
+                  class="tech-icon"
+                  loading="lazy"
+                />
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>
 
 <PDFViewer pdfUrl="" />
 
 <script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const buttons = document.querySelectorAll('.view-certificate-button');
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.view-certificate-button');
 
-		buttons.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				const pdfUrl = btn.getAttribute('data-pdf-url');
-				if (pdfUrl) (window as any).showPDFViewer(pdfUrl);
-			});
-		});
-	});
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const pdfUrl = btn.getAttribute('data-pdf-url');
+        if (pdfUrl) (window as any).showPDFViewer(pdfUrl);
+      });
+    });
+  });
 </script>
