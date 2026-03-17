@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(woff2_compress --version)",
+      "Bash(node -e \"require\\(''ttf2woff2''\\)\")",
+      "Bash(python -c \":*)",
+      "Bash(npm run:*)",
+      "Bash(wc -l /c/Users/Developer/Documents/Carlos/portfolio-site/dist/_astro/*.css)",
+      "Bash(npx lighthouse:*)",
+      "Bash(node -e \":*)",
+      "Bash(node -e \"const r = JSON.parse\\(require\\(''fs''\\).readFileSync\\(''./lighthouse-report.json'',''utf8''\\)\\); console.log\\(JSON.stringify\\(Object.fromEntries\\(Object.entries\\(r.categories\\).map\\(\\([k,v]\\)=>[k,Math.round\\(v.score*100\\)]\\)\\)\\)\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4322/en/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4322/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4322/index.html)",
+      "Bash(pkill -f 'astro preview')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:4331/portfolio-site/en/\")",
+      "Bash(grep -r images/ /c/Users/Developer/Documents/Carlos/portfolio-site/src --include=*.astro --include=*.ts --include=*.tsx --include=*.js --include=*.jsx --include=*.css)",
+      "Bash(grep -v \"^images$\\\\|^fonts$\\\\|^certificates$\")",
+      "Bash(for img:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $img ===\")",
+      "Bash(grep -r \"$img\" src/)",
+      "Bash(done)",
+      "Bash(find /c/Users/Developer/Documents/Carlos/portfolio-site/public/images -name \"$img\" -type f)"
+    ]
+  }
+}

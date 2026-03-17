@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import fonttools; print\\(''''ok''''\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python -c \"from fontTools.ttLib import TTFont; print\\(''fonttools ok''\\)\")"
+    ]
+  }
+}

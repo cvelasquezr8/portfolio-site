@@ -180,69 +180,78 @@ const validationError = translations('contact.email.validation.error');
     message: string;
   }
 
-  import Swal from 'sweetalert2';
-
   let idempotencyKey = crypto.randomUUID();
 
   const regenerateKey = () => {
     idempotencyKey = crypto.randomUUID();
   };
 
-  const customSwal = Swal.mixin({
-    background: '#1a1b25',
-    color: '#ffffff',
-    confirmButtonColor: '#4361EE',
-    buttonsStyling: true,
-    customClass: {
-      popup: 'custom-swal-popup',
-      confirmButton: 'custom-swal-button',
-    },
-    timerProgressBar: false,
-    timer: 2000,
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    showConfirmButton: false,
-    didOpen: () => {
-      const swalContainer = Swal.getPopup();
-      if (swalContainer) {
-        const gradientBar = document.createElement('div');
-        gradientBar.style.position = 'absolute';
-        gradientBar.style.top = '0';
-        gradientBar.style.left = '0';
-        gradientBar.style.width = '100%';
-        gradientBar.style.height = '4px';
-        gradientBar.style.background =
-          'linear-gradient(to rigth, #2563eb, #7c3aed)';
-        gradientBar.style.borderTopLeftRadius = '10px';
-        gradientBar.style.borderTopRightRadius = '10px';
+  // Lazy-loaded Swal instances — only fetched on first form submit
+  let _Swal: any = null;
+  let _customSwal: any = null;
 
-        const progressBarContainer = document.createElement('div');
-        progressBarContainer.style.width = '100%';
-        progressBarContainer.style.height = '6px';
-        progressBarContainer.style.background = 'rgba(255, 255, 255, 0.2)';
-        progressBarContainer.style.borderRadius = '4px';
-        progressBarContainer.style.overflow = 'hidden';
-        progressBarContainer.style.marginTop = '10px';
-        progressBarContainer.style.position = 'relative';
-        progressBarContainer.style.marginBottom = '0%';
+  async function initSwal() {
+    if (_Swal) return { Swal: _Swal, customSwal: _customSwal };
 
-        const progressBar = document.createElement('div');
-        progressBar.id = 'swal-progress-bar';
-        progressBar.style.width = '0%';
-        progressBar.style.height = '100%';
-        progressBar.style.background =
-          'linear-gradient(to right, #2563eb, #7c3aed)';
-        progressBar.style.transition = 'width 1.5s';
+    const { default: Swal } = await import('sweetalert2');
+    _Swal = Swal;
+    _customSwal = Swal.mixin({
+      background: '#1a1b25',
+      color: '#ffffff',
+      confirmButtonColor: '#4361EE',
+      buttonsStyling: true,
+      customClass: {
+        popup: 'custom-swal-popup',
+        confirmButton: 'custom-swal-button',
+      },
+      timerProgressBar: false,
+      timer: 2000,
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      didOpen: () => {
+        const swalContainer = _Swal.getPopup();
+        if (swalContainer) {
+          const gradientBar = document.createElement('div');
+          gradientBar.style.position = 'absolute';
+          gradientBar.style.top = '0';
+          gradientBar.style.left = '0';
+          gradientBar.style.width = '100%';
+          gradientBar.style.height = '4px';
+          gradientBar.style.background =
+            'linear-gradient(to right, #2563eb, #7c3aed)';
+          gradientBar.style.borderTopLeftRadius = '10px';
+          gradientBar.style.borderTopRightRadius = '10px';
 
-        progressBarContainer.appendChild(progressBar);
-        swalContainer.prepend(gradientBar);
-        swalContainer.appendChild(progressBarContainer);
-        setTimeout(() => {
-          progressBar.style.width = '100%';
-        }, 100);
-      }
-    },
-  });
+          const progressBarContainer = document.createElement('div');
+          progressBarContainer.style.width = '100%';
+          progressBarContainer.style.height = '6px';
+          progressBarContainer.style.background = 'rgba(255, 255, 255, 0.2)';
+          progressBarContainer.style.borderRadius = '4px';
+          progressBarContainer.style.overflow = 'hidden';
+          progressBarContainer.style.marginTop = '10px';
+          progressBarContainer.style.position = 'relative';
+          progressBarContainer.style.marginBottom = '0%';
+
+          const progressBar = document.createElement('div');
+          progressBar.id = 'swal-progress-bar';
+          progressBar.style.width = '0%';
+          progressBar.style.height = '100%';
+          progressBar.style.background =
+            'linear-gradient(to right, #2563eb, #7c3aed)';
+          progressBar.style.transition = 'width 1.5s';
+
+          progressBarContainer.appendChild(progressBar);
+          swalContainer.prepend(gradientBar);
+          swalContainer.appendChild(progressBarContainer);
+          setTimeout(() => {
+            progressBar.style.width = '100%';
+          }, 100);
+        }
+      },
+    });
+    return { Swal: _Swal, customSwal: _customSwal };
+  }
 
   const titleStyle = (title: string) => {
     return `<span style="color: #4361ee !important; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px rgba(67, 97, 238, 0.3);">${title}</span>`;
@@ -257,26 +266,29 @@ const validationError = translations('contact.email.validation.error');
 			`;
   };
 
-  const successMessage = () => {
-    customSwal.fire({
+  const successMessage = async () => {
+    await initSwal();
+    _customSwal.fire({
       icon: 'success',
       title: titleStyle((window as any).successMessageTitle),
       html: messageStyle((window as any).successMessageDescription),
     });
   };
 
-  const errorMessage = (
+  const errorMessage = async (
     message: string = (window as any).errorOptionalMessage,
   ) => {
-    customSwal.fire({
+    await initSwal();
+    _customSwal.fire({
       icon: 'error',
       title: titleStyle((window as any).errorTitle),
       html: messageStyle(message),
     });
   };
 
-  const cooldownMessage = (remainingTime: number) => {
-    customSwal.fire({
+  const cooldownMessage = async (remainingTime: number) => {
+    await initSwal();
+    _customSwal.fire({
       icon: 'warning',
       title: titleStyle((window as any).waitTitle),
       html: messageStyle(
@@ -294,22 +306,24 @@ const validationError = translations('contact.email.validation.error');
     }
   };
 
-  const connectionErrorMessage = () => {
-    customSwal.fire({
+  const connectionErrorMessage = async () => {
+    await initSwal();
+    _customSwal.fire({
       icon: 'error',
       title: titleStyle((window as any).connectionTitle),
       html: messageStyle((window as any).connectionDescription),
     });
   };
 
-  const sendingMessage = () => {
-    customSwal.fire({
+  const sendingMessage = async () => {
+    await initSwal();
+    _customSwal.fire({
       title: titleStyle((window as any).sendingTitle),
       html: messageStyle((window as any).sendingDescription),
       allowEscapeKey: false,
       allowOutsideClick: false,
       didOpen: () => {
-        customSwal.showLoading();
+        _customSwal.showLoading();
       },
     });
   };
@@ -416,7 +430,7 @@ const validationError = translations('contact.email.validation.error');
           body: JSON.stringify(formData),
         });
 
-        Swal.close();
+        _Swal.close();
 
         const data: ApiResponse = await response.json();
         if (data.success) {
@@ -428,7 +442,7 @@ const validationError = translations('contact.email.validation.error');
           errorMessage(data.message);
         }
       } catch (error) {
-        Swal.close();
+        _Swal.close();
         connectionErrorMessage();
       }
 

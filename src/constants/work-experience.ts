@@ -24,7 +24,7 @@ export const getWorkExperience = (translations: ReturnType<typeof useTranslation
     ],
     summary: translations('experience.equasystems.summary'),
     icon: {
-      image: 'equasystems.png',
+      image: 'equasystems.webp',
       alt: 'EquaSy,stems Logo'
     },
     href: '#experience'
@@ -38,7 +38,7 @@ export const getWorkExperience = (translations: ReturnType<typeof useTranslation
     techs: ['PHP', '.NET', 'SQL Server', 'C#', 'Visual Basic .NET', 'Git', 'Github', 'ERP', 'Call Center', 'Security'],
     summary: translations('experience.softdaniv.summary'),
     icon: {
-      image: 'softdaniv.png',
+      image: 'softdaniv.webp',
       alt: 'Softdaniv Logo'
     },
     href: '#experience'

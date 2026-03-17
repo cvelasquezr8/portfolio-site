@@ -46,6 +46,12 @@ const schemaJSON = JSON.stringify({
 		<link rel="icon" type="image/x-icon" href={`${pathPage}images/website.ico`} />
 		<link rel="apple-touch-icon" href={`${pathPage}images/website.ico`} />
 
+		<!-- Preload LCP hero image -->
+		<link rel="preload" as="image" href={`${pathPage}images/carlos-velasquez.jpg`} />
+
+		<!-- Preload Roboto 400 (body text critical for FCP) — Merriweather excluded to avoid LCP bandwidth competition -->
+		<link rel="preload" as="font" type="font/woff2" crossorigin href={`${pathPage}fonts/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.woff2`} />
+
 		<!-- Canonical & Hreflang -->
 		<link rel="canonical" href={canonicalURL} />
 		<link rel="alternate" hreflang="en" href={enURL} />
@@ -78,24 +84,34 @@ const schemaJSON = JSON.stringify({
 		<meta property="twitter:image:alt" content="Carlos Velasquez - Full Stack Developer" />
 
 		<!-- Schema.org JSON-LD -->
-		<script type="application/ld+json" set:html={schemaJSON} />
+		<script type="application/ld+json" is:inline set:html={schemaJSON} />
 
-		<!-- Google tag (gtag.js) -->
-		<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-SJ8RXQ8BMG"></script>
+		<!-- Google Analytics — loaded during browser idle time to avoid blocking -->
 		<script is:inline>
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){window.dataLayer.push(arguments);}
 		  gtag('js', new Date());
 		  gtag('config', 'G-SJ8RXQ8BMG');
+		  (window.requestIdleCallback || function(cb){ setTimeout(cb, 2000); })(function() {
+		    var s = document.createElement('script');
+		    s.async = true;
+		    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-SJ8RXQ8BMG';
+		    document.head.appendChild(s);
+		  });
 		</script>
 
-		<!-- Fonts -->
+		<!-- Fonts — async load to avoid render blocking (single tag pattern) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
+			rel="preload"
 			href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
-			rel="stylesheet"
+			as="style"
+			onload="this.onload=null;this.rel='stylesheet'"
 		/>
+		<noscript>
+			<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet" />
+		</noscript>
 
 		<!-- Theme Script -->
 		<script>
@@ -106,24 +122,9 @@ const schemaJSON = JSON.stringify({
 
 			function applyTheme(theme: any) {
 				const root = document.documentElement;
-
 				root.classList.remove(THEMES.DARK);
 				root.classList.add(theme);
-
-				if (theme === THEMES.DARK) {
-					root.style.setProperty('--primary-color', '#3245FF');
-					root.style.setProperty('--secondary-color', '#BC52EE');
-					root.style.setProperty('--bg-color', '#0A0B14');
-					root.style.setProperty('--text-color', '#E5E7EB');
-					root.style.setProperty('--card-bg', '#1A1B25');
-					root.style.setProperty('--border-color', 'rgba(50, 69, 255, 0.2)');
-					root.style.setProperty('--gradient-start', '#3245FF');
-					root.style.setProperty('--gradient-end', '#BC52EE');
-					root.style.setProperty('--accent-color', '#9CA3AF');
-					root.style.setProperty('--star-color', '#FFFFFF');
-					root.style.setProperty('--card-shadow', '0 4px 20px rgba(50, 69, 255, 0.2)');
-					root.style.setProperty('--hover-bg', 'rgba(50, 69, 255, 0.1)');
-				}
+				// CSS variables are already defined in :root in the stylesheet — no setProperty needed
 			}
 
 			// Initialize theme
@@ -135,16 +136,18 @@ const schemaJSON = JSON.stringify({
 				applyTheme(theme);
 			};
 
-			// Add dynamic stars
+			// Add dynamic stars — use % units to avoid any layout reads (forced reflow prevention)
 			document.addEventListener('DOMContentLoaded', function() {
 				const starsWrapper = document.querySelector('.stars-wrapper') as any;
-				for (let i = 0; i < 20; i++) {
-					const star = document.createElement('div');
-					star.className = 'shooting-star';
-					star.style.left = Math.random() * window.innerWidth + 'px';
-					star.style.top = Math.random() * window.innerHeight + 'px';
-					star.style.animationDelay = Math.random() * 5 + 's';
-					starsWrapper.appendChild(star);
+				if (starsWrapper) {
+					const fragment = document.createDocumentFragment();
+					for (let i = 0; i < 20; i++) {
+						const star = document.createElement('div');
+						star.className = 'shooting-star';
+						star.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-delay:${Math.random() * 2}s`;
+						fragment.appendChild(star);
+					}
+					starsWrapper.appendChild(fragment);
 				}
 
 				const sections = document.querySelectorAll(".section-fade");
