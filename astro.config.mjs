@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import node from '@astrojs/node';
 
 const BACKEND_URL_PROD = process.env.BACKEND_URL_PROD ?? 'localhost:3000/email/send/';
 
@@ -59,8 +60,12 @@ export default defineConfig({
 			redirectToDefaultLocale: true,
 		}
 	},
-	output: 'static',
-	base: '/',
+	output: 'server',
+	adapter: node({ mode: 'standalone' }),
+	server: {
+		port: process.env.NODE_ENV === 'production' ? (Number(process.env.PORT) || 80) : 4321,
+		host: true,
+	},
 	vite: {
 		define: {
 			'globalThis.BASE_URL': JSON.stringify('/'),
