@@ -2,8 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const BACKEND_URL_PROD = isProduction ? process.env.BACKEND_URL_PROD : 'localhost:3000/email/send/';
+const BACKEND_URL_PROD = process.env.BACKEND_URL_PROD ?? 'localhost:3000/email/send/';
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, fileURLToPath } from 'url';
@@ -32,7 +31,7 @@ function inlineSmallCSS() {
 						/<link rel="stylesheet" href="([^"]*\/_astro\/[^"]*\.css)">/g,
 						(match, href) => {
 							// Strip base path prefix to get relative path inside dist
-							const rel = href.replace(/^\/[^/]+\//, '');
+							const rel = href.replace(/^\//, '');
 							const cssPath = resolve(distRoot, rel);
 							try {
 								const css = readFileSync(cssPath, 'utf8');
@@ -61,12 +60,10 @@ export default defineConfig({
 		}
 	},
 	output: 'static',
-	base: isProduction ? "/portfolio-site/" : "/",
+	base: '/',
 	vite: {
 		define: {
-			'globalThis.BASE_URL': JSON.stringify(
-				isProduction ? '/portfolio-site/' : '/'
-			),
+			'globalThis.BASE_URL': JSON.stringify('/'),
 			'globalThis.BACKEND_URL': JSON.stringify(BACKEND_URL_PROD),
 		},
 		plugins: [],
