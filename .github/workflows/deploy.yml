@@ -38,3 +38,17 @@ jobs:
         run: npm run build
         env:
           BACKEND_URL_PROD: ${{ secrets.BACKEND_URL_PROD }}
+
+  deploy:
+    name: Deploy to Seenode
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Seenode Deployment
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.SEENODE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"gitCommitSha": "${{ github.sha }}"}' \
+            "https://api.seenode.com/v1/applications/${{ secrets.SEENODE_APPLICATION_ID }}/deployments"
