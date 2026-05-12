@@ -1,0 +1,67 @@
+[
+	{
+		"id": "frontend",
+		"order": 1,
+		"size": "xl",
+		"eyebrow": { "en": "Client Layer", "es": "Capa Cliente" },
+		"title": { "en": "Frontend", "es": "Frontend" },
+		"elements": [
+			{ "title": "React", "image": "react.svg", "color": "#61DAFB", "primary": true },
+			{ "title": "Next.js", "image": "nextdotjs.svg", "color": "#FFFFFF", "primary": true },
+			{ "title": "Astro", "image": "astro.svg", "color": "#FF5D01" },
+			{ "title": "TypeScript", "image": "typescript.svg", "color": "#3178C6", "primary": true },
+			{ "title": "Tailwind CSS", "image": "tailwindcss.svg", "color": "#38BDF8" },
+			{ "title": "shadcn/ui", "image": "shadcnui.svg", "color": "#E5E7EB" },
+			{ "title": "Ant Design", "image": "antdesign.svg", "color": "#1677FF" },
+			{ "title": "Bootstrap", "image": "bootstrap.svg", "color": "#7952B3" }
+		]
+	},
+	{
+		"id": "backend",
+		"order": 2,
+		"size": "md",
+		"eyebrow": { "en": "Server Layer", "es": "Capa Servidor" },
+		"title": { "en": "Backend", "es": "Backend" },
+		"elements": [
+			{ "title": "Node.js", "image": "nodedotjs.svg", "color": "#5FA04E" },
+			{ "title": "NestJS", "image": "nestjs.svg", "color": "#E0234E" },
+			{ "title": "GraphQL", "image": "graphql.svg", "color": "#E10098" }
+		]
+	},
+	{
+		"id": "database",
+		"order": 3,
+		"size": "md",
+		"eyebrow": { "en": "Data Layer", "es": "Capa de Datos" },
+		"title": { "en": "Database", "es": "Base de Datos" },
+		"elements": [
+			{ "title": "PostgreSQL", "image": "postgresql.svg", "color": "#4169E1", "primary": true },
+			{ "title": "MySQL", "image": "mysql.svg", "color": "#4479A1", "primary": true },
+			{ "title": "MongoDB", "image": "mongodb.svg", "color": "#47A248" },
+			{ "title": "Redis", "image": "redis.svg", "color": "#DC382D" }
+		]
+	},
+	{
+		"id": "aws-cloud",
+		"order": 4,
+		"size": "lg",
+		"eyebrow": { "en": "Cloud Infrastructure", "es": "Infraestructura Cloud" },
+		"title": { "en": "AWS Cloud Services", "es": "AWS Cloud Services" },
+		"elements": [
+			{ "title": "EC2", "glyph": "server", "color": "#FF9900" },
+			{ "title": "Load Balancer", "glyph": "balancer", "color": "#FF9900" },
+			{ "title": "RDS", "glyph": "database", "color": "#FF9900" },
+			{ "title": "S3", "glyph": "storage", "color": "#FF9900" }
+		]
+	},
+	{
+		"id": "cicd",
+		"order": 5,
+		"size": "sm",
+		"eyebrow": { "en": "CI/CD · DevSecOps", "es": "CI/CD · DevSecOps" },
+		"title": { "en": "GitHub Actions", "es": "GitHub Actions" },
+		"elements": [
+			{ "title": "Workflows", "image": "github-actions.svg", "color": "#2088FF" }
+		]
+	}
+]

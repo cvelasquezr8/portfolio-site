@@ -1,0 +1,193 @@
+---
+import { getCollection } from 'astro:content';
+import { languagesList } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProjectCard from './ProjectCard.astro';
+import ProjectModal from './ProjectModal.astro';
+
+const currentLang = (Astro.currentLocale ?? 'en') as keyof typeof languagesList;
+const t = useTranslations(currentLang);
+
+const all = await getCollection('projects');
+const projects = all
+	.filter((p) => p.data.featured)
+	.sort((a, b) => a.data.order - b.data.order);
+
+const modalLabels = {
+	close: t('project.modal.close'),
+	stack: t('project.modal.stack'),
+	viewLive: t('project.modal.view_live'),
+	viewCode: t('project.modal.view_code'),
+};
+---
+
+<section id="projects" class="projects-section section-fade">
+	<div class="container mx-auto px-4 py-20">
+		<SectionHeader eyebrow={t('project.subtitle')} title={t('project.title')} />
+
+		<div class="projects-section__grid">
+			{
+				projects.map((p) => (
+					<ProjectCard
+						id={p.id}
+						title={p.data.title[currentLang]}
+						summary={p.data.summary[currentLang]}
+						cover={p.data.images[0]}
+						stack={p.data.stack}
+						openLabel={t('project.view_project')}
+					/>
+				))
+			}
+		</div>
+
+		{
+			projects.map((p) => (
+				<ProjectModal
+					id={p.id}
+					title={p.data.title[currentLang]}
+					description={p.data.description[currentLang]}
+					images={p.data.images}
+					stack={p.data.stack}
+					githubUrl={p.data.githubUrl}
+					liveUrl={p.data.liveUrl}
+					labels={modalLabels}
+				/>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.projects-section {
+		position: relative;
+	}
+
+	.projects-section__grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	@media (min-width: 1024px) {
+		.projects-section__grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>
+
+<script>
+	type Cleanup = () => void;
+	let modalCleanup: Cleanup | null = null;
+	let lastFocused: HTMLElement | null = null;
+
+	const FOCUSABLE = [
+		'a[href]',
+		'button:not([disabled])',
+		'textarea:not([disabled])',
+		'input:not([disabled])',
+		'select:not([disabled])',
+		'[tabindex]:not([tabindex="-1"])',
+	].join(',');
+
+	function trapFocus(modal: HTMLDialogElement): Cleanup {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key !== 'Tab') return;
+			const items = modal.querySelectorAll<HTMLElement>(FOCUSABLE);
+			if (items.length === 0) return;
+			const first = items[0];
+			const last = items[items.length - 1];
+			const active = document.activeElement as HTMLElement | null;
+
+			if (e.shiftKey && active === first) {
+				e.preventDefault();
+				last.focus();
+			} else if (!e.shiftKey && active === last) {
+				e.preventDefault();
+				first.focus();
+			}
+		};
+		modal.addEventListener('keydown', onKey);
+		return () => modal.removeEventListener('keydown', onKey);
+	}
+
+	function openModal(id: string) {
+		const modal = document.getElementById(`modal-${id}`) as HTMLDialogElement | null;
+		if (!modal) return;
+		lastFocused = document.activeElement as HTMLElement;
+		modal.showModal();
+		document.documentElement.style.overflow = 'hidden';
+
+		// Move focus to the close button after the open transition starts
+		requestAnimationFrame(() => {
+			const closeBtn = modal.querySelector<HTMLButtonElement>('[data-project-close]');
+			closeBtn?.focus();
+		});
+
+		modalCleanup?.();
+		modalCleanup = trapFocus(modal);
+	}
+
+	function closeModal(modal: HTMLDialogElement) {
+		modal.close();
+		document.documentElement.style.overflow = '';
+		modalCleanup?.();
+		modalCleanup = null;
+		lastFocused?.focus();
+		lastFocused = null;
+	}
+
+	// Open triggers
+	document.querySelectorAll<HTMLElement>('[data-project-open]').forEach((trigger) => {
+		const id = trigger.getAttribute('data-project-open');
+		if (!id) return;
+		trigger.addEventListener('click', () => openModal(id));
+	});
+
+	// Close triggers + backdrop click
+	document.querySelectorAll<HTMLDialogElement>('[data-project-modal]').forEach((modal) => {
+		modal.querySelectorAll<HTMLElement>('[data-project-close]').forEach((btn) => {
+			btn.addEventListener('click', () => closeModal(modal));
+		});
+		// Close when clicking outside the panel (on backdrop)
+		modal.addEventListener('click', (e) => {
+			const panel = modal.querySelector('.project-modal__panel');
+			if (panel && !panel.contains(e.target as Node)) {
+				closeModal(modal);
+			}
+		});
+		// Native ESC support: <dialog> fires `cancel` first, then `close`
+		modal.addEventListener('cancel', (e) => {
+			e.preventDefault();
+			closeModal(modal);
+		});
+	});
+
+	// Magnetic action buttons — desktop + motion-OK only
+	const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+	if (motionOk && hoverable) {
+		document.querySelectorAll<HTMLElement>('[data-magnetic]').forEach((el) => {
+			let raf = 0;
+			const STRENGTH = 14;
+			const onMove = (e: PointerEvent) => {
+				const rect = el.getBoundingClientRect();
+				const x = e.clientX - rect.left - rect.width / 2;
+				const y = e.clientY - rect.top - rect.height / 2;
+				cancelAnimationFrame(raf);
+				raf = requestAnimationFrame(() => {
+					el.style.transform = `translate(${(x / rect.width) * STRENGTH}px, ${(y / rect.height) * STRENGTH}px)`;
+				});
+			};
+			const reset = () => {
+				cancelAnimationFrame(raf);
+				el.style.transform = '';
+			};
+			el.addEventListener('pointermove', onMove);
+			el.addEventListener('pointerleave', reset);
+			el.addEventListener('pointercancel', reset);
+		});
+	}
+</script>

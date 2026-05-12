@@ -1,9 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
 
 const BACKEND_URL_PROD = process.env.BACKEND_URL_PROD ?? 'localhost:3000/email/send/';
+// Canonical production origin. Override via SITE_URL env var per environment.
+const SITE_URL = process.env.SITE_URL ?? 'https://carlos-velasquez.dev';
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { join, fileURLToPath } from 'url';
@@ -52,6 +55,7 @@ function inlineSmallCSS() {
 
 // https://astro.build/config
 export default defineConfig({
+	site: SITE_URL,
 	i18n: {
 		defaultLocale: 'en',
 		locales: ['en', 'es'],
@@ -73,5 +77,14 @@ export default defineConfig({
 		},
 		plugins: [],
 	},
-	integrations: [tailwind(), inlineSmallCSS()],
+	integrations: [
+		tailwind(),
+		sitemap({
+			i18n: {
+				defaultLocale: 'en',
+				locales: { en: 'en', es: 'es' },
+			},
+		}),
+		inlineSmallCSS(),
+	],
 });

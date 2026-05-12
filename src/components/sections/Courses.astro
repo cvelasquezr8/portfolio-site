@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Card from '../ui/Card.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Button from '../ui/Button.astro';
+import { languagesList } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+import PDFViewer from '../ui/PDFViewer.astro';
+
+const pathPage = (globalThis as any).BASE_URL;
+const currentLang = (Astro.currentLocale ?? 'en') as keyof typeof languagesList;
+const translations = useTranslations(currentLang);
+const courses = (await getCollection('certifications')).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+---
+
+<section id="courses" class="py-20 px-4 section-fade">
+	<div class="container mx-auto">
+		<SectionHeader
+			eyebrow={translations('certificate.subtitle')}
+			title={translations('certificate.title')}
+		/>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+			{
+				courses.map((course) => (
+					<Card
+						description={course.data.description[currentLang]}
+						tags={course.data.tags ?? []}
+						className="h-full"
+					>
+						<img
+							slot="icon"
+							src={`${pathPage}images/${course.data.icon.image}`}
+							alt={course.data.icon.alt}
+							class="tech-icon"
+							loading="lazy"
+						/>
+
+						<div slot="title">
+							<h3 class="text-xl font-semibold text-blue-400">{course.data.title[currentLang]}</h3>
+							<p class="text-accent-color text-sm">{course.data.academy}</p>
+						</div>
+
+						<div slot="actions" class="flex gap-4">
+							<Button
+								data-pdf-url={`${pathPage}${course.data.pdfPath}`}
+								className="view-certificate-button"
+							>
+								<span>{translations('certificate.view_certificate')}</span>
+								<img
+									style="width: 22px; height: 22px;"
+									src={`${pathPage}images/devbox.svg`}
+									alt=""
+									aria-hidden="true"
+									loading="lazy"
+								/>
+							</Button>
+						</div>
+					</Card>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<PDFViewer pdfUrl="" />
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const buttons = document.querySelectorAll('.view-certificate-button');
+		buttons.forEach((btn) => {
+			btn.addEventListener('click', () => {
+				const pdfUrl = btn.getAttribute('data-pdf-url');
+				if (pdfUrl) (window as any).showPDFViewer(pdfUrl);
+			});
+		});
+	});
+</script>

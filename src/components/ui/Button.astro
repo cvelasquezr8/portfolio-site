@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type AnchorProps = HTMLAttributes<'a'>;
+type ButtonProps = HTMLAttributes<'button'>;
+
+type Props = (AnchorProps | ButtonProps) & {
+	href?: string;
+	className?: string;
+	variant?: 'default' | 'wide';
+};
+
+const { href, className = '', variant = 'default', ...rest } = Astro.props as Props;
+
+const sizeClasses = variant === 'wide' ? 'w-full px-6 py-3 glow' : 'px-4 py-2';
+
+const baseClasses = `inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white ${sizeClasses} rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-0.5 group`;
+
+const anchorRest = rest as AnchorProps;
+const buttonRest = rest as ButtonProps;
+const computedRel =
+	anchorRest.rel ?? (anchorRest.target === '_blank' ? 'noopener noreferrer' : undefined);
+---
+
+{
+	href ? (
+		<a {...anchorRest} href={href} rel={computedRel} class={`${baseClasses} ${className}`}>
+			<slot />
+		</a>
+	) : (
+		<button {...buttonRest} type={buttonRest.type ?? 'button'} class={`${baseClasses} ${className}`}>
+			<slot />
+		</button>
+	)
+}

@@ -1,0 +1,52 @@
+---
+import type { BaseCard } from '../../types';
+
+interface Props extends Omit<BaseCard, 'title' | 'icon'> {
+	title?: string;
+	icon?: string;
+	className?: string;
+	/** Inline style — useful for passing CSS custom properties (per-card accents). */
+	style?: string;
+}
+
+const { title, description, icon, tags, className = '', summary = '', style } = Astro.props;
+---
+
+<article class={`skill-card rounded-xl p-6 ${className}`} style={style}>
+	<div class="flex items-start justify-between mb-4 gap-4">
+		<div class="flex-1 min-w-0">
+			<slot name="title">
+				<h3 class="text-xl font-semibold text-blue-400">{title}</h3>
+			</slot>
+		</div>
+		<div class="card-icon-wrapper flex-shrink-0 rounded-full bg-gradient-to-br from-blue-600/90 to-purple-600/90 flex items-center justify-center shadow-md">
+			<div class="card-icon">
+				<slot name="icon">{icon}</slot>
+			</div>
+		</div>
+	</div>
+
+	{
+		description ? (
+			<p class="text-sm text-text-color/85 mb-4 leading-relaxed">{description}</p>
+		) : (
+			<slot />
+		)
+	}
+
+	{summary && <p class="text-sm text-text-color/75 mb-4 leading-relaxed">{summary}</p>}
+
+	{
+		tags && tags.length > 0 && (
+			<ul class="flex flex-wrap gap-2 mb-4 list-none p-0" aria-label="Tags">
+				{tags.map((tag) => (
+					<li class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300">
+						{tag}
+					</li>
+				))}
+			</ul>
+		)
+	}
+
+	<slot name="actions" />
+</article>

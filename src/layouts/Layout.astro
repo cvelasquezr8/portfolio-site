@@ -1,6 +1,7 @@
 ---
 import { languagesList } from '../i18n/ui';
 import { useTranslations } from '../i18n/utils';
+import Starfield from '../components/galaxy/Starfield.astro';
 
 const pathPage = (globalThis as any).BASE_URL;
 const currentLang = Astro.currentLocale || "en";
@@ -14,23 +15,55 @@ const esURL = `${siteOrigin}${pathPage}es/`;
 const ogImageURL = `${siteOrigin}${pathPage}images/carlos-velasquez.jpg`;
 const siteURL = `${siteOrigin}${pathPage}`;
 
-// Schema.org structured data
+const alternateLocale = currentLang === 'en' ? 'es_ES' : 'en_US';
+
+// Schema.org structured data — Person + WebSite, linked via @graph for richer knowledge-graph eligibility.
 const schemaJSON = JSON.stringify({
 	"@context": "https://schema.org",
-	"@type": "Person",
-	"name": "Carlos Velasquez",
-	"jobTitle": "Full Stack Developer",
-	"url": siteURL,
-	"image": ogImageURL,
-	"sameAs": [
-		"https://github.com/cvelasquezr8",
-		"https://linkedin.com/in/cvelasquezr8",
-		"https://roadmap.sh/u/cvelasquezr8",
-		"https://hackerrank.com/profile/cvelasquezr8",
-		"https://leetcode.com/u/cvelasquezr8/"
-	],
-	"description": translations('index.description'),
-	"knowsAbout": ["Node.js", "NestJS", "React", "Next.js", "PostgreSQL", "TypeScript", "Docker", "REST APIs"]
+	"@graph": [
+		{
+			"@type": "Person",
+			"@id": `${siteURL}#person`,
+			"name": "Carlos Velasquez",
+			"jobTitle": "Full Stack Developer",
+			"url": siteURL,
+			"image": {
+				"@type": "ImageObject",
+				"url": ogImageURL,
+				"width": 1200,
+				"height": 630
+			},
+			"email": "mailto:contact@carlos-velasquez.dev",
+			"sameAs": [
+				"https://github.com/cvelasquezr8",
+				"https://linkedin.com/in/cvelasquezr8",
+				"https://roadmap.sh/u/cvelasquezr8",
+				"https://hackerrank.com/profile/cvelasquezr8",
+				"https://leetcode.com/u/cvelasquezr8/"
+			],
+			"description": translations('index.description'),
+			"knowsAbout": [
+				"Node.js", "NestJS", "Express",
+				"React", "Next.js", "TypeScript",
+				"PostgreSQL", "MySQL", "MongoDB",
+				"Docker", "AWS", "REST APIs", "GraphQL",
+				"Clean Architecture", "DevSecOps"
+			],
+			"worksFor": {
+				"@type": "Organization",
+				"name": "EquaSystems S.A.S"
+			}
+		},
+		{
+			"@type": "WebSite",
+			"@id": `${siteURL}#website`,
+			"url": siteURL,
+			"name": translations('index.title'),
+			"description": translations('index.description'),
+			"inLanguage": currentLang === 'en' ? 'en-US' : 'es-ES',
+			"publisher": { "@id": `${siteURL}#person` }
+		}
+	]
 });
 ---
 
@@ -72,7 +105,10 @@ const schemaJSON = JSON.stringify({
 		<meta property="og:description" content={translations('index.description')} />
 		<meta property="og:image" content={ogImageURL} />
 		<meta property="og:image:alt" content="Carlos Velasquez - Full Stack Developer" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
+		<meta property="og:locale:alternate" content={alternateLocale} />
 		<meta property="og:site_name" content="Carlos Velasquez Portfolio" />
 
 		<!-- Twitter -->
@@ -135,45 +171,11 @@ const schemaJSON = JSON.stringify({
 				localStorage.setItem(THEME_KEY, theme);
 				applyTheme(theme);
 			};
-
-			// Add dynamic stars — use % units to avoid any layout reads (forced reflow prevention)
-			document.addEventListener('DOMContentLoaded', function() {
-				const starsWrapper = document.querySelector('.stars-wrapper') as any;
-				if (starsWrapper) {
-					const fragment = document.createDocumentFragment();
-					for (let i = 0; i < 20; i++) {
-						const star = document.createElement('div');
-						star.className = 'shooting-star';
-						star.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-delay:${Math.random() * 2}s`;
-						fragment.appendChild(star);
-					}
-					starsWrapper.appendChild(fragment);
-				}
-
-				const sections = document.querySelectorAll(".section-fade");
-				const observer = new IntersectionObserver((entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add("show");
-						} else {
-							entry.target.classList.remove("show");
-						}
-					});
-				}, { threshold: 0.2 });
-
-				sections.forEach((section) => observer.observe(section));
-			});
 		</script>
 	</head>
 	<body class="theme-transition">
-		<div class="stars-wrapper">
-			<div id="stars"></div>
-			<div id="stars2"></div>
-			<div id="stars3"></div>
-			<div id="stars4"></div>
-			<div id="stars5"></div>
-			<div class="nebula"></div>
-		</div>
+		<a href="#main" class="skip-to-content">Skip to content</a>
+		<Starfield />
 		<slot />
 	</body>
 </html>

@@ -1,0 +1,346 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from '../ui/SectionHeader.astro';
+import { languagesList } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+const currentLang = (Astro.currentLocale ?? 'en') as keyof typeof languagesList;
+const translations = useTranslations(currentLang);
+
+const pathPage = (globalThis as any).BASE_URL;
+const stack = (await getCollection('technologies'))
+	.map((entry) => entry.data)
+	.sort((a, b) => a.order - b.order);
+
+/**
+ * Minimal inline SVG glyphs for AWS sub-services. White strokes — recolored by
+ * CSS using `currentColor`, so the parent tile drives the tint on hover.
+ */
+const awsGlyphs: Record<'server' | 'balancer' | 'database' | 'storage', string> = {
+	server: `<rect x="4" y="4" width="16" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="4" y="14" width="16" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="7" r="0.9" fill="currentColor"/><circle cx="7" cy="17" r="0.9" fill="currentColor"/><path d="M11 7h6M11 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`,
+	balancer: `<circle cx="12" cy="5.5" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="5" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="19" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.5l-7 8.5M12 7.5v8.5M12 7.5l7 8.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>`,
+	database: `<ellipse cx="12" cy="5.5" rx="7" ry="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6" stroke="currentColor" stroke-width="1.6" fill="none"/>`,
+	storage: `<path d="M5 7h14l-1.2 12.2c-.07.74-.69 1.3-1.43 1.3H7.63c-.74 0-1.36-.56-1.43-1.3L5 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7l1-3h14l1 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="2" fill="currentColor"/>`,
+};
+---
+
+<section id="technologies" class="py-20 px-4 section-fade">
+	<div class="container mx-auto">
+		<SectionHeader
+			eyebrow={translations('tech.subtitle')}
+			title={translations('tech.title')}
+		/>
+
+		<div class="bento">
+			{
+				stack.map((card) => (
+					<article class={`bento__card bento__card--${card.size}`} data-card-id={card.id}>
+						<header class="bento__header">
+							<p class="bento__eyebrow">{card.eyebrow[currentLang]}</p>
+							<h3 class="bento__title">{card.title[currentLang]}</h3>
+						</header>
+
+						<ul class="bento__tiles" role="list">
+							{card.elements.map((element) => (
+								<li
+									class={`tech-tile${element.primary ? ' tech-tile--primary' : ''}`}
+									style={`--tech-color: ${element.color}`}
+								>
+									<span class="tech-tile__icon">
+										{element.image ? (
+											<img
+												src={`${pathPage}images/${element.image}`}
+												alt=""
+												aria-hidden="true"
+												loading="lazy"
+												decoding="async"
+											/>
+										) : element.glyph ? (
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 24 24"
+												aria-hidden="true"
+												set:html={awsGlyphs[element.glyph]}
+											/>
+										) : null}
+									</span>
+									<span class="tech-tile__name">{element.title}</span>
+								</li>
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.bento {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 1.25rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.bento__card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+		padding: 1.5rem;
+		border-radius: 18px;
+		background: color-mix(in srgb, var(--card-bg) 70%, transparent);
+		backdrop-filter: blur(18px) saturate(140%);
+		-webkit-backdrop-filter: blur(18px) saturate(140%);
+		border: 1px solid var(--border-color);
+		box-shadow: var(--card-shadow);
+		overflow: hidden;
+		isolation: isolate;
+		transition:
+			border-color 0.4s var(--ease-premium),
+			box-shadow 0.4s var(--ease-premium),
+			transform 0.4s var(--ease-premium);
+	}
+
+	/* Galaxy gradient sheen on the border — masked so only the outline lights up. */
+	.bento__card::before {
+		content: '';
+		position: absolute;
+		inset: -1px;
+		border-radius: inherit;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			rgba(var(--primary-color-rgb), 0) 0%,
+			rgba(var(--primary-color-rgb), 0.55) 35%,
+			rgba(var(--secondary-color-rgb), 0.55) 65%,
+			rgba(var(--secondary-color-rgb), 0) 100%
+		);
+		-webkit-mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		mask-composite: exclude;
+		opacity: 0.55;
+		pointer-events: none;
+		transition: opacity 0.4s var(--ease-premium);
+	}
+
+	.bento__card:hover {
+		border-color: rgba(var(--primary-color-rgb), 0.4);
+		box-shadow: var(--card-shadow-hover);
+		transform: translateY(-3px);
+	}
+
+	.bento__card:hover::before {
+		opacity: 1;
+	}
+
+	/* Bento sizes — 6-column grid. */
+	.bento__card--xl {
+		grid-column: span 3;
+		grid-row: span 2;
+	}
+	.bento__card--md {
+		grid-column: span 3;
+	}
+	.bento__card--lg {
+		grid-column: span 4;
+	}
+	.bento__card--sm {
+		grid-column: span 2;
+	}
+
+	.bento__header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+	}
+
+	.bento__eyebrow {
+		margin: 0;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--accent-color);
+	}
+
+	.bento__title {
+		margin: 0;
+		font-size: 1.45rem;
+		font-weight: 600;
+		line-height: 1.15;
+		background: linear-gradient(
+			135deg,
+			#ffffff 30%,
+			color-mix(in srgb, #ffffff 60%, var(--primary-color)) 100%
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	/* Tile grid inside each card. */
+	.bento__tiles {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.7rem;
+		flex: 1;
+	}
+
+	.bento__card--xl .bento__tiles {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem;
+	}
+
+	.bento__card--lg .bento__tiles {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.bento__card--sm .bento__tiles {
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 1024px) {
+		.bento__card--xl .bento__tiles {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	/* Tech tile — the per-tech --tech-color drives the hover glow. */
+	.tech-tile {
+		--tech-color: #ffffff;
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		padding: 0.7rem 0.9rem;
+		border-radius: 12px;
+		background: color-mix(in srgb, var(--bg-color) 50%, transparent);
+		border: 1px solid color-mix(in srgb, var(--tech-color) 22%, transparent);
+		color: var(--text-color);
+		transition:
+			border-color 0.35s var(--ease-premium),
+			background 0.35s var(--ease-premium),
+			box-shadow 0.35s var(--ease-premium),
+			transform 0.35s var(--ease-premium);
+	}
+
+	.tech-tile:hover {
+		transform: translateY(-2px);
+		border-color: var(--tech-color);
+		background: color-mix(in srgb, var(--bg-color) 65%, var(--tech-color));
+		box-shadow:
+			0 0 0 1px color-mix(in srgb, var(--tech-color) 75%, transparent),
+			0 10px 28px -8px color-mix(in srgb, var(--tech-color) 60%, transparent),
+			0 0 40px -10px color-mix(in srgb, var(--tech-color) 80%, transparent);
+	}
+
+	.tech-tile--primary::after {
+		content: '';
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--tech-color);
+		box-shadow: 0 0 8px var(--tech-color);
+	}
+
+	.tech-tile__icon {
+		display: grid;
+		place-items: center;
+		width: 30px;
+		height: 30px;
+		flex-shrink: 0;
+		border-radius: 9px;
+		background: color-mix(in srgb, var(--bg-color) 70%, transparent);
+		border: 1px solid color-mix(in srgb, var(--tech-color) 18%, transparent);
+		padding: 5px;
+		color: var(--tech-color);
+		transition:
+			background 0.35s var(--ease-premium),
+			border-color 0.35s var(--ease-premium),
+			transform 0.35s var(--ease-premium);
+	}
+
+	.tech-tile:hover .tech-tile__icon {
+		transform: scale(1.08) rotate(-2deg);
+		border-color: var(--tech-color);
+		background: color-mix(in srgb, var(--bg-color) 50%, var(--tech-color));
+	}
+
+	.tech-tile__icon img,
+	.tech-tile__icon svg {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+
+	.tech-tile__name {
+		font-size: 0.92rem;
+		font-weight: 500;
+		letter-spacing: 0.01em;
+		color: var(--text-color);
+	}
+
+	.tech-tile:hover .tech-tile__name {
+		color: #ffffff;
+	}
+
+	/* Responsive: collapse to a stack on small viewports — bento becomes a single column. */
+	@media (max-width: 768px) {
+		.bento {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+		.bento__card--xl,
+		.bento__card--lg,
+		.bento__card--md,
+		.bento__card--sm {
+			grid-column: span 1;
+			grid-row: auto;
+		}
+		.bento__card--lg .bento__tiles {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 480px) {
+		.bento__title {
+			font-size: 1.25rem;
+		}
+		.tech-tile {
+			padding: 0.6rem 0.75rem;
+		}
+		.tech-tile__name {
+			font-size: 0.85rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bento__card,
+		.bento__card::before,
+		.tech-tile,
+		.tech-tile__icon {
+			transition: none;
+		}
+		.bento__card:hover,
+		.tech-tile:hover {
+			transform: none;
+		}
+		.tech-tile:hover .tech-tile__icon {
+			transform: none;
+		}
+	}
+</style>

@@ -1,0 +1,63 @@
+---
+/**
+ * Starfield + nebula background. Mounted once at the top of <body>.
+ *
+ * Safari/iOS note: this technique uses a single tiny element with a huge
+ * box-shadow list to render dozens of stars. WebKit's layer-bounds calculation
+ * is unreliable when `will-change: transform` is set on an element with such an
+ * oversized box-shadow — the compositor crops the shadow to the source element
+ * bounds and the stars vanish. Two mitigations are baked in:
+ *   1. We do NOT set `will-change` on the star divs (see global.css).
+ *   2. The wrapper itself gets a `translate3d(0,0,0)` to promote a single
+ *      composition layer covering the viewport, so the inner painting stays in
+ *      software (where box-shadow extents are honored).
+ */
+---
+
+<div class="stars-wrapper" aria-hidden="true">
+	<div id="stars"></div>
+	<div id="stars2"></div>
+	<div id="stars3"></div>
+	<div id="stars4"></div>
+	<div id="stars5"></div>
+	<div class="nebula"></div>
+</div>
+
+<script>
+	// Sprinkle shooting stars + observe sections — runs once per page load.
+	function init() {
+		const starsWrapper = document.querySelector('.stars-wrapper');
+		if (starsWrapper && !starsWrapper.querySelector('.shooting-star')) {
+			const fragment = document.createDocumentFragment();
+			for (let i = 0; i < 20; i++) {
+				const star = document.createElement('div');
+				star.className = 'shooting-star';
+				star.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-delay:${Math.random() * 2}s`;
+				fragment.appendChild(star);
+			}
+			starsWrapper.appendChild(fragment);
+		}
+
+		const sections = document.querySelectorAll('.section-fade');
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('show');
+					} else {
+						entry.target.classList.remove('show');
+					}
+				});
+			},
+			{ threshold: 0.2 },
+		);
+
+		sections.forEach((section) => observer.observe(section));
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', init);
+	} else {
+		init();
+	}
+</script>

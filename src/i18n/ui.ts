@@ -6,11 +6,11 @@ export const languagesList = {
 export const labels = {
   en: {
     //** Meta Tags */
-    'index.title': 'Carlos Velasquez - Full Stack Developer & Space Explorer',
+    'index.title': 'Carlos Velasquez — Full Stack Developer | Node.js, NestJS, React',
     'index.description':
-      'Experienced Full Stack Developer specializing in modern web technologies. Explore my portfolio featuring innovative projects and creative solutions.',
+      'Full Stack Developer with 5+ years building production web platforms with Node.js, NestJS, React, Next.js and PostgreSQL. End-to-end ownership from API to UI.',
     'index.keywords':
-      'full stack developer, web development, software engineer, portfolio, Carlos Velasquez, space theme, creative developer',
+      'Full Stack Developer, Software Engineer, Node.js, NestJS, React, Next.js, TypeScript, PostgreSQL, REST API, Docker, Carlos Velasquez',
 
     //** Navigation Bar */
     'nav.home': 'Home',
@@ -27,8 +27,11 @@ export const labels = {
     'hero.code_astronaut': 'CODE ASTRONAUT',
     'hero.space_developer': 'SPACE DEVELOPER',
     'hero.description':
-      "Exploring the digital universe one line of code at a time. Building stellar applications that push the boundaries of what's possible.",
-    'hero.launch_mission': 'Download Mission Status',
+      'Exploring the digital universe one line of code at a time. Engineering resilient applications that push the boundaries of what production systems can do.',
+    'hero.h1_role': 'Full Stack Developer',
+    'hero.years_badge': '5+ years shipping',
+    'hero.stack_badge': 'Node · Nest · React',
+    'hero.launch_mission': 'Download Mission Dossier',
     'hero.summary': 'Full Stack Developer (5 years) — I build scalable web applications using Node.js/NestJS, React/Next.js and PostgreSQL. I focus on reliable APIs, clean architecture and delivering business-driven end-to-end solutions.',
 
     //** Technical Section */
@@ -38,11 +41,15 @@ export const labels = {
     //** Skills Section */
     'project.title': 'Featured Projects',
     'project.subtitle': 'SPACE MISSIONS',
-    'project.view_project': 'View Project',
+    'project.view_project': 'Open Project',
     'project.view_code': 'GitHub Repository',
-    'project.equasystems.title': 'Equasystem WebSite',
+    'project.modal.close': 'Close project details',
+    'project.modal.stack': 'Tech Orbit',
+    'project.modal.view_live': 'Launch Live Site',
+    'project.modal.view_code': 'View Source',
+    'project.equasystems.title': 'Equa Systems — Marketing Site',
     'project.equasystems.description':
-      'Designed and developed a modern website for Equa Systems, enhancing their online presence and client engagement. Focused on usability, responsiveness, and a sleek design to showcase their tech solutions effectively.',
+      'Designed and shipped the corporate site for Equa Systems. Optimized for Core Web Vitals, fully responsive, and structured to surface the service catalog and case studies for prospective clients.',
 
     //* Work Experience Titles */
     'experience.title': 'Career Journey',
@@ -52,39 +59,39 @@ export const labels = {
     'experience.equasystems.role': 'Full Stack Developer',
     'experience.equasystems.period': 'August 2020 - Present',
     'experience.equasystems.description':
-      'At Equa Systems, I have been responsible for designing and implementing web applications that enhance our clients’ digital presence. My role involves collaborating with cross-functional teams to deliver high-quality software solutions that meet business needs.',
+      "Design and ship web applications for Equa Systems' clients across multiple verticals. Partner with product, design, and QA to scope features, implement them end-to-end, and own delivery through to production deployment.",
     'experience.equasystems.summary':
-      'Key Achievements: Developed and maintained multiple client websites, implemented new features that improved user engagement, and optimized application performance.',
+      'Led front-to-back implementation of multiple client platforms, shipped features that measurably lifted engagement, and tuned application performance from API response times through to render.',
 
     'experience.softdaniv.role': 'Software Developer',
     'experience.softdaniv.period': 'July 2019 - January 2021',
     'experience.softdaniv.description':
-      'During my time at Softdaniv, I contributed to the development of enterprise software solutions, focusing on backend development and database management. I worked closely with clients to understand their requirements and delivered customized software that improved their operational efficiency.',
+      'Built enterprise software with a backend and data focus. Worked directly with clients to translate operational requirements into shipped features, and owned database design and query performance for the systems I delivered.',
     'experience.softdaniv.summary':
-      'Key Achievements: Successfully delivered multiple projects on time, improved database performance by optimizing queries, and received positive feedback from clients for exceptional service.',
+      "Delivered projects on schedule across the team's portfolio, optimized critical queries to cut response times, and partnered with stakeholders through delivery and follow-on iterations.",
 
     //** Certificates Section */
     'certificate.title': 'Certificates & Courses',
     'certificate.subtitle': 'ASTRO ACHIEVEMENTS',
-    'certificate.hacker_rank_node_basic.title': 'Certificate of Accomplishment - NodeJs (Basic)',
+    'certificate.hacker_rank_node_basic.title': 'Node.js (Basic) — HackerRank',
     'certificate.hacker_rank_node_basic.description':
-      'This is a Certificate of Accomplishment from HackerRank for Node.js (Basic), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
-    'certificate.udemy_sql_advance.title': 'Certificate of Accomplishment - SQL Server (Advanced)',
+      'HackerRank skill assessment validating Node.js fundamentals: modules, asynchronous I/O, file system access, and HTTP server primitives.',
+    'certificate.udemy_sql_advance.title': 'SQL Server: Advanced Programming — Udemy',
     'certificate.udemy_sql_advance.description':
-      'This is a Certificate of Completion from Udemy, awarded to Carlos Velásquez for successfully completing 5 total hours of the online course SQL Server: Advanced Programming 2021. The course was instructed by Mariano Puglisi.',
-    'certificate.devtalles.title': 'Certificate of Accomplishment - Clean Architecture',
+      'Advanced SQL Server programming: stored procedures, indexing strategy, transaction control, and query performance tuning. Instructor: Mariano Puglisi.',
+    'certificate.devtalles.title': 'Clean Architecture in Node.js — DevTalles',
     'certificate.devtalles.description':
-      'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NodeJs - Authentication Rest with Clean Architecture". The course was instructed by Fernando Herrera.',
+      'Building production REST APIs in Node.js with Clean Architecture: dependency inversion, layered separation, and JWT-based authentication. Instructor: Fernando Herrera.',
     'certificate.view_certificate': 'View Certificate',
-    'certificate.devtalles.nestjs.title': 'Certificate of Accomplishment - NestJs',
+    'certificate.devtalles.nestjs.title': 'NestJS — The Complete Guide',
     'certificate.devtalles.nestjs.description':
-      'This is a Certificate of Accomplishment from DevTalles, awarded to Carlos Velasquez for successfully completing the course "NestJs - The Complete Guide". The course was instructed by Fernando Herrera.',
-    'certificate.hacker_rank_node_intermediate.title': 'Certificate of Accomplishment - Node.js (Intermediate)',
+      'Comprehensive NestJS coverage: modular architecture, guards, interceptors, dependency injection, and database integration. Instructor: Fernando Herrera.',
+    'certificate.hacker_rank_node_intermediate.title': 'Node.js (Intermediate) — HackerRank',
     'certificate.hacker_rank_node_intermediate.description':
-      'This is a Certificate of Accomplishment from HackerRank for Node.js (Intermediate), awarded to Carlos Velasquez. It confirms that he has successfully passed the HackerRank skill certification test.',
-    'certificate.cloud_native_academy.devsecops.title': 'Certificate of Accomplishment - DevSecOps Github Actions',
+      'HackerRank skill assessment validating intermediate Node.js: streams, event-loop internals, error handling, and asynchronous patterns.',
+    'certificate.cloud_native_academy.devsecops.title': 'DevSecOps with GitHub Actions',
     'certificate.cloud_native_academy.devsecops.description':
-      'This is a Certificate of Accomplishment from Cloud Native Academy, awarded to Carlos Velasquez for successfully completing the course "DevSecOps Github Actions". The course was instructed by Aldo Trucios Cornejo.',
+      'Implementing secure CI/CD pipelines with GitHub Actions: vulnerability scanning, secret management, and supply-chain verification. Instructor: Aldo Trucios Cornejo.',
 
     //** Contact Section */
     'contact.title': 'Keep in Touch',
@@ -98,7 +105,7 @@ export const labels = {
     'contact.form.send_message': 'Send Message',
     'contact.email.success.title': 'Mission Accomplished! 🚀',
     'contact.email.success.description':
-      'Your message has been successfully transmitted to Mission Control. I will respond as soon as possible. Thank you for reaching out!',
+      "Your message reached Mission Control. I'll respond as soon as possible — thanks for reaching out.",
     'contact.email.error.title': 'Houston, We Have a Problem! ❌',
     'contact.email.error.optional.message': 'There was an issue sending your message. Please try again later.',
     'contact.email.wait.title': 'Hold Your Rockets! ⏳',
@@ -137,9 +144,9 @@ export const labels = {
     'footer.experience.title': 'EXPERIENCE',
 
     //** Error Section */
-    'error.title': 'Houston, We Have a Problem!',
+    'error.title': 'Houston, we have a problem.',
     'error.description':
-      "The cosmic coordinates you're looking for seem to be lost in space. Let's navigate back to a known star system.",
+      "The coordinates you're looking for are lost in space. Let's navigate back to a known star system.",
     'error.button': 'Return to Mission Control',
 
     //** Roadmap Section */
@@ -157,11 +164,11 @@ export const labels = {
   },
   es: {
     //** Meta Tags */
-    'index.title': 'Carlos Velasquez - Desarrollador Full Stack y Explorador Espacial',
+    'index.title': 'Carlos Velasquez — Desarrollador Full Stack | Node.js, NestJS, React',
     'index.description':
-      'Desarrollador Full Stack con experiencia especializado en tecnologías web modernas. Explora mi portafolio con proyectos innovadores y soluciones creativas.',
+      'Desarrollador Full Stack con más de 5 años construyendo plataformas web en producción con Node.js, NestJS, React, Next.js y PostgreSQL. Responsable end-to-end, desde la API hasta la UI.',
     'index.keywords':
-      'desarrollador full stack, desarrollo web, ingeniero de software, portafolio, Carlos Velásquez, tema espacial, desarrollador creativo',
+      'Desarrollador Full Stack, Ingeniero de Software, Node.js, NestJS, React, Next.js, TypeScript, PostgreSQL, REST API, Docker, Carlos Velasquez',
 
     //** Navigation Bar */
     'nav.home': 'Inicio',
@@ -178,22 +185,29 @@ export const labels = {
     'hero.code_astronaut': 'ASTRONAUTA DEL CÓDIGO',
     'hero.space_developer': 'DESARROLLADOR ESPACIAL',
     'hero.description':
-      'Explorando el universo digital línea por línea de código. Construyendo aplicaciones estelares que empujan los límites de lo que es posible.',
-    'hero.launch_mission': 'Descargar Estado de la Misión',
+      'Explorando el universo digital una línea de código a la vez. Construyendo aplicaciones estelares que empujan los límites de los sistemas en producción.',
+    'hero.h1_role': 'Desarrollador Full Stack',
+    'hero.years_badge': '+5 años en producción',
+    'hero.stack_badge': 'Node · Nest · React',
+    'hero.launch_mission': 'Descargar Dossier de Misión',
     'hero.summary': 'Desarrollador Full Stack (5 años) — Construyo aplicaciones web escalables usando Node.js/NestJS, React/Next.js y PostgreSQL. Me enfoco en APIs confiables, arquitectura limpia y entregar soluciones de extremo a extremo orientadas al negocio.',
 
-    //** Tecnical Section */
+    //** Technical Section */
     'tech.title': 'Capacidades Técnicas',
     'tech.subtitle': 'SISTEMAS DE NAVEGACIÓN',
 
     //** Skills Section */
     'project.title': 'Proyectos Destacados',
-    'project.subtitle': 'MISIÓN ESPACIAL',
-    'project.view_project': 'Ver Proyecto',
+    'project.subtitle': 'MISIONES ESPACIALES',
+    'project.view_project': 'Abrir Proyecto',
     'project.view_code': 'Repositorio de GitHub',
-    'project.equasystems.title': 'Sitio Web de Equasystem',
+    'project.modal.close': 'Cerrar detalles del proyecto',
+    'project.modal.stack': 'Órbita Tecnológica',
+    'project.modal.view_live': 'Lanzar Sitio en Vivo',
+    'project.modal.view_code': 'Ver Código Fuente',
+    'project.equasystems.title': 'Equa Systems — Sitio Corporativo',
     'project.equasystems.description':
-      'Diseño y desarrollo de un sitio web moderno para Equa Systems, mejorando su presencia en línea y el compromiso con los clientes...',
+      'Diseñé y entregué el sitio corporativo de Equa Systems. Optimizado para Core Web Vitals, totalmente responsivo y estructurado para destacar el catálogo de servicios y casos de éxito.',
 
     //* Work Experience Titles */
     'experience.title': 'Trayectoria Profesional',
@@ -203,39 +217,39 @@ export const labels = {
     'experience.equasystems.role': 'Desarrollador Full Stack',
     'experience.equasystems.period': 'Agosto 2020 - Presente',
     'experience.equasystems.description':
-      'En Equa Systems, he sido responsable del diseño e implementación de aplicaciones web que mejoran la presencia digital de nuestros clientes. Mi rol implica colaborar con equipos multidisciplinarios para entregar soluciones de software de alta calidad que satisfagan las necesidades del negocio.',
+      'Diseño y entrego aplicaciones web para los clientes de Equa Systems en múltiples sectores. Colaboro con producto, diseño y QA para definir alcance, implementar funcionalidades de extremo a extremo y asumir el despliegue a producción.',
     'experience.equasystems.summary':
-      'Logros Clave: Desarrollé y mantuve múltiples sitios web de clientes, implementé nuevas funciones que mejoraron el compromiso del usuario y optimicé el rendimiento de las aplicaciones.',
+      'Lideré la implementación full-stack de múltiples plataformas de cliente, entregué funcionalidades que elevaron de forma medible el engagement y optimicé el rendimiento desde la API hasta el render.',
 
     'experience.softdaniv.role': 'Desarrollador de Software',
     'experience.softdaniv.period': 'Julio 2019 - Enero 2021',
     'experience.softdaniv.description':
-      'Durante mi tiempo en Softdaniv, contribuí al desarrollo de soluciones de software empresarial, enfocándome en el desarrollo backend y la gestión de bases de datos. Trabajé en estrecha colaboración con los clientes para entender sus requisitos y entregar software personalizado que mejoró su eficiencia operativa.',
+      'Construí software empresarial con foco en backend y datos. Trabajé directamente con clientes para traducir requerimientos operativos en funcionalidades entregadas, y fui responsable del diseño y rendimiento de las consultas en los sistemas que entregué.',
     'experience.softdaniv.summary':
-      'Logros Clave: Entregué exitosamente múltiples proyectos dentro de los plazos establecidos, mejoré el rendimiento de la base de datos optimizando las consultas y recibí comentarios positivos de los clientes por el servicio excepcional proporcionado.',
+      'Entregué proyectos a tiempo en el portafolio del equipo, optimicé consultas críticas para reducir los tiempos de respuesta y acompañé a los stakeholders durante la entrega e iteraciones posteriores.',
 
     //** Certificates Section */
     'certificate.title': 'Certificados y Cursos',
     'certificate.subtitle': 'LOGROS EN EL ESPACIO',
-    'certificate.hacker_rank_node_basic.title': 'Certificado de Logro - NodeJs (Básico)',
+    'certificate.hacker_rank_node_basic.title': 'Node.js (Básico) — HackerRank',
     'certificate.hacker_rank_node_basic.description':
-      'Este es un Certificado de Logro de HackerRank para Node.js (Básico), otorgado a Carlos Velasquez. Confirma que ha aprobado con éxito la prueba de certificación de habilidades de HackerRank.',
-    'certificate.udemy_sql_advance.title': 'Certificado de Logro - SQL Server (Avanzado)',
+      'Evaluación de HackerRank que valida los fundamentos de Node.js: módulos, I/O asíncrono, acceso al sistema de archivos y primitivas de servidor HTTP.',
+    'certificate.udemy_sql_advance.title': 'SQL Server: Programación Avanzada — Udemy',
     'certificate.udemy_sql_advance.description':
-      'Este es un Certificado de Finalización de Udemy, otorgado a Carlos Velásquez por completar con éxito 5 horas totales del curso en línea SQL Server: Programación Avanzada 2021. El curso fue impartido por Mariano Puglisi.',
-    'certificate.devtalles.title': 'Certificado de Logro - Arquitectura Limpia',
+      'Programación avanzada en SQL Server: procedimientos almacenados, estrategia de indexación, control transaccional y tuning de consultas. Instructor: Mariano Puglisi.',
+    'certificate.devtalles.title': 'Clean Architecture en Node.js — DevTalles',
     'certificate.devtalles.description':
-      'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NodeJs - Autenticación Rest con Clean Architecture". El curso fue impartido por Fernando Herrera.',
+      'Construcción de APIs REST en Node.js con Clean Architecture: inversión de dependencias, separación por capas y autenticación basada en JWT. Instructor: Fernando Herrera.',
     'certificate.view_certificate': 'Ver Certificado',
-    'certificate.devtalles.nestjs.title': 'Certificado de Logro - NestJs',
+    'certificate.devtalles.nestjs.title': 'NestJS — La Guía Completa',
     'certificate.devtalles.nestjs.description':
-      'Este es un Certificado de Logro de DevTalles, otorgado a Carlos Velasquez por completar con éxito el curso "NestJs - La Guía Completa". El curso fue impartido por Fernando Herrera.',
-    'certificate.hacker_rank_node_intermediate.title': 'Certificado de Logro - Node.js (Intermedio)',
+      'Cobertura completa de NestJS: arquitectura modular, guards, interceptores, inyección de dependencias e integración con bases de datos. Instructor: Fernando Herrera.',
+    'certificate.hacker_rank_node_intermediate.title': 'Node.js (Intermedio) — HackerRank',
     'certificate.hacker_rank_node_intermediate.description':
-      'Este es un Certificado de Logro de HackerRank para Node.js (Intermedio), otorgado a Carlos Velasquez. Confirma que ha aprobado con éxito la prueba de certificación de habilidades de HackerRank.',
-    'certificate.cloud_native_academy.devsecops.title': 'Certificado de Logro - DevSecOps Github Actions',
+      'Evaluación de HackerRank que valida Node.js a nivel intermedio: streams, internals del event loop, manejo de errores y patrones asíncronos.',
+    'certificate.cloud_native_academy.devsecops.title': 'DevSecOps con GitHub Actions',
     'certificate.cloud_native_academy.devsecops.description':
-      'Este es un Certificado de Logro de Cloud Native Academy, otorgado a Carlos Velasquez por completar con éxito el curso "DevSecOps Github Actions". El curso fue impartido por Aldo Trucios Cornejo.',
+      'Implementación de pipelines CI/CD seguros con GitHub Actions: análisis de vulnerabilidades, gestión de secretos y verificación de cadena de suministro. Instructor: Aldo Trucios Cornejo.',
 
     //** Contact Section */
     'contact.title': 'Mantente en Contacto',
@@ -249,7 +263,7 @@ export const labels = {
     'contact.form.send_message': 'Enviar Mensaje',
     'contact.email.success.title': '¡Misión Cumplida! 🚀',
     'contact.email.success.description':
-      'Tu mensaje ha sido transmitido con éxito a Control de Misión. Responderé lo antes posible. ¡Gracias por contactar!',
+      'Tu mensaje llegó a Control de Misión. Responderé lo antes posible — gracias por escribirme.',
     'contact.email.error.title': '¡Houston, Tenemos un Problema! ❌',
     'contact.email.error.optional.message':
       'Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.',
@@ -289,8 +303,9 @@ export const labels = {
     'footer.experience.title': 'EXPERIENCIA',
 
     //** Error Section */
-    'error.title': '¡Houston, Tenemos un Problema!',
-    'error.description': `Las coordenadas cósmicas que buscas parecen estar perdidas en el espacio. Volvamos a navegar a un sistema estelar conocido.`,
+    'error.title': 'Houston, tenemos un problema.',
+    'error.description':
+      'Las coordenadas que buscas están perdidas en el espacio. Volvamos a un sistema estelar conocido.',
     'error.button': 'Volver al Control de Misión',
 
     //** Roadmap Section */

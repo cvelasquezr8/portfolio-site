@@ -1,0 +1,44 @@
+[
+	{
+		"id": "home",
+		"name": { "en": "Home", "es": "Inicio" },
+		"href": "#",
+		"order": 1
+	},
+	{
+		"id": "experience",
+		"name": { "en": "Experience", "es": "Experiencia" },
+		"href": "#experience",
+		"order": 2
+	},
+	{
+		"id": "skills",
+		"name": { "en": "Skills", "es": "Habilidades" },
+		"href": "#technologies",
+		"order": 3
+	},
+	{
+		"id": "projects",
+		"name": { "en": "Projects", "es": "Proyectos" },
+		"href": "#projects",
+		"order": 4
+	},
+	{
+		"id": "challenges",
+		"name": { "en": "Challenges", "es": "Desafíos" },
+		"href": "#challenges",
+		"order": 5
+	},
+	{
+		"id": "certificates",
+		"name": { "en": "Certificates", "es": "Certificados" },
+		"href": "#courses",
+		"order": 6
+	},
+	{
+		"id": "contact",
+		"name": { "en": "Contact", "es": "Contacto" },
+		"href": "#contact",
+		"order": 7
+	}
+]

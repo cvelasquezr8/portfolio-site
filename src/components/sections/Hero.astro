@@ -1,0 +1,187 @@
+---
+import { getCollection } from 'astro:content';
+import { languagesList } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+const currentLang = Astro.currentLocale || 'en';
+const pathPage = (globalThis as any).BASE_URL;
+const translations = useTranslations(currentLang as keyof typeof languagesList);
+const curriculum =
+	currentLang === 'en'
+		? 'carlos-velasquez-resume-en.pdf'
+		: 'carlos-velasquez-resume-es.pdf';
+
+const socialLinks = (await getCollection('socialLinks'))
+	.map((entry) => entry.data)
+	.sort((a, b) => a.order - b.order);
+---
+
+<section class="container mx-auto px-4 pt-32 pb-16">
+	<div class="max-w-4xl mx-auto text-center px-2 sm:px-0">
+		<div class="relative mb-8">
+			<img
+				src={`${pathPage}images/carlos-velasquez.jpg`}
+				alt="Carlos Velasquez - Full Stack Developer"
+				class="w-36 h-36 sm:w-48 sm:h-48 rounded-full mx-auto border-4 border-blue-500 shadow-xl relative z-10 float"
+				loading="eager"
+				fetchpriority="high"
+				width="192"
+				height="192"
+			/>
+		</div>
+
+		<!-- Social Media Links -->
+		<div class="flex justify-center gap-4 mb-8">
+			{
+				socialLinks.map((link) => (
+					<a
+						href={link.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						class={`p-3 rounded-lg bg-gradient-to-r ${link.color} ${link.hoverColor} transition-all duration-300 shadow-lg hover:scale-110`}
+						title={link.name}
+					>
+						<img
+							src={`${pathPage}images/${link.icon}`}
+							alt={link.name}
+							class="w-6 h-6"
+							loading="lazy"
+						/>
+					</a>
+				))
+			}
+		</div>
+
+		<p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-blue-400 mb-3 font-semibold">
+			{translations('hero.mission_control')}
+		</p>
+
+		<h1 class="text-4xl sm:text-5xl font-bold mb-3 leading-tight">
+			<span class="block hero-name">Carlos Velasquez</span>
+		</h1>
+
+		<p class="text-lg sm:text-xl text-gray-300 mb-6 font-medium">
+			{translations('hero.h1_role')}
+		</p>
+
+		<ul
+			class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 text-xs sm:text-sm tracking-wide list-none p-0"
+			aria-label="Profile highlights"
+		>
+			<li class="hero-chip hero-chip--brand">
+				<span aria-hidden="true">🛰️</span>
+				<span>{translations('hero.full_stack_explorer')}</span>
+			</li>
+			<li class="hero-chip hero-chip--years">
+				<span aria-hidden="true">⌛</span>
+				<span>{translations('hero.years_badge')}</span>
+			</li>
+			<li class="hero-chip hero-chip--stack">
+				<span aria-hidden="true">⚡</span>
+				<span>{translations('hero.stack_badge')}</span>
+			</li>
+		</ul>
+
+		<p class="text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+			{translations('hero.summary')}
+		</p>
+
+		<a
+			href={`${pathPage}${curriculum}`}
+			download
+			class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:from-blue-500 hover:to-purple-500 transition-all shadow-lg hover:-translate-y-1 group glow"
+		>
+			<span class="text-xl">🌎</span>
+			{translations('hero.launch_mission')}
+			<svg
+				class="w-7 h-6 group-hover:translate-x-1 transition-transform"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="3"
+					d="M7 13l5 5m0 0l5-5m-5 5V6"></path>
+			</svg>
+		</a>
+	</div>
+</section>
+
+<style>
+	.hero-name {
+		background: linear-gradient(135deg, #ffffff 30%, color-mix(in srgb, #ffffff 70%, var(--primary-color)) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	.hero-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		padding: 0.5rem 0.95rem;
+		border-radius: 999px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		border: 1px solid var(--border-color);
+		background: color-mix(in srgb, var(--card-bg) 70%, transparent);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		transition:
+			transform 0.3s var(--ease-premium),
+			border-color 0.3s var(--ease-premium),
+			background 0.3s var(--ease-premium);
+	}
+
+	.hero-chip:hover {
+		transform: translateY(-2px);
+	}
+
+	.hero-chip--brand {
+		color: #cfd6ff;
+		border-color: rgba(var(--primary-color-rgb), 0.4);
+		background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.18), rgba(var(--primary-color-rgb), 0.08));
+	}
+
+	.hero-chip--brand:hover {
+		border-color: rgba(var(--primary-color-rgb), 0.7);
+	}
+
+	.hero-chip--years {
+		color: #f3e8ff;
+		border-color: rgba(var(--secondary-color-rgb), 0.4);
+		background: linear-gradient(135deg, rgba(var(--secondary-color-rgb), 0.18), rgba(var(--secondary-color-rgb), 0.08));
+	}
+
+	.hero-chip--years:hover {
+		border-color: rgba(var(--secondary-color-rgb), 0.7);
+	}
+
+	.hero-chip--stack {
+		color: #e5e7eb;
+		border-color: rgba(var(--primary-color-rgb), 0.3);
+		background: linear-gradient(135deg, rgba(var(--primary-color-rgb), 0.12), rgba(var(--secondary-color-rgb), 0.12));
+	}
+
+	.hero-chip--stack:hover {
+		border-color: rgba(var(--primary-color-rgb), 0.55);
+	}
+
+	@media (max-width: 360px) {
+		.hero-chip {
+			padding: 0.4rem 0.7rem;
+			font-size: 0.72rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero-chip {
+			transition: none;
+		}
+		.hero-chip:hover {
+			transform: none;
+		}
+	}
+</style>

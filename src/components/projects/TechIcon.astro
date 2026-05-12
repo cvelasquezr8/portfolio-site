@@ -1,0 +1,49 @@
+---
+import { techIcons } from './icons';
+
+interface Props {
+	slug: string;
+	size?: number;
+	class?: string;
+}
+
+const { slug, size = 18, class: className = '' } = Astro.props;
+const icon = techIcons[slug];
+---
+
+{
+	icon ? (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox={icon.viewBox ?? '0 0 24 24'}
+			width={size}
+			height={size}
+			fill="currentColor"
+			role="img"
+			aria-label={icon.label}
+			class={`tech-icon-svg ${className}`}
+		>
+			<path d={icon.path} />
+		</svg>
+	) : (
+		<span class={`tech-icon-fallback ${className}`} aria-label={slug}>
+			{slug}
+		</span>
+	)
+}
+
+<style>
+	.tech-icon-svg {
+		display: inline-block;
+		flex-shrink: 0;
+	}
+
+	.tech-icon-fallback {
+		display: inline-block;
+		font-size: 0.75rem;
+		padding: 0.125rem 0.5rem;
+		border: 1px dashed currentColor;
+		border-radius: 4px;
+		opacity: 0.6;
+	}
+</style>

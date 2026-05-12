@@ -2,7 +2,9 @@
 
 :root {
 	--primary-color: #3245ff;
+	--primary-color-rgb: 50, 69, 255;
 	--secondary-color: #bc52ee;
+	--secondary-color-rgb: 188, 82, 238;
 	--bg-color: #0a0b14;
 	--text-color: #e5e7eb;
 	--card-bg: #1a1b25;
@@ -12,7 +14,42 @@
 	--accent-color: #9ca3af;
 	--star-color: #ffffff;
 	--card-shadow: 0 4px 20px rgba(50, 69, 255, 0.2);
+	--card-shadow-hover: 0 8px 32px rgba(50, 69, 255, 0.28);
 	--hover-bg: rgba(50, 69, 255, 0.1);
+	--ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Premium keyboard focus ring — a11y win, visible only for keyboard users */
+:focus-visible {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 3px;
+	border-radius: 4px;
+	box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.18);
+	transition: box-shadow 0.18s var(--ease-premium);
+}
+
+/* Skip-to-content — visually hidden until keyboard focus.
+   Lets keyboard users bypass the nav and jump to <main>. */
+.skip-to-content {
+	position: fixed;
+	top: 12px;
+	left: 12px;
+	z-index: 1000;
+	padding: 0.6rem 1rem;
+	border-radius: 8px;
+	background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 0.875rem;
+	text-decoration: none;
+	box-shadow: 0 8px 24px rgba(var(--primary-color-rgb), 0.4);
+	transform: translateY(-150%);
+	transition: transform 0.25s var(--ease-premium);
+}
+
+.skip-to-content:focus-visible {
+	transform: translateY(0);
+	outline: none;
 }
 
 html {
@@ -54,18 +91,26 @@ body {
 /* Animated Stars Background */
 .stars-wrapper {
 	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	z-index: -1;
 	overflow: hidden;
 	opacity: 0.7;
+	pointer-events: none;
+	/* Promote the wrapper to its own compositor layer so iOS Safari paints the
+	   star box-shadows without clipping them to each inner element's tiny bounds. */
+	-webkit-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 #stars {
 	width: 2px;
 	height: 2px;
 	background: transparent;
-	will-change: transform;
 	box-shadow: 1744px 122px #ffffff, 134px 1321px #ffffff, 92px 859px #ffffff,
 		235px 1045px #ffffff, 1011px 1648px #ffffff, 1964px 1851px #ffffff,
 		1354px 901px #ffffff, 1248px 1248px #ffffff, 1289px 1904px #ffffff,
@@ -137,16 +182,66 @@ body {
 	}
 }
 
+/* Galaxy card — unified visual language across the site.
+   Consumers: shared/Card.astro and any section card that needs the same treatment.
+   Premium glassmorphism + gradient-mask border that lights up on hover. */
 .skill-card {
-	background: var(--card-bg);
+	position: relative;
+	background: color-mix(in srgb, var(--card-bg) 78%, transparent);
 	border: 1px solid var(--border-color);
-	transition: border-color 0.3s ease, background 0.3s ease;
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(14px) saturate(140%);
+	-webkit-backdrop-filter: blur(14px) saturate(140%);
+	box-shadow: var(--card-shadow);
+	transition:
+		border-color 0.4s var(--ease-premium),
+		box-shadow 0.4s var(--ease-premium),
+		transform 0.4s var(--ease-premium);
+}
+
+.skill-card::before {
+	content: '';
+	position: absolute;
+	inset: -1px;
+	border-radius: inherit;
+	padding: 1px;
+	background: linear-gradient(
+		135deg,
+		rgba(var(--primary-color-rgb), 0) 0%,
+		rgba(var(--primary-color-rgb), 0.6) 35%,
+		rgba(var(--secondary-color-rgb), 0.6) 65%,
+		rgba(var(--secondary-color-rgb), 0) 100%
+	);
+	-webkit-mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	opacity: 0;
+	transition: opacity 0.4s var(--ease-premium);
+	pointer-events: none;
 }
 
 .skill-card:hover {
-	border-color: var(--primary-color);
-	background: color-mix(in srgb, var(--card-bg) 98%, var(--primary-color));
+	border-color: rgba(var(--primary-color-rgb), 0.45);
+	box-shadow: var(--card-shadow-hover);
+	transform: translateY(-2px);
+}
+
+.skill-card:hover::before {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.skill-card,
+	.skill-card::before {
+		transition: none;
+	}
+	.skill-card:hover {
+		transform: none;
+	}
 }
 
 /* Space themed scrollbar */
@@ -197,9 +292,10 @@ body {
 	right: 0;
 	bottom: 0;
 	border-radius: inherit;
-	box-shadow: 0 0 30px rgba(var(--primary-color), 0.3);
+	box-shadow: 0 0 30px rgba(var(--primary-color-rgb), 0.35);
 	opacity: 0;
-	transition: opacity 0.3s ease;
+	transition: opacity 0.3s var(--ease-premium);
+	pointer-events: none;
 }
 
 .glow:hover::after {
@@ -329,8 +425,11 @@ body {
 
 .section-fade {
 	opacity: 0;
-	transform: translateY(10px);
-	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	transform: translateY(14px);
+	transition:
+		opacity 0.7s var(--ease-premium),
+		transform 0.7s var(--ease-premium);
+	will-change: opacity, transform;
 }
 
 .section-fade.show {

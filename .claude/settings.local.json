@@ -21,7 +21,21 @@
       "Bash(echo \"=== $img ===\")",
       "Bash(grep -r \"$img\" src/)",
       "Bash(done)",
-      "Bash(find /c/Users/Developer/Documents/Carlos/portfolio-site/public/images -name \"$img\" -type f)"
+      "Bash(find /c/Users/Developer/Documents/Carlos/portfolio-site/public/images -name \"$img\" -type f)",
+      "Skill(update-config)",
+      "Bash(type src\\\\pages\\\\index.astro)",
+      "Bash(type src\\\\pages\\\\en\\\\index.astro)",
+      "Bash(test -d Dockerfile -o -f Dockerfile)",
+      "Bash(code . *)",
+      "Bash(npx skills *)",
+      "Bash(awk 'NR<=30' src/components/Hero.astro)",
+      "Bash(npm install *)",
+      "Bash(npx prettier *)",
+      "Bash(npx eslint *)",
+      "Bash(grep -B0 -A12 \"src..components..Technologies.astro$\")",
+      "Bash(git mv *)",
+      "Bash(taskkill /F /IM node.exe)",
+      "PowerShell(Get-Process *)"
     ]
   }
 }

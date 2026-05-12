@@ -1,0 +1,265 @@
+---
+import TechIcon from './TechIcon.astro';
+
+interface Props {
+	id: string;
+	title: string;
+	summary: string;
+	cover: string;
+	stack: string[];
+	openLabel: string;
+}
+
+const { id, title, summary, cover, stack, openLabel } = Astro.props;
+---
+
+<article class="project-card section-fade" data-project-card data-project-id={id}>
+	<button
+		class="project-card__trigger"
+		type="button"
+		data-project-open={id}
+		aria-haspopup="dialog"
+		aria-label={`${openLabel}: ${title}`}
+	>
+		<div class="project-card__cover">
+			<img src={cover} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+			<div class="project-card__cover-overlay"></div>
+		</div>
+		<div class="project-card__body">
+			<h3 class="project-card__title">{title}</h3>
+			<p class="project-card__summary">{summary}</p>
+			<ul class="project-card__stack" aria-label="Technology stack">
+				{
+					stack.slice(0, 5).map((slug) => (
+						<li>
+							<TechIcon slug={slug} size={16} />
+						</li>
+					))
+				}
+				{stack.length > 5 && <li class="project-card__stack-more">+{stack.length - 5}</li>}
+			</ul>
+		</div>
+		<span class="project-card__cta" aria-hidden="true">
+			<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+				<line x1="5" y1="12" x2="19" y2="12" />
+				<polyline points="12 5 19 12 12 19" />
+			</svg>
+		</span>
+	</button>
+</article>
+
+<style>
+	.project-card {
+		position: relative;
+		border-radius: 16px;
+		overflow: hidden;
+		background: color-mix(in srgb, var(--card-bg) 78%, transparent);
+		border: 1px solid var(--border-color);
+		backdrop-filter: blur(14px) saturate(140%);
+		-webkit-backdrop-filter: blur(14px) saturate(140%);
+		box-shadow: var(--card-shadow);
+		transition:
+			transform 0.4s var(--ease-premium),
+			box-shadow 0.4s var(--ease-premium),
+			border-color 0.4s var(--ease-premium);
+		will-change: transform;
+	}
+
+	.project-card::before {
+		content: '';
+		position: absolute;
+		inset: -1px;
+		border-radius: inherit;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			rgba(var(--primary-color-rgb), 0) 0%,
+			rgba(var(--primary-color-rgb), 0.6) 35%,
+			rgba(var(--secondary-color-rgb), 0.6) 65%,
+			rgba(var(--secondary-color-rgb), 0) 100%
+		);
+		-webkit-mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		-webkit-mask-composite: xor;
+		mask:
+			linear-gradient(#000 0 0) content-box,
+			linear-gradient(#000 0 0);
+		mask-composite: exclude;
+		opacity: 0;
+		transition: opacity 0.4s var(--ease-premium);
+		pointer-events: none;
+	}
+
+	.project-card:hover {
+		border-color: rgba(var(--primary-color-rgb), 0.45);
+		box-shadow: var(--card-shadow-hover);
+	}
+
+	.project-card:hover::before {
+		opacity: 1;
+	}
+
+	.project-card__trigger {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		background: transparent;
+		border: 0;
+		color: inherit;
+		text-align: left;
+		cursor: pointer;
+		font: inherit;
+	}
+
+	.project-card__cover {
+		position: relative;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+	}
+
+	.project-card__cover img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s var(--ease-premium);
+	}
+
+	.project-card:hover .project-card__cover img {
+		transform: scale(1.06);
+	}
+
+	.project-card__cover-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to top, rgba(10, 11, 20, 0.85) 0%, rgba(10, 11, 20, 0) 60%);
+	}
+
+	.project-card__body {
+		padding: 1.25rem 1.4rem 1.4rem;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+	}
+
+	.project-card__title {
+		font-size: 1.2rem;
+		margin: 0;
+		background: linear-gradient(135deg, #ffffff 30%, color-mix(in srgb, #ffffff 70%, var(--primary-color)) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	.project-card__summary {
+		color: var(--accent-color);
+		font-size: 0.92rem;
+		line-height: 1.55;
+		margin: 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.project-card__stack {
+		list-style: none;
+		margin: 0.25rem 0 0;
+		padding: 0;
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		align-items: center;
+		color: var(--text-color);
+	}
+
+	.project-card__stack li {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 8px;
+		background: color-mix(in srgb, var(--card-bg) 60%, transparent);
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+	}
+
+	.project-card__stack-more {
+		font-size: 0.72rem;
+		font-weight: 600;
+		color: var(--accent-color);
+		padding: 0 0.5rem !important;
+		width: auto !important;
+	}
+
+	.project-card__cta {
+		position: absolute;
+		top: 14px;
+		right: 14px;
+		width: 36px;
+		height: 36px;
+		display: grid;
+		place-items: center;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--bg-color) 60%, transparent);
+		backdrop-filter: blur(8px);
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		transition: transform 0.4s var(--ease-premium), background 0.4s var(--ease-premium);
+	}
+
+	.project-card:hover .project-card__cta {
+		background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+		transform: translateX(2px) translateY(-2px);
+	}
+
+	@media (max-width: 640px) {
+		.project-card__body {
+			padding: 1rem 1.1rem 1.2rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-card,
+		.project-card__cover img,
+		.project-card__cta {
+			transition: none;
+		}
+		.project-card:hover .project-card__cover img {
+			transform: none;
+		}
+	}
+</style>
+
+<script>
+	// Subtle pointer-parallax tilt — desktop only, motion-respecting
+	const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const hoverable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+	if (motionOk && hoverable) {
+		const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
+		cards.forEach((card) => {
+			let raf = 0;
+			const onMove = (e: PointerEvent) => {
+				const rect = card.getBoundingClientRect();
+				const x = (e.clientX - rect.left) / rect.width - 0.5;
+				const y = (e.clientY - rect.top) / rect.height - 0.5;
+				cancelAnimationFrame(raf);
+				raf = requestAnimationFrame(() => {
+					card.style.transform = `perspective(900px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg) translateY(-2px)`;
+				});
+			};
+			const reset = () => {
+				cancelAnimationFrame(raf);
+				card.style.transform = '';
+			};
+			card.addEventListener('pointermove', onMove);
+			card.addEventListener('pointerleave', reset);
+			card.addEventListener('pointercancel', reset);
+		});
+	}
+</script>
