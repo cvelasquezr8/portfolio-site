@@ -57,6 +57,431 @@ const validationError = translations('contact.email.validation.error');
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
   }
+
+  .form-input {
+    position: relative;
+  }
+
+  .form-input input,
+  .form-input textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  .form-input input::placeholder,
+  .form-input textarea::placeholder {
+    color: rgba(156, 163, 175, 0.6);
+  }
+
+  .form-input input:focus,
+  .form-input textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.1);
+  }
+
+  .form-input input.valid,
+  .form-input textarea.valid {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+  }
+
+  .form-input input.invalid,
+  .form-input textarea.invalid {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+  }
+
+  .form-input input:focus.valid,
+  .form-input textarea:focus.valid {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.1);
+  }
+
+  .form-input input:focus.invalid,
+  .form-input textarea:focus.invalid {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3), inset 0 0 10px rgba(239, 68, 68, 0.1);
+  }
+
+  .input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .form-input input.valid ~ .input-icon,
+  .form-input textarea.valid ~ .input-icon {
+    opacity: 1;
+  }
+
+  .char-count {
+    font-size: 0.75rem;
+    color: rgba(156, 163, 175, 0.8);
+    margin-top: 0.25rem;
+    transition: color 0.3s ease;
+  }
+
+  .char-count.warning {
+    color: #f59e0b;
+  }
+
+  .char-count.near-limit {
+    color: #ef4444;
+  }
+
+  .form-group {
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+  }
+
+  .form-group:nth-child(1) { animation-delay: 0.1s; }
+  .form-group:nth-child(2) { animation-delay: 0.2s; }
+  .form-group:nth-child(3) { animation-delay: 0.3s; }
+  .form-group:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .submit-button {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .submit-button:hover::before {
+    left: 100%;
+  }
+
+  .submit-button:active {
+    transform: scale(0.98);
+  }
+
+  .right-column {
+    opacity: 0;
+    animation: fadeInScale 0.8s ease forwards;
+    animation-delay: 0.3s;
+    border-radius: 1rem;
+    position: relative;
+  }
+
+  .right-column::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 11, 20, 0.5) 70%, rgba(10, 11, 20, 0.9) 100%);
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .form-feedback {
+    position: absolute;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .form-input:has(input.invalid) .form-feedback.error,
+  .form-input:has(textarea.invalid) .form-feedback.error {
+    opacity: 1;
+    color: #ef4444;
+  }
+
+  .form-input input.valid ~ .form-feedback.success,
+  .form-input textarea.valid ~ .form-feedback.success {
+    opacity: 1;
+    color: #10b981;
+  }
+
+  /* Giru Background */
+  .giru-background {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+  }
+
+  .orb-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent);
+    top: -100px;
+    right: -100px;
+    animation: float-orb-1 15s ease-in-out infinite;
+  }
+
+  .orb-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.3), transparent);
+    bottom: -50px;
+    left: -50px;
+    animation: float-orb-2 12s ease-in-out infinite;
+  }
+
+  .orb-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+    top: 50%;
+    right: 20%;
+    animation: float-orb-3 18s ease-in-out infinite;
+  }
+
+  @keyframes float-orb-1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-30px, 30px); }
+  }
+
+  @keyframes float-orb-2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, -30px); }
+  }
+
+  @keyframes float-orb-3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, 20px); }
+  }
+
+  /* Giru Container */
+  .giru-container {
+    perspective: 1200px;
+    z-index: 10;
+  }
+
+  .energy-field {
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      rgba(59, 130, 246, 0.5),
+      rgba(147, 51, 234, 0.4),
+      rgba(59, 130, 246, 0.3),
+      transparent
+    );
+    filter: blur(20px);
+    animation: energy-spin 8s linear infinite;
+  }
+
+  @keyframes energy-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .giru-glow {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.6), rgba(147, 51, 234, 0.3), transparent);
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.15);
+    }
+  }
+
+  .giru-image {
+    width: 280px;
+    height: auto;
+    animation: giru-float 4s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(59, 130, 246, 0.5)) drop-shadow(0 0 30px rgba(147, 51, 234, 0.4));
+    position: relative;
+    z-index: 20;
+  }
+
+  @keyframes giru-float {
+    0%, 100% {
+      transform: translateY(0px) rotateZ(-1.5deg);
+    }
+    50% {
+      transform: translateY(-20px) rotateZ(1.5deg);
+    }
+  }
+
+  .giru-image:hover {
+    filter: brightness(1.2) drop-shadow(0 20px 50px rgba(59, 130, 246, 0.8)) drop-shadow(0 0 40px rgba(147, 51, 234, 0.6));
+    animation: giru-float-hover 2s ease-in-out infinite;
+  }
+
+  @keyframes giru-float-hover {
+    0%, 100% {
+      transform: translateY(-5px) rotateZ(-2deg);
+    }
+    50% {
+      transform: translateY(-25px) rotateZ(2deg);
+    }
+  }
+
+  .giru-rings {
+    width: 200px;
+    height: 200px;
+    animation: rings-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes rings-pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(
+      from 0deg,
+      rgba(59, 130, 246, 0.8),
+      rgba(147, 51, 234, 0.5),
+      rgba(59, 130, 246, 0.3),
+      transparent
+    );
+    -webkit-mask: radial-gradient(circle, transparent 35%, black 75%);
+    mask: radial-gradient(circle, transparent 35%, black 75%);
+  }
+
+  .ring-1 {
+    width: 180px;
+    height: 180px;
+    animation: rotate-ring 12s linear infinite;
+  }
+
+  .ring-2 {
+    width: 120px;
+    height: 120px;
+    animation: rotate-ring 8s linear infinite reverse;
+    opacity: 0.6;
+  }
+
+  .ring-3 {
+    width: 70px;
+    height: 70px;
+    animation: rotate-ring 5s linear infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes rotate-ring {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Orbit dots */
+  .giru-orbit {
+    position: absolute;
+    inset: -60px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.6));
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.9), 0 0 6px rgba(147, 51, 234, 0.6);
+    animation: orbit 6s linear infinite;
+  }
+
+  .orbit-dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .orbit-dot:nth-child(2) {
+    animation-delay: 1.5s;
+  }
+
+  .orbit-dot:nth-child(3) {
+    animation-delay: 3s;
+  }
+
+  .orbit-dot:nth-child(4) {
+    animation-delay: 4.5s;
+  }
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg) translateX(60px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(60px) rotate(-360deg);
+    }
+  }
+
+  /* Particle styles */
+  .particle {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+  }
+
+  /* Lightning effect */
+  .lightning-container {
+    pointer-events: none;
+  }
+
+  .lightning {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .right-column {
+      height: 300px;
+    }
+  }
 </style>
 
 <section id="contact" class="py-20 section-fade">
@@ -67,76 +492,131 @@ const validationError = translations('contact.email.validation.error');
         title={translations('contact.title')}
       />
 
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div class="skill-card p-8 rounded-lg relative overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="skill-card p-8 rounded-lg relative overflow-hidden border border-blue-500/10">
           <div
-            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-purple-600">
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
           </div>
           <form id="contactForm" class="space-y-6">
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-blue-500"
+            <!-- Name Field -->
+            <div class="form-group">
+              <label class="text-sm font-semibold text-blue-400 block mb-3"
                 >{translations('contact.form.name')}</label
               >
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder={translations('contact.form.name_holder')}
-                class="w-full px-4 py-3 rounded-lg bg-gray-900/50 border border-blue-500/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-gray-200"
-              />
+              <div class="form-input relative">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder={translations('contact.form.name_holder')}
+                  maxlength="50"
+                  autocomplete="name"
+                />
+                <span class="input-icon">✓</span>
+                <span class="form-feedback error"></span>
+              </div>
             </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-blue-500"
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label class="text-sm font-semibold text-blue-400 block mb-3"
                 >{translations('contact.form.email')}</label
               >
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder={translations('contact.form.email_holder')}
-                class="w-full px-4 py-3 rounded-lg bg-gray-900/50 border border-blue-500/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-gray-200"
-              />
+              <div class="form-input relative">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder={translations('contact.form.email_holder')}
+                  autocomplete="email"
+                />
+                <span class="input-icon">✓</span>
+                <span class="form-feedback error"></span>
+              </div>
             </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium text-blue-500"
-                >{translations('contact.form.message')}</label
+
+            <!-- Message Field -->
+            <div class="form-group">
+              <div class="flex justify-between items-center mb-3">
+                <label class="text-sm font-semibold text-blue-400"
+                  >{translations('contact.form.message')}</label
+                >
+                <span class="char-count"><span id="charCount">0</span>/500</span>
+              </div>
+              <div class="form-input relative">
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder={translations('contact.form.message_holder')}
+                  rows="4"
+                  maxlength="500"
+                ></textarea>
+                <span class="input-icon">✓</span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+              <Button
+                type="submit"
+                variant="wide"
+                className="justify-center submit-button"
               >
-              <textarea
-                id="message"
-                name="message"
-                placeholder={translations('contact.form.message_holder')}
-                rows="4"
-                class="w-full px-4 py-3 rounded-lg bg-gray-900/50 border border-blue-500/20 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none transition-all text-gray-200 resize-none"
-              ></textarea>
+                <span>{translations('contact.form.send_message')}</span>
+                <span class="text-xl group-hover:translate-x-1 transition-transform">🛰️</span>
+              </Button>
             </div>
-            <Button type="submit" variant="wide" className="justify-center">
-              <span>{translations('contact.form.send_message')}</span>
-              <span class="text-xl group-hover:translate-x-1 transition-transform">🛰️</span>
-            </Button>
           </form>
         </div>
 
-        <div class="relative h-[400px] hidden md:block">
-          <div class="absolute inset-0">
-            <img
-              src={`${pathPage}images/satellite.png`}
-              alt="Space Station"
-              class="w-24 absolute top-10 right-10 floating-delayed"
-              loading="lazy"
-            />
-            <img
-              src={`${pathPage}images/astronaut.png`}
-              alt="Floating Astronaut"
-              class="w-52 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 floating"
-              loading="lazy"
-            />
-            <img
-              src={`${pathPage}images/planet.png`}
-              alt="Planet"
-              class="w-20 absolute bottom-20 left-20 floating-fast"
-              loading="lazy"
-            />
-            <div class="shooting-star"></div>
+        <!-- Right Column - Giru Focus -->
+        <div class="right-column relative h-[400px] hidden md:flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 pointer-events-none">
+            <!-- Dynamic background with orbs -->
+            <div class="giru-background">
+              <div class="orb orb-1"></div>
+              <div class="orb orb-2"></div>
+              <div class="orb orb-3"></div>
+            </div>
+
+            <!-- Particles container -->
+            <div id="particles-container" class="absolute inset-0"></div>
+
+            <!-- Lightning effect container -->
+            <div class="lightning-container absolute inset-0"></div>
+
+            <!-- Main Giru with enhanced effects -->
+            <div class="giru-container absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <!-- Outer energy field -->
+              <div class="energy-field"></div>
+
+              <!-- Glow aura -->
+              <div class="giru-glow absolute inset-0 w-full h-full rounded-full" style="filter: blur(50px);"></div>
+
+              <!-- Giru image -->
+              <img
+                id="astronaut-img"
+                src={`${pathPage}images/giru.png`}
+                alt="Giru - Dragon Ball GT"
+                class="giru-image relative z-20 transition-all duration-150"
+                loading="lazy"
+              />
+
+              <!-- Energy rings -->
+              <div class="giru-rings absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+              </div>
+
+              <!-- Pulsing dots around Giru -->
+              <div class="giru-orbit">
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -355,6 +835,164 @@ const validationError = translations('contact.email.validation.error');
     return {isValid: true};
   };
 
+  import gsap from 'gsap';
+
+  // Giru interaction
+  const giruImg = document.getElementById('astronaut-img') as HTMLImageElement | null;
+  const giruContainer = document.querySelector('.giru-container') as HTMLElement | null;
+  const particlesContainer = document.getElementById('particles-container') as HTMLElement | null;
+
+  if (giruImg && giruContainer) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let targetRot = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    const animateGiru = () => {
+      const rect = giruContainer.getBoundingClientRect();
+      const containerCenterX = rect.left + rect.width / 2;
+      const containerCenterY = rect.top + rect.height / 2;
+
+      const distX = mouseX - containerCenterX;
+      const distY = mouseY - containerCenterY;
+
+      const maxDistance = 200;
+      const distance = Math.sqrt(distX * distX + distY * distY);
+
+      if (distance < maxDistance) {
+        const angle = Math.atan2(distY, distX);
+        targetX = Math.cos(angle) * 25;
+        targetY = Math.sin(angle) * 25;
+        targetRot = (angle * 180) / Math.PI;
+
+        if (particlesContainer && Math.random() > 0.8) {
+          createParticle(containerCenterX, containerCenterY);
+        }
+      } else {
+        targetX = 0;
+        targetY = 0;
+        targetRot = 0;
+      }
+
+      gsap.to(giruImg, {
+        x: targetX,
+        y: targetY,
+        rotation: targetRot * 0.1,
+        duration: 0.6,
+        ease: 'power2.out',
+      });
+
+      requestAnimationFrame(animateGiru);
+    };
+
+    const createParticle = (x: number, y: number) => {
+      if (!particlesContainer) return;
+
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+
+      const size = Math.random() * 4 + 2;
+      const duration = Math.random() * 1.5 + 0.8;
+      const colors = ['59, 130, 246', '147, 51, 234', '59, 130, 246', '99, 102, 241'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.background = `rgba(${color}, 0.95)`;
+      particle.style.boxShadow = `0 0 ${size * 3}px rgba(${color}, 0.8), inset 0 0 ${size}px rgba(255,255,255,0.3)`;
+
+      particlesContainer.appendChild(particle);
+
+      const randomX = Math.random() * 100 - 50;
+      const randomY = Math.random() * -100 - 50;
+
+      gsap.to(particle, {
+        y: randomY,
+        x: randomX,
+        opacity: 0,
+        scale: 0,
+        duration: duration,
+        ease: 'power2.out',
+        onComplete: () => {
+          particle.remove();
+        },
+      });
+    };
+
+    animateGiru();
+
+    // Hover effect con más dramatismo
+    giruImg.addEventListener('mouseenter', () => {
+      gsap.to(giruImg, {
+        scale: 1.3,
+        duration: 0.4,
+        ease: 'back.out',
+      });
+
+      gsap.to(giruContainer, {
+        '--glow-intensity': 1,
+        duration: 0.4,
+      });
+
+      if (particlesContainer) {
+        for (let i = 0; i < 12; i++) {
+          const rect = giruImg.getBoundingClientRect();
+          const angle = (i / 12) * Math.PI * 2;
+          const x = rect.left + rect.width / 2 + Math.cos(angle) * 30;
+          const y = rect.top + rect.height / 2 + Math.sin(angle) * 30;
+          createParticle(x, y);
+        }
+      }
+    });
+
+    giruImg.addEventListener('mouseleave', () => {
+      gsap.to(giruImg, {
+        scale: 1,
+        duration: 0.4,
+        ease: 'back.out',
+      });
+
+      gsap.to(giruContainer, {
+        duration: 0.4,
+      });
+    });
+  }
+
+  // Real-time validation
+  const updateFieldValidation = (input: HTMLInputElement | HTMLTextAreaElement) => {
+    const value = input.value.trim();
+    const isEmail = input.id === 'email';
+    const isMessage = input.id === 'message';
+
+    let isValid = false;
+
+    if (isEmail) {
+      isValid = value.length > 0 && validateEmail(value);
+    } else if (isMessage) {
+      isValid = value.length > 0;
+    } else {
+      isValid = value.length > 0;
+    }
+
+    if (isValid) {
+      input.classList.remove('invalid');
+      input.classList.add('valid');
+    } else if (value.length > 0) {
+      input.classList.remove('valid');
+      input.classList.add('invalid');
+    } else {
+      input.classList.remove('valid', 'invalid');
+    }
+  };
+
   const contactForm = document.getElementById(
     'contactForm',
   ) as HTMLFormElement | null;
@@ -365,6 +1003,40 @@ const validationError = translations('contact.email.validation.error');
   const messageInput = document.getElementById(
     'message',
   ) as HTMLTextAreaElement | null;
+  const charCountSpan = document.getElementById('charCount') as HTMLSpanElement | null;
+
+  // Add real-time validation listeners
+  if (nameInput) {
+    nameInput.addEventListener('input', () => updateFieldValidation(nameInput));
+    nameInput.addEventListener('blur', () => updateFieldValidation(nameInput));
+  }
+
+  if (emailInput) {
+    emailInput.addEventListener('input', () => updateFieldValidation(emailInput));
+    emailInput.addEventListener('blur', () => updateFieldValidation(emailInput));
+  }
+
+  if (messageInput) {
+    messageInput.addEventListener('input', () => {
+      updateFieldValidation(messageInput);
+      if (charCountSpan) {
+        const count = messageInput.value.length;
+        charCountSpan.textContent = count.toString();
+
+        const countElement = charCountSpan.parentElement;
+        if (count > 450) {
+          countElement?.classList.add('near-limit');
+          countElement?.classList.remove('warning');
+        } else if (count > 400) {
+          countElement?.classList.add('warning');
+          countElement?.classList.remove('near-limit');
+        } else {
+          countElement?.classList.remove('warning', 'near-limit');
+        }
+      }
+    });
+    messageInput.addEventListener('blur', () => updateFieldValidation(messageInput));
+  }
 
   if (contactForm) {
     contactForm.addEventListener('submit', async function (event: Event) {
@@ -379,9 +1051,14 @@ const validationError = translations('contact.email.validation.error');
         return;
       }
 
+      gsap.to(submitButton, {
+        scale: 0.95,
+        duration: 0.1,
+        yoyo: true,
+        repeat: 1,
+      });
+
       submitButton.disabled = true;
-      submitButton.style.opacity = '0.6';
-      submitButton.style.cursor = 'not-allowed';
 
       const formData = {
         name: nameInput.value.trim(),
@@ -389,25 +1066,23 @@ const validationError = translations('contact.email.validation.error');
         message: messageInput.value.trim(),
       };
 
-      // Validate form data
       const validation = validateForm(formData);
       if (!validation.isValid) {
         errorMessage(validation.error || (window as any).validationError);
         submitButton.disabled = false;
-        submitButton.style.opacity = '1';
-        submitButton.style.cursor = 'pointer';
         return;
       }
 
       const lastSent = localStorage.getItem('lastEmailSent');
       const now = Date.now();
-      const cooldown = 3 * 60 * 1000; // 3 minutes
+      const cooldown = 3 * 60 * 1000;
 
       if (lastSent && now - parseInt(lastSent) < cooldown) {
         const remainingTime = Math.ceil(
           (cooldown - (now - parseInt(lastSent))) / 1000,
         );
         cooldownMessage(remainingTime);
+        submitButton.disabled = false;
         return;
       }
 
@@ -430,6 +1105,13 @@ const validationError = translations('contact.email.validation.error');
           localStorage.setItem('lastEmailSent', now.toString());
           successMessage();
           contactForm.reset();
+          nameInput.classList.remove('valid', 'invalid');
+          emailInput.classList.remove('valid', 'invalid');
+          messageInput.classList.remove('valid', 'invalid');
+          if (charCountSpan) {
+            charCountSpan.textContent = '0';
+            charCountSpan.parentElement?.classList.remove('warning', 'near-limit');
+          }
           regenerateKey();
         } else {
           errorMessage(data.message);
@@ -440,8 +1122,6 @@ const validationError = translations('contact.email.validation.error');
       }
 
       submitButton.disabled = false;
-      submitButton.style.opacity = '1';
-      submitButton.style.cursor = 'pointer';
     });
   }
 </script>

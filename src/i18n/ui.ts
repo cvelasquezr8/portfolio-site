@@ -14,12 +14,12 @@ export const labels = {
 
     //** Navigation Bar */
     'nav.home': 'Home',
+    'nav.about': 'About',
     'nav.skills': 'Skills',
     'nav.experience': 'Experience',
     'nav.projects': 'Projects',
     'nav.certificates': 'Certificates',
     'nav.contact': 'Contact',
-    'nav.challenges': 'Challenges',
 
     //** Hero Section */
     'hero.mission_control': 'MISSION CONTROL',
@@ -33,6 +33,10 @@ export const labels = {
     'hero.stack_badge': 'Node · Nest · React',
     'hero.launch_mission': 'Download Mission Dossier',
     'hero.summary': 'Full Stack Developer (5 years) — I build scalable web applications using Node.js/NestJS, React/Next.js and PostgreSQL. I focus on reliable APIs, clean architecture and delivering business-driven end-to-end solutions.',
+
+    //** About Section */
+    'about.title': 'Who I Am',
+    'about.subtitle': 'MISSION BRIEFING',
 
     //** Technical Section */
     'tech.title': 'Technical Capabilities',
@@ -172,11 +176,11 @@ export const labels = {
 
     //** Navigation Bar */
     'nav.home': 'Inicio',
+    'nav.about': 'Sobre Mí',
     'nav.skills': 'Habilidades',
     'nav.experience': 'Experiencia',
     'nav.projects': 'Proyectos',
     'nav.certificates': 'Certificados',
-    'nav.challenges': 'Desafíos',
     'nav.contact': 'Contacto',
 
     //** Hero Section */
@@ -191,6 +195,10 @@ export const labels = {
     'hero.stack_badge': 'Node · Nest · React',
     'hero.launch_mission': 'Descargar Dossier de Misión',
     'hero.summary': 'Desarrollador Full Stack (5 años) — Construyo aplicaciones web escalables usando Node.js/NestJS, React/Next.js y PostgreSQL. Me enfoco en APIs confiables, arquitectura limpia y entregar soluciones de extremo a extremo orientadas al negocio.',
+
+    //** About Section */
+    'about.title': 'Quién Soy',
+    'about.subtitle': 'BRIEFING DE MISIÓN',
 
     //** Technical Section */
     'tech.title': 'Capacidades Técnicas',

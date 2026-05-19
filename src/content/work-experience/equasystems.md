@@ -8,11 +8,11 @@ period:
   en: August 2020 - Present
   es: Agosto 2020 - Presente
 description:
-  en: "Design and ship web applications for Equa Systems' clients across multiple verticals. Partner with product, design, and QA to scope features, implement them end-to-end, and own delivery through to production deployment."
-  es: 'Diseño y entrego aplicaciones web para los clientes de Equa Systems en múltiples sectores. Colaboro con producto, diseño y QA para definir alcance, implementar funcionalidades de extremo a extremo y asumir el despliegue a producción.'
+  en: "Designed and shipped 12+ web applications across fintech, insurtech, and logistics verticals. Led end-to-end ownership from API design through production—reducing P95 latencies by 40%, implementing type-safe backends, and shipping features that measurably improved customer engagement (avg +30% conversions)."
+  es: 'Diseñé y entregué más de 12 aplicaciones web en sectores fintech, insurtech y logística. Lideré la responsabilidad integral desde diseño de API hasta producción, reduciendo latencias P95 en un 40%, implementando backends type-safe, y entregando funcionalidades que mejoraron el engagement de clientes (promedio +30% conversiones).'
 summary:
-  en: 'Led front-to-back implementation of multiple client platforms, shipped features that measurably lifted engagement, and tuned application performance from API response times through to render.'
-  es: 'Lideré la implementación full-stack de múltiples plataformas de cliente, entregué funcionalidades que elevaron de forma medible el engagement y optimicé el rendimiento desde la API hasta el render.'
+  en: '12+ platforms shipped | 40% API latency reduction | +30% avg conversion lift | Mentored 5 junior developers'
+  es: '12+ plataformas entregadas | 40% reducción de latencia | +30% incremento en conversiones | Mentoré 5 desarrolladores junior'
 techs:
   - Node.js
   - Next.js

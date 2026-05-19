@@ -1,0 +1,224 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import SectionHeader from '../ui/SectionHeader.astro';
+
+const currentLang = Astro.currentLocale || 'en';
+const translations = useTranslations(currentLang as any);
+---
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-content {
+    opacity: 0;
+    animation: slideInLeft 0.8s ease forwards;
+  }
+
+  .about-stats {
+    opacity: 0;
+    animation: slideInRight 0.8s ease 0.2s forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .about-text {
+    line-height: 1.8;
+    color: #e5e7eb;
+    font-size: 1.05rem;
+  }
+
+  .about-text p {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text strong {
+    color: #3b82f6;
+    font-weight: 600;
+  }
+
+  .stat-card {
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #3b82f6, #a855f7);
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #3b82f6;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    font-weight: 500;
+  }
+
+  .highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .highlight-item {
+    padding: 1rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: 0.5rem;
+    border-left: 3px solid #3b82f6;
+  }
+
+  .highlight-item strong {
+    display: block;
+    color: #3b82f6;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .highlight-item span {
+    color: #d1d5db;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-stats {
+      animation: slideInUp 0.8s ease 0.2s forwards;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="about" class="py-20 section-fade">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      <SectionHeader
+        eyebrow={translations('about.subtitle')}
+        title={translations('about.title')}
+      />
+
+      <div class="about-grid">
+        <!-- Left: Story -->
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I'm a <strong>Full Stack Developer</strong> with 5+ years building production web platforms that scale. I started as a backend engineer obsessed with database design and API architecture, then expanded into frontend to own the complete end-to-end user experience.
+            </p>
+
+            <p>
+              What drives me: <strong>reliable systems</strong> that survive the chaos of production, <strong>clean code</strong> that compounds over time, and <strong>shipping features</strong> that measurably move the needle for users.
+            </p>
+
+            <p>
+              I've led implementations across Node.js, NestJS, React, and Next.js stacks. I care deeply about performance, testability, and mentoring teammates. Whether it's architecting a scalable REST API or shipping a responsive UI under deadline, I bring the same focus: do it right, do it fast.
+            </p>
+          </div>
+
+          <div class="highlights">
+            <div class="highlight-item">
+              <strong>Approach</strong>
+              <span>End-to-end ownership, shipping fast</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Focus</strong>
+              <span>Scalability, DX, performance</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Mindset</strong>
+              <span>Production-first thinking</span>
+            </div>
+            <div class="highlight-item">
+              <strong>Passion</strong>
+              <span>Mentoring, learning, shipping</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Stats -->
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Years shipping production web platforms</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number">12+</div>
+            <div class="stat-label">Full-stack projects delivered end-to-end</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">Average performance improvement (APIs & UIs)</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Commitment to code quality & testing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

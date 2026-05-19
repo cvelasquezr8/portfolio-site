@@ -10,10 +10,6 @@ const navigationLinks = (await getCollection('navigation'))
 	.map((entry) => entry.data)
 	.sort((a, b) => a.order - b.order);
 
-const roadmapLinks = (await getCollection('roadmap'))
-	.map((entry) => entry.data)
-	.sort((a, b) => a.order - b.order);
-
 const certificationsLinks = (await getCollection('certifications'))
 	.map((entry) => entry.data)
 	.sort((a, b) => a.order - b.order);
@@ -53,12 +49,6 @@ const projectItems: FooterItem[] = featuredProjects.map((entry) => ({
 	openProjectId: entry.id,
 }));
 
-const roadmapItems: FooterItem[] = roadmapLinks.map((link) => ({
-	label: link.name[currentLang],
-	href: link.href,
-	isTargetBlank: link.isTargetBlank,
-}));
-
 const certificateItems: FooterItem[] = certificationsLinks.map((cert) => ({
 	label: cert.name[currentLang],
 	pdfUrl: `${pathPage}${cert.pdfPath}`,
@@ -68,7 +58,6 @@ const navigation: { title: string; elements: FooterItem[] }[] = [
 	{ title: translations('footer.navigation.title'), elements: navigationItems },
 	{ title: translations('footer.experience.title'), elements: experienceItems },
 	{ title: translations('footer.project.title'), elements: projectItems },
-	{ title: translations('roadmap.title'), elements: roadmapItems },
 	{ title: translations('footer.certificate.title'), elements: certificateItems },
 ];
 ---

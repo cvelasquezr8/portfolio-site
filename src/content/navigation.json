@@ -6,27 +6,27 @@
 		"order": 1
 	},
 	{
+		"id": "about",
+		"name": { "en": "About", "es": "Sobre Mí" },
+		"href": "#about",
+		"order": 2
+	},
+	{
 		"id": "experience",
 		"name": { "en": "Experience", "es": "Experiencia" },
 		"href": "#experience",
-		"order": 2
+		"order": 3
 	},
 	{
 		"id": "skills",
 		"name": { "en": "Skills", "es": "Habilidades" },
 		"href": "#technologies",
-		"order": 3
+		"order": 4
 	},
 	{
 		"id": "projects",
 		"name": { "en": "Projects", "es": "Proyectos" },
 		"href": "#projects",
-		"order": 4
-	},
-	{
-		"id": "challenges",
-		"name": { "en": "Challenges", "es": "Desafíos" },
-		"href": "#challenges",
 		"order": 5
 	},
 	{
